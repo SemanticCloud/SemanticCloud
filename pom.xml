@@ -13,12 +13,14 @@
     <modules>
         <module>ManagementService</module>
         <module>SemanticEngineService</module>
+        <module>Dashboard</module>
     </modules>
 
     <properties>
         <jade.version>4.3.3</jade.version>
         <jena.version>3.0.0</jena.version>
         <lombok.version>1.16.2</lombok.version>
+        <lineman.version>1.7</lineman.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
@@ -95,6 +97,11 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring.boot.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.maxxkrakoa.lineman-maven-plugin</groupId>
+                    <artifactId>lineman-maven-plugin</artifactId>
+                    <version>${lineman.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

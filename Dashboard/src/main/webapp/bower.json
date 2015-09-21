@@ -1,0 +1,24 @@
+{
+  "name": "Semantic Cloud Dashboard",
+  "version": "0.0.1",
+  "authors": [
+    "Łukasz Smolaga <smolaga@gmail.com>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AdminLTE": "admin-lte#~2.3.0",
+    "angular": "~1.4.4",
+    "angular-bootstrap": "~0.13.3",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5",
+    "components-font-awesome": "~4.4.0",
+    "restangular": "~1.5.1"
+  }
+}

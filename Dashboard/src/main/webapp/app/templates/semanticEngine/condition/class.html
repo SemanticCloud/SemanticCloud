@@ -1,0 +1,13 @@
+<div class="box" ng-controller="ConditionController">
+    <h3>{{classUri}}</h3>
+
+    <div class="box-body" ng-repeat="property in properties" ng-include=" 'semanticEngine/condition/property.html' ">
+    </div>
+    <div class="box-footer">
+        <div class="text-right">
+            <button class="btn btn-success" ng-click="addProperty()">
+                Add property
+            </button>
+        </div>
+    </div>
+</div>
