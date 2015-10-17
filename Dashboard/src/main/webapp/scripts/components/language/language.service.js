@@ -27,7 +27,8 @@ angular.module('dashboardApp')
  They are written in English to avoid character encoding issues (not a perfect solution)
  */
     .constant('LANGUAGES', [
-        'en', 'fr'
+        'en'
+        ,'pl'
         //JHipster will add new languages here
     ]
 );
