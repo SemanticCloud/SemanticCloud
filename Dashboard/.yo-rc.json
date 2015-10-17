@@ -1,0 +1,21 @@
+{
+  "generator-jhipster": {
+    "baseName": "Dashboard",
+    "packageName": "org.semanticcloud",
+    "packageFolder": "org/semanticcloud",
+    "authenticationType": "oauth2",
+    "hibernateCache": "hazelcast",
+    "clusteredHttpSession": "hazelcast",
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "8",
+    "enableTranslation": true,
+    "rememberMeKey": "94916d1f0bfcbb0b9c9f919815080402a30258ce"
+  }
+}
