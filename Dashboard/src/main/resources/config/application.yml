@@ -43,3 +43,7 @@ swagger:
     contact:
     license: Apache 2.0
     licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:9000/eureka/
