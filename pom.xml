@@ -25,6 +25,7 @@
         <module>SemanticEngineService</module>
         <module>Dashboard</module>
         <module>DiscoveryService</module>
+        <module>GatewayService</module>
     </modules>
 
     <properties>
@@ -139,6 +140,7 @@
                 <!--<version>${spring.boot.version}</version>-->
                 <!--<scope>test</scope>-->
             <!--</dependency>-->
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-parent</artifactId>
@@ -146,7 +148,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
