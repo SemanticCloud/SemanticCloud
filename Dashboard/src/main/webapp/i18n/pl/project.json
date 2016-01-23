@@ -1,0 +1,20 @@
+{
+    "dashboardApp": {
+        "project" : {
+            "home": {
+                "title": "Project",
+                "createLabel": "Dodaj Project",
+                "createOrEditLabel": "Dodaj lub edytuj: Project"
+            },
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Project {{ id }}?"
+            },
+            "detail": {
+                "title": "Project"
+            },
+            "name": "Name",
+            "description": "Description",
+            "members": "Members"
+        }
+    }
+}

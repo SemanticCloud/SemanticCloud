@@ -6,6 +6,8 @@
             "home": "Strona domowa",
             "entities": {
                 "main": "Encje",
+                "credentials": "Credentials",
+                "project": "Project",
                 "additionalEntity": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
