@@ -61,6 +61,10 @@ angular.module('dashboardApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pasc
                 'navbar@': {
                     templateUrl: 'scripts/components/navbar/navbar.html',
                     controller: 'NavbarController'
+                },
+                'topnavbar@': {
+                    templateUrl: 'scripts/components/navbar/topnavbar.html',
+                    controller: 'NavbarController'
                 }
             },
             resolve: {

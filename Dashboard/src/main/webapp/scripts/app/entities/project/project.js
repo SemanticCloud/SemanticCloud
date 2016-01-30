@@ -26,7 +26,7 @@ angular.module('dashboardApp')
             })
             .state('project.detail', {
                 parent: 'entity',
-                url: '/project/{id}',
+                url: '/project/{id}/detail',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'dashboardApp.project.detail.title'

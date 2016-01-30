@@ -7,6 +7,23 @@
                     <span translate="global.menu.home">Home</span>
                 </a>
             </li>
+            <!--<li class="active" ui-sref-active="active">-->
+                <!--<a ui-sref="engine">-->
+                    <!--<span class="glyphicon glyphicon-home"></span>-->
+                    <!--<span translate="global.menu.home">Home</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <li ui-sref-active="active" ng-switch-when="true">
+                <a ui-sref="project"><span class="fa fa-files-o"></span>
+                &#xA0;<span translate="global.menu.projects">Projects</span>
+                </a>
+            </li>
+            <li class="header">
+                Project
+            </li>
+            <li class="header">
+                SYSTEM
+            </li>
             <li ui-sref-active="active" ng-switch-when="true" class="dropdown pointer">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="">
                                 <span>
@@ -18,9 +35,8 @@
                                 </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li ui-sref-active="active" ><a ui-sref="project"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span translate="global.menu.entities.project">project</span></a></li>
-                    <li ui-sref-active="active" ><a ui-sref="credentials"><span class="glyphicon glyphicon-asterisk"></span>
+                    <li ui-sref-active="active"><a ui-sref="credentials"><span
+                        class="glyphicon glyphicon-asterisk"></span>
                         &#xA0;<span translate="global.menu.entities.credentials">credentials</span></a></li>
                     <!-- JHipster will add entities to the menu here -->
                 </ul>
@@ -83,20 +99,6 @@
                     <li ng-hide="inProduction" ui-sref-active="active"><a ui-sref="docs"><span
                         class="glyphicon glyphicon-book"></span>
                         &#xA0;<span translate="global.menu.admin.apidocs">API</span></a></li>
-                </ul>
-            </li>
-            <li ui-sref-active="active" class="dropdown pointer" ng-controller="LanguageController">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                                <span>
-                                    <span class="glyphicon glyphicon-flag"></span>
-                                    <span class="hidden-tablet" translate="global.menu.language">Language</span>
-                                    <b class="caret"></b>
-                                </span>
-                </a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('language')}">
-                    <li active-menu="{{language}}" ng-repeat="language in languages">
-                        <a href="" ng-click="changeLanguage(language)">{{language | findLanguageFromKey}}</a>
-                    </li>
                 </ul>
             </li>
         </ul>

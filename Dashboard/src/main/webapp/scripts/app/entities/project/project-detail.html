@@ -31,8 +31,8 @@
                     <span translate="dashboardApp.project.members">members</span>
                 </td>
                 <td>
-                    <span ng-repeat="members in project.memberss">
-                        {{members.id}}{{$last ? '' : ', '}}
+                    <span ng-repeat="member in project.memberss">
+                        {{member.login}}{{$last ? '' : ', '}}
                     <span>
                 </td>
             </tr>
