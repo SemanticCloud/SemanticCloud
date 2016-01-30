@@ -75,7 +75,7 @@
         <springfox.version>2.0.3</springfox.version>
         <usertype-core.version>4.0.0.GA</usertype-core.version>
         <!--<jade.version>4.3.3</jade.version>-->
-        <!--<jena.version>3.0.0</jena.version>-->
+        <jena.version>3.0.0</jena.version>
         <!--<lombok.version>1.16.2</lombok.version>-->
         <!--<postgresql.version>9.1-901-1.jdbc4</postgresql.version>-->
         <!--<spring.boot.version>1.2.6.RELEASE</spring.boot.version>-->
@@ -122,11 +122,11 @@
                 <!--<artifactId>spring-data-jpa</artifactId>-->
                 <!--<version>${spring.data.jpa.version}</version>-->
             <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.apache.jena</groupId>-->
-                <!--<artifactId>jena-core</artifactId>-->
-                <!--<version>${jena.version}</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-core</artifactId>
+                <version>${jena.version}</version>
+            </dependency>
             <!--<dependency>-->
                 <!--<groupId>com.tilab.jade</groupId>-->
                 <!--<artifactId>jade</artifactId>-->

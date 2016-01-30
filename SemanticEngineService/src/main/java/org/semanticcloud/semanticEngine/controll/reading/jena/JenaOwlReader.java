@@ -3,7 +3,7 @@ package org.semanticcloud.semanticEngine.controll.reading.jena;
 import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
 import org.semanticcloud.semanticEngine.entity.models.InvalidConfigurationException;
 import org.semanticcloud.semanticEngine.entity.models.PropertyValueCondition;
-import org.semanticcloud.semanticEngine.entity.OntoClass;
+import org.semanticcloud.semanticEngine.entity.OwlClass;
 import org.semanticcloud.semanticEngine.entity.OntoProperty;
 import org.semanticcloud.semanticEngine.entity.OwlIndividual;
 import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
@@ -42,7 +42,7 @@ public class JenaOwlReader extends OntologyReader{
 	/* (non-Javadoc)
 	 * @see models.ontologyReading.jena.OntologyReader#getOwlClass(java.lang.String)
 	 */
-	public OntoClass getOwlClass(String className) {
+	public OwlClass getOwlClass(String className) {
 		if (!(className.contains("#"))) {
 			className = String.format("%s#%s", uri, className);
 		}
@@ -50,7 +50,7 @@ public class JenaOwlReader extends OntologyReader{
 		if (ontClass == null)
 			return null;
 
-		OntoClass owlClass = new OntoClass(ontClass.getNameSpace(), ontClass.getLocalName(), getProperties(ontClass));
+		OwlClass owlClass = new OwlClass(ontClass.getNameSpace(), ontClass.getLocalName(), getProperties(ontClass));
 		return owlClass;
 	}
 
@@ -75,6 +75,7 @@ public class JenaOwlReader extends OntologyReader{
 
 	private List<OntoProperty> getProperties(OntClass ontClass) {
 		List<OntoProperty> props = new ArrayList<OntoProperty>();
+
 
 		for (Iterator<OntProperty> i = ontClass.listDeclaredProperties(); i.hasNext();) {
 			OntProperty prop = i.next();
@@ -107,7 +108,7 @@ public class JenaOwlReader extends OntologyReader{
 	/* (non-Javadoc)
 	 * @see models.ontologyReading.jena.OntologyReader#getIndividualsInRange(models.ontologyModel.OntoClass, models.ontologyModel.OntoProperty)
 	 */
-	public List<OwlIndividual> getIndividualsInRange(OntoClass owlClass, OntoProperty property) {
+	public List<OwlIndividual> getIndividualsInRange(OwlClass owlClass, OntoProperty property) {
 		List<OwlIndividual> individuals = new ArrayList<OwlIndividual>();
 
 		for (OntClass rangeClass : getAllClassesFromRange(property)) {
@@ -125,11 +126,11 @@ public class JenaOwlReader extends OntologyReader{
 	/* (non-Javadoc)
 	 * @see models.ontologyReading.jena.OntologyReader#getClassesInRange(models.ontologyModel.OntoClass, models.ontologyModel.OntoProperty)
 	 */
-	public List<OntoClass> getClassesInRange2(OntoClass owlClass, OntoProperty property) {
-		List<OntoClass> classes = new ArrayList<OntoClass>();
+	public List<OwlClass> getClassesInRange2(OwlClass owlClass, OntoProperty property) {
+		List<OwlClass> classes = new ArrayList<OwlClass>();
 
 		for (OntClass ontClass : getAllClassesFromRange(property)) {
-			classes.add(new OntoClass(ontClass));
+			classes.add(new OwlClass(ontClass));
 		}
 
 		return classes;
@@ -138,8 +139,8 @@ public class JenaOwlReader extends OntologyReader{
     /* (non-Javadoc)
      * @see models.ontologyReading.jena.OntologyReader#getClassesInRange(models.ontologyModel.OntoClass, models.ontologyModel.OntoProperty)
      */
-    public List<OntoClass> getClassesInRange(OntoClass owlClass, OntoProperty property) {
-        List<OntoClass> classes = new ArrayList<OntoClass>();
+    public List<OwlClass> getClassesInRange(OwlClass owlClass, OntoProperty property) {
+        List<OwlClass> classes = new ArrayList<OwlClass>();
 
         OntProperty ontProp = model.getOntProperty(property.getUri());
         for (ExtendedIterator<? extends OntResource> r = ontProp.listRange(); r.hasNext();) {
@@ -148,7 +149,7 @@ public class JenaOwlReader extends OntologyReader{
                 if (res.isClass()) {
                     OntClass rangeClass = res.asClass();
 
-                    classes.add(new OntoClass(rangeClass));
+                    classes.add(new OwlClass(rangeClass));
                     fillWithSubClasses(classes, rangeClass);
                 }
             }
@@ -157,7 +158,7 @@ public class JenaOwlReader extends OntologyReader{
     }
 
     @Override
-    public List<OntoClass> getOwlSubclasses(String classUri) {
+    public List<OwlClass> getOwlSubclasses(String classUri) {
         return null;
     }
 
@@ -187,11 +188,11 @@ public class JenaOwlReader extends OntologyReader{
 
 
 
-    private void fillWithSubClasses(List<OntoClass> classes, OntClass superClass){
+    private void fillWithSubClasses(List<OwlClass> classes, OntClass superClass){
         for (ExtendedIterator<? extends OntResource> s = superClass.listSubClasses(true); s.hasNext();) {
             OntClass subclass = s.next().asClass();
             if (!subclass.getURI().equals("http://www.w3.org/2002/07/owl#Nothing")){
-                classes.add(new OntoClass(subclass, superClass));
+                classes.add(new OwlClass(subclass, superClass));
                 fillWithSubClasses(classes, subclass);
             }
         }

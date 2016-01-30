@@ -7,7 +7,7 @@ import org.apache.jena.ontology.OntClass;
 import org.semanticweb.owlapi.model.IRI;
 
 
-public class OwlClass extends OwlElement implements IOwlElement {
+public class OwlClass extends OwlElement {
 
     private OwlClass superClass;
 	private List<OntoProperty> properties;

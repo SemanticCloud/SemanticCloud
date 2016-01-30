@@ -6,15 +6,15 @@ import jobs.PropertyTypeConfiguration;
 import org.apache.jena.ontology.OntDocumentManager;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.OntologyReader;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.jena.JenaOwlReader;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.jena.JenaOwlReaderConfig;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.jena.OwlPropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.jena.propertyFactories.DateTimePropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.jena.propertyFactories.FloatPropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.jena.propertyFactories.IntegerPropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.jena.propertyFactories.ObjectPropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.jena.propertyFactories.StringPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
+import org.semanticcloud.semanticEngine.controll.reading.jena.JenaOwlReader;
+import org.semanticcloud.semanticEngine.controll.reading.jena.JenaOwlReaderConfig;
+import org.semanticcloud.semanticEngine.controll.reading.jena.OwlPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.jena.propertyFactories.DateTimePropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.jena.propertyFactories.FloatPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.jena.propertyFactories.IntegerPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.jena.propertyFactories.ObjectPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.jena.propertyFactories.StringPropertyFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class OntologyReaderProducer {
     public OntologyReader produceReader() {
         String uri = "file:/opt/Ontology/CloudOntology.owl";
         JenaOwlReaderConfig jenaOwlReaderConfig = new JenaOwlReaderConfig()
-                .useLocalMapping("http://semantic-cloud.org/Cloud", "file:/opt/Ontology/CloudOntology.owl")
+                .useLocalMapping("http://semantic-cloud.org/Cloud", "file:/home/malagus/workspace/master-thesis/Ontologia/cloud.owl")
                 .ignorePropertiesWithUnspecifiedDomain();
 
         return initialize(uri, jenaOwlReaderConfig);

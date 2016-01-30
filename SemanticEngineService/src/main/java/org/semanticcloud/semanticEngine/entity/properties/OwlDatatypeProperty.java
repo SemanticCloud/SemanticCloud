@@ -1,17 +1,16 @@
 package org.semanticcloud.semanticEngine.entity.properties;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.semanticcloud.semanticEngine.entity.OntoProperty;
 
-@AllArgsConstructor
 @Getter
-public class OwlDatatypeProperty implements OntoProperty{
-    private String namespace;
-    private String localName;
+public class OwlDatatypeProperty extends OntoProperty {
     private String datatype;
 
-    public String getUri(){
-        return String.format("%s%s", namespace, localName);
+    public OwlDatatypeProperty(String namespace, String localName, String datatype) {
+        this.namespace = namespace;
+        this.localName = localName;
+        this.datatype = datatype;
     }
+
 }

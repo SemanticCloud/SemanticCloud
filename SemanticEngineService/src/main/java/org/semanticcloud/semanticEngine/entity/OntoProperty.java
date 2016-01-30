@@ -1,6 +1,6 @@
 package org.semanticcloud.semanticEngine.entity;
 
 
-public interface OntoProperty extends OwlElement {
+public abstract class OntoProperty extends OwlElement {
 	
 }

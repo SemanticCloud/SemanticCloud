@@ -2,8 +2,8 @@ package org.semanticcloud.semanticEngine.controll;
 
 import java.util.List;
 
-import org.semanticcloud.semanticEngine.controll.ontologyReading.OntologyReader;
-import org.semanticcloud.semanticEngine.entity.OntoClass;
+import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
+import org.semanticcloud.semanticEngine.entity.OwlClass;
 import org.semanticcloud.semanticEngine.entity.OntoProperty;
 import org.semanticcloud.semanticEngine.entity.OwlIndividual;
 import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
@@ -16,7 +16,7 @@ public class OntologyService {
     private OntologyReader ontologyReader;
 
 
-    public OntoClass getOwlClass(String classUri) {
+    public OwlClass getOwlClass(String classUri) {
         return ontologyReader.getOwlClass(classUri);
     }
 
@@ -30,7 +30,7 @@ public class OntologyService {
 
     public List<OwlIndividual> getIndividualsInRange(String classUri, String propertyUri) {
         try {
-            OntoClass owlClass = ontologyReader.getOwlClass(classUri);
+            OwlClass owlClass = ontologyReader.getOwlClass(classUri);
             OntoProperty property;
             property = ontologyReader.getProperty(propertyUri);
             return ontologyReader.getIndividualsInRange(owlClass, property);
@@ -41,9 +41,9 @@ public class OntologyService {
 
     }
 
-    public List<OntoClass> getClassesInRange(String classUri, String propertyUri) {
+    public List<OwlClass> getClassesInRange(String classUri, String propertyUri) {
         try {
-            OntoClass owlClass = ontologyReader.getOwlClass(classUri);
+            OwlClass owlClass = ontologyReader.getOwlClass(classUri);
             OntoProperty property;
             property = ontologyReader.getProperty(propertyUri);
             return ontologyReader.getClassesInRange(owlClass, property);

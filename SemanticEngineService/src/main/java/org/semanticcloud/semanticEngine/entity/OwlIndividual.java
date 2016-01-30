@@ -8,7 +8,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import java.util.Iterator;
 import java.util.List;
 
-public class OwlIndividual implements OwlElement {
+public class OwlIndividual extends OwlElement {
 	private String uri;
 	private String localName;
 	private String classUri;
@@ -34,10 +34,6 @@ public class OwlIndividual implements OwlElement {
 	
 	public String getUri(){
 		return uri;
-	}
-	
-	public String getLocalName(){
-		return localName;
 	}
 	
 	public String getClassUri(){

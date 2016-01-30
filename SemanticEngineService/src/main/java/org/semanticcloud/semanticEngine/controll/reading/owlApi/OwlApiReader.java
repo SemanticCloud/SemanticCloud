@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.semanticcloud.semanticEngine.entity.models.PropertyValueCondition;
-import org.semanticcloud.semanticEngine.entity.OntoClass;
+import org.semanticcloud.semanticEngine.entity.OwlClass;
 import org.semanticcloud.semanticEngine.entity.OntoProperty;
 import org.semanticcloud.semanticEngine.entity.OwlIndividual;
 import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
@@ -98,17 +98,17 @@ public class OwlApiReader extends OntologyReader {
     }
 
 	@Override
-	public List<OntoClass> getClassesInRange(OntoClass owlClass, OntoProperty property) {
-		List<OntoClass> classes = new ArrayList<OntoClass>();
+	public List<OwlClass> getClassesInRange(OwlClass owlClass, OntoProperty property) {
+		List<OwlClass> classes = new ArrayList<OwlClass>();
 
 		for (OWLClass ontClass : getAllClassesFromRange(property)) {
-			classes.add(new OntoClass(ontClass.getIRI(), new ArrayList()));
+			classes.add(new OwlClass(ontClass.getIRI(), new ArrayList()));
 		}
 		return classes;
 	}
 
     @Override
-    public List<OntoClass> getOwlSubclasses(String classUri) {
+    public List<OwlClass> getOwlSubclasses(String classUri) {
         return null;
 
     }
@@ -136,7 +136,7 @@ public class OwlApiReader extends OntologyReader {
 	}
 
 	@Override
-	public List<OwlIndividual> getIndividualsInRange(OntoClass owlClass, OntoProperty property) {
+	public List<OwlIndividual> getIndividualsInRange(OwlClass owlClass, OntoProperty property) {
 		List<OwlIndividual> individuals = new ArrayList<OwlIndividual>();
 
 		for (OWLClass rangeClass : getAllClassesFromRange(property)) {
@@ -153,7 +153,7 @@ public class OwlApiReader extends OntologyReader {
 	}
 
 	@Override
-	public OntoClass getOwlClass(String className) {
+	public OwlClass getOwlClass(String className) {
 		if (!(className.contains("#"))) {
 			className = String.format("%s#%s", uri, className);
 		}
@@ -162,7 +162,7 @@ public class OwlApiReader extends OntologyReader {
 		
 		List<OntoProperty> classProperties = getClassProperties(owlClass); 
 		
-		return new OntoClass(owlClass.getIRI().getNamespace(), owlClass.getIRI().getFragment(), classProperties);
+		return new OwlClass(owlClass.getIRI().getNamespace(), owlClass.getIRI().getFragment(), classProperties);
 	}
 
 	private List<OntoProperty> getClassProperties(OWLClass owlClass) {

@@ -1,12 +1,12 @@
 package jobs;
 
-import org.semanticcloud.semanticEngine.controll.ontologyReading.owlApi.OwlApiReader;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.owlApi.OwlPropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.owlApi.propertyFactories.DateTimePropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.owlApi.propertyFactories.FloatPropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.owlApi.propertyFactories.IntegerPropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.owlApi.propertyFactories.ObjectPropertyFactory;
-import org.semanticcloud.semanticEngine.controll.ontologyReading.owlApi.propertyFactories.StringPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.owlApi.OwlApiReader;
+import org.semanticcloud.semanticEngine.controll.reading.owlApi.OwlPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactories.DateTimePropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactories.FloatPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactories.IntegerPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactories.ObjectPropertyFactory;
+import org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactories.StringPropertyFactory;
 
 public class OwlApiReaderConfiguration {
 
