@@ -1,0 +1,27 @@
+discovery:
+  image: discovery-service
+  ports:
+    - "9000:9000"
+configserver:
+  image: config-service
+  links:
+    - discovery
+dashboarddb:
+  image: postgres:9.4.5
+  environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=dashboard
+  links:
+    - discovery
+dashboard:
+  image: dashboard
+  links:
+    - discovery
+    - dashboarddb
+gateway:
+  image: gateway-service
+  ports:
+    - "8080:8080"
+  links:
+    - discovery

@@ -48,6 +48,9 @@ swagger:
     license: Apache 2.0
     licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html
 eureka:
+    instance:
+        hostname: configserver
+        preferIpAddress: true
     client:
         serviceUrl:
-            defaultZone: http://localhost:9000/eureka/
+            defaultZone: http://discovery:9000/eureka/

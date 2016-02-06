@@ -1,9 +1,10 @@
 server:
-  port: 8888
+  port: 9001
 
 eureka:
   instance:
     hostname: configserver
+    preferIpAddress: true
   client:
     registerWithEureka: true
     fetchRegistry: true
