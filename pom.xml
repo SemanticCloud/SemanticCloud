@@ -27,7 +27,8 @@
         <module>DiscoveryService</module>
         <module>GatewayService</module>
         <module>ConfigService</module>
-        <module>Agency</module>
+        <module>Agency</module>    
+        <module>Agents</module>
     </modules>
 
     <properties>
