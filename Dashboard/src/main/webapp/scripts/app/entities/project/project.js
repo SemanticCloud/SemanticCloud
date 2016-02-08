@@ -5,7 +5,7 @@ angular.module('dashboardApp')
         $stateProvider
             .state('project', {
                 parent: 'entity',
-                url: '/projects',
+                url: '/project',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'dashboardApp.project.home.title'
@@ -25,8 +25,8 @@ angular.module('dashboardApp')
                 }
             })
             .state('project.detail', {
-                parent: 'entity',
-                url: '/project/{id}/detail',
+                parent: 'project',
+                url: '/{id}/detail',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'dashboardApp.project.detail.title'
@@ -38,10 +38,6 @@ angular.module('dashboardApp')
                     }
                 },
                 resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('project');
-                        return $translate.refresh();
-                    }],
                     entity: ['$stateParams', 'Project', function($stateParams, Project) {
                         return Project.get({id : $stateParams.id});
                     }]

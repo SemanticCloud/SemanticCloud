@@ -4,7 +4,13 @@ angular.module('dashboardApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('admin', {
-                abstract: true,
-                parent: 'site'
+                parent: 'home',
+                url: 'admin',
+                views: {
+                    'navbar@': {
+                        templateUrl: 'scripts/app/admin/navbar.html',
+                        controller: 'NavbarController'
+                    }
+                },
             });
     });

@@ -78,6 +78,7 @@ module.exports = function (grunt) {
                 bsFiles: {
                     src : [
                         'src/main/webapp/**/*.html',
+                        'src/main/webapp/scripts/**/*.html',
                         'src/main/webapp/**/*.json',
                         'src/main/webapp/assets/styles/**/*.css',
                         'src/main/webapp/scripts/**/*.js',
@@ -88,7 +89,7 @@ module.exports = function (grunt) {
             },
             options: {
                 watchTask: true,
-                proxy: "localhost:8080"
+                proxy: "localhost:8000"
             }
         },
         clean: {

@@ -1,5 +1,5 @@
 <!-- Logo -->
-<a href="index2.html" class="logo">
+<a ui-sref="home" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>SC</b></span>
     <!-- logo for regular state and mobile devices -->
@@ -11,13 +11,13 @@
         <span class="sr-only">Toggle navigation</span>
     </a>
 
+
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav" ng-switch="isAuthenticated()">
             <li class="dropdown tasks-menu" ui-sref-active="active" ng-controller="LanguageController">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                                <span>
-                                    <span class="fa fa-flag-o"></span>
-                                </span>
+                    <span class="fa fa-flag-o"></span>
+                    <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="header" translate="global.menu.language">Language</li>
@@ -33,38 +33,34 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="" class="user-image" alt="User Image">
+                    <span class="glyphicon glyphicon-user"></span>
                     <span class="hidden-xs">{{account.login}}</span>
+                    <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <!-- User image -->
-                    <li class="user-header">
-                        <img src="" class="img-circle" alt="User Image">
+                    <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="settings"><span
+                        class="glyphicon glyphicon-wrench"></span>
+                        &#xA0;<span translate="global.menu.account.settings">Settings</span></a></li>
+                    <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="password"><span
+                        class="glyphicon glyphicon-lock"></span>
+                        &#xA0;<span translate="global.menu.account.password">Password</span></a></li>
+                    <li ui-sref-active="active" ng-switch-when="true"><a href="" ng-click="logout()"><span
+                        class="glyphicon glyphicon-log-out"></span>
+                        &#xA0;<span translate="global.menu.account.logout">Log out</span></a></li>
+                    <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="login"><span
+                        class="glyphicon glyphicon-log-in"></span>
+                        &#xA0;<span translate="global.menu.account.login">Authenticate</span></a></li>
 
-                        <p>
-                            {{account.login}}
-                        </p>
-                    </li>
-                    <!-- Menu Body -->
-                    <li class="user-body">
-                        <!--<div class="row">-->
-                        <!--</div>-->
-                        <!-- /.row -->
-                    </li>
-                    <!-- Menu Footer-->
-                    <li class="user-footer">
-                        <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                        </div>
-                        <div class="pull-right">
-                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                        </div>
-                    </li>
+                    <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="register"><span
+                        class="glyphicon glyphicon-plus-sign"></span>
+                        &#xA0;<span translate="global.menu.account.register">Register</span></a></li>
+
                 </ul>
             </li>
-            <!-- Control Sidebar Toggle Button -->
-            <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <li class="dropdown tasks-menu">
+                <a ui-sref="admin" role="button">
+                    <i class="fa fa-gears"></i>
+                </a>
             </li>
         </ul>
     </div>
