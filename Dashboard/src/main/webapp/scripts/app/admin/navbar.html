@@ -1,0 +1,33 @@
+<nav class="" role="navigation">
+    <div class="sidebar-collapse">
+        <ul side-navigation="" class="nav metismenu sidebar-menu" id="side-menu" ng-switch="isAuthenticated()">
+            <li class="header">
+                <span class="fa fa-gears"></span>
+                <span class="hidden-tablet" translate="global.menu.admin.main">Administration</span>
+            </li>
+
+            <li ui-sref-active="active"><a ui-sref="user-management"><span
+                class="glyphicon glyphicon-user"></span>
+                &#xA0;<span translate="global.menu.admin.user-management">User management</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="tracker"><span class="glyphicon glyphicon-eye-open"></span>
+                &nbsp;<span translate="global.menu.admin.tracker">User tracker</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="metrics"><span class="glyphicon glyphicon-dashboard"></span>
+                &#xA0;<span translate="global.menu.admin.metrics">Metrics</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="health"><span class="glyphicon glyphicon-heart"></span>
+                &#xA0;<span translate="global.menu.admin.health">Health</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="configuration"><span
+                class="glyphicon glyphicon-list-alt"></span>
+                &#xA0;<span translate="global.menu.admin.configuration">Configuration</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="audits"><span class="glyphicon glyphicon-bell"></span>
+                &#xA0;<span translate="global.menu.admin.audits">Audits</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="logs"><span class="glyphicon glyphicon-tasks"></span>
+                &#xA0;<span translate="global.menu.admin.logs">Logs</span></a></li>
+            <li ng-hide="inProduction" ui-sref-active="active"><a ui-sref="docs"><span
+                class="glyphicon glyphicon-book"></span>
+                &#xA0;<span translate="global.menu.admin.apidocs">API</span></a></li>
+
+        </ul>
+
+    </div>
+</nav>
+
