@@ -5,8 +5,8 @@ package org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactori
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;
 
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.properties.IntegerProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.IntegerProperty;
 
 public class IntegerPropertyFactory extends SimpleDatatypePropertyFactory {
 	public IntegerPropertyFactory(){

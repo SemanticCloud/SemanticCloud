@@ -1,0 +1,23 @@
+server:
+  port: 8090
+debug:
+spring:
+  application:
+  name: agency
+eureka:
+  instance:
+    hostname: agency
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery:9000/eureka/
+agency:
+  providers:
+    -
+      name: "Test1"
+      lib:  "test"
+    -
+      name: "Test2"
+      lib:  "test"

@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.semanticcloud.semanticEngine.controll.OntologyService;
 import org.semanticcloud.semanticEngine.controll.OperatorService;
-import org.semanticcloud.semanticEngine.entity.OwlClass;
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.OwlIndividual;
+import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+import org.semanticcloud.semanticEngine.model.conditions.ClassCondition;
 import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
 import org.semanticcloud.semanticEngine.entity.models.PropertyOperator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("classes")
+@RequestMapping("class")
 public class ClassResource {
 
     @Autowired
@@ -33,18 +33,6 @@ public class ClassResource {
     @RequestMapping(value = "{classUri}/subclasses", method = RequestMethod.GET)
     public void getSubclasses(@PathVariable String classUri) {
         ontologyService.getOwlSubclasses(classUri);
-    }
-
-    @RequestMapping(value = "{classUri}/properties/{propertyUri}", method = RequestMethod.GET)
-    public OntoProperty getPropertyCondition(@PathVariable String classUri, @PathVariable String propertyUri) {
-        OwlClass owlClass = ontologyService.getOwlClass(classUri);
-        OntoProperty property = null;
-        try {
-            property = ontologyService.getProperty(propertyUri);
-        } catch (ConfigurationException e) {
-            e.printStackTrace();
-        }
-        return property;
     }
 
     @RequestMapping(value = "{classUri}/properties/{propertyUri}/operators", method = RequestMethod.GET)
@@ -64,13 +52,13 @@ public class ClassResource {
 
     }
 
-    @RequestMapping(value = "{classUri}/properties/{propertyUri}/individuals", method = RequestMethod.GET)
-    public List<OwlIndividual> getIndividualsInRange(@PathVariable String classUri, @PathVariable String propertyUri) {
-        return ontologyService.getIndividualsInRange(classUri, propertyUri);
-    }
 
-    @RequestMapping(value = "{classUri}/properties/{propertyUri}/classes", method = RequestMethod.GET)
-    public List<OwlClass> getClassesInRange(@PathVariable String classUri, @PathVariable String propertyUri) {
-        return ontologyService.getClassesInRange(classUri, propertyUri);
+    @RequestMapping(value = "conditions", method = RequestMethod.POST)
+    public void updateConditions(List<ClassCondition> classConditions) {
+
+    }
+    @RequestMapping(value = "condition", method = RequestMethod.POST)
+    public void updateCondition(ClassCondition classCondition) {
+
     }
 }

@@ -2,10 +2,10 @@ package org.semanticcloud.semanticEngine.controll.reading.jena;
 
 import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
 import org.semanticcloud.semanticEngine.entity.models.InvalidConfigurationException;
-import org.semanticcloud.semanticEngine.entity.models.PropertyValueCondition;
-import org.semanticcloud.semanticEngine.entity.OwlClass;
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.OwlIndividual;
+import org.semanticcloud.semanticEngine.model.conditions.PropertyCondition;
+import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OwlIndividual;
 import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
@@ -32,11 +32,9 @@ public class JenaOwlReader extends OntologyReader{
 		this.uri = namespace.substring(0, namespace.length() - 1);
 	}
 
-	public JenaOwlReader(OntModel model, JenaOwlReaderConfig config) {
+	public JenaOwlReader(OntModel model, boolean ignorePropsWithNoDomain) {
 		this(model);
-        if (config != null) {
-            ignorePropsWithNoDomain = config.isIgnorePropsWithNoDomain();
-        }
+		this.ignorePropsWithNoDomain = ignorePropsWithNoDomain;
 	}
 
 	/* (non-Javadoc)
@@ -115,7 +113,7 @@ public class JenaOwlReader extends OntologyReader{
 			for (ExtendedIterator<? extends OntResource> i = rangeClass.listInstances(); i.hasNext();) {
 				Individual individual = i.next().asIndividual();
 
-				OwlIndividual owlIndividual = new OwlIndividual(individual, new ArrayList<PropertyValueCondition>());
+				OwlIndividual owlIndividual = new OwlIndividual(individual, new ArrayList<PropertyCondition>());
 				if (!individuals.contains(owlIndividual))
 					individuals.add(owlIndividual);
 			}

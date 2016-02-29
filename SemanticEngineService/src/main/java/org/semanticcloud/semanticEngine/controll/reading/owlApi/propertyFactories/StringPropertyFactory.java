@@ -4,8 +4,8 @@ package org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactori
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;
 
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.properties.StringProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.StringProperty;
 
 public class StringPropertyFactory extends SimpleDatatypePropertyFactory {
 	public StringPropertyFactory(){

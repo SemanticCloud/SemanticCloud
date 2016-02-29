@@ -27,8 +27,8 @@
         <module>DiscoveryService</module>
         <module>GatewayService</module>
         <module>ConfigService</module>
-        <module>Agency</module>    
         <module>Agents</module>
+        <module>Agency</module>
     </modules>
 
     <properties>
@@ -78,7 +78,7 @@
         <spring-security.version>4.0.2.RELEASE</spring-security.version>
         <springfox.version>2.0.3</springfox.version>
         <usertype-core.version>4.0.0.GA</usertype-core.version>
-        <!--<jade.version>4.3.3</jade.version>-->
+        <jade.version>4.4.0</jade.version>
         <jena.version>3.0.0</jena.version>
         <!--<lombok.version>1.16.2</lombok.version>-->
         <!--<postgresql.version>9.1-901-1.jdbc4</postgresql.version>-->
@@ -86,12 +86,12 @@
         <!--<spring.data.jpa.version>1.9.0.RELEASE</spring.data.jpa.version>-->
     </properties>
 
-    <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>tilab</id>-->
-            <!--<url>http://jade.tilab.com/maven/</url>-->
-        <!--</repository>-->
-    <!--</repositories>-->
+    <repositories>
+        <repository>
+            <id>tilab</id>
+            <url>http://jade.tilab.com/maven/</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -131,11 +131,11 @@
                 <artifactId>jena-core</artifactId>
                 <version>${jena.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>com.tilab.jade</groupId>-->
-                <!--<artifactId>jade</artifactId>-->
-                <!--<version>${jade.version}</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>com.tilab.jade</groupId>
+                <artifactId>jade</artifactId>
+                <version>${jade.version}</version>
+            </dependency>
 
             <!--&lt;!&ndash;Test dependencies&ndash;&gt;-->
             <!--<dependency>-->

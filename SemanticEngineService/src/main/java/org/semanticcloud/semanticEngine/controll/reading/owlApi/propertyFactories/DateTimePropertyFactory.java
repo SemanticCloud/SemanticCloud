@@ -1,7 +1,7 @@
 package org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactories;
 
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.properties.DateTimeProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.DateTimeProperty;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;

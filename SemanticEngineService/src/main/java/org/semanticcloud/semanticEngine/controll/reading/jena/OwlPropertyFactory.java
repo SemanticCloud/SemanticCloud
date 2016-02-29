@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.semanticcloud.semanticEngine.entity.models.InvalidConfigurationException;
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 import org.apache.jena.ontology.OntProperty;
 
 public abstract class OwlPropertyFactory {

@@ -1,8 +1,8 @@
 package org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactories;
 
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 import org.semanticcloud.semanticEngine.controll.reading.owlApi.OwlPropertyFactory;
-import org.semanticcloud.semanticEngine.entity.properties.OwlObjectProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.OwlObjectProperty;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;

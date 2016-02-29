@@ -6,14 +6,14 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 import org.semanticcloud.semanticEngine.entity.models.PropertyOperator;
-import org.semanticcloud.semanticEngine.entity.properties.DateTimeProperty;
-import org.semanticcloud.semanticEngine.entity.properties.FloatProperty;
-import org.semanticcloud.semanticEngine.entity.properties.IntegerProperty;
-import org.semanticcloud.semanticEngine.entity.properties.OwlObjectProperty;
-import org.semanticcloud.semanticEngine.entity.properties.PropertyOperatorType;
-import org.semanticcloud.semanticEngine.entity.properties.StringProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.DateTimeProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.FloatProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.IntegerProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.OwlObjectProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.PropertyOperatorType;
+import org.semanticcloud.semanticEngine.model.ontology.properties.StringProperty;
 import org.springframework.stereotype.Service;
 
 @Service

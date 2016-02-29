@@ -1,24 +1,13 @@
 package org.semanticcloud.semanticEngine.controll.reading;
 
+import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
+import org.semanticcloud.semanticEngine.model.ontology.OwlIndividual;
+
 import java.util.List;
 
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
-import org.semanticcloud.semanticEngine.entity.models.PropertyProvider;
-import org.semanticcloud.semanticEngine.entity.OwlClass;
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.OwlIndividual;
-
-public abstract class OntologyReader implements PropertyProvider{
-	
-	private static OntologyReader instance;
-	
-	public static void setGlobalInstance(OntologyReader reader) {
-		instance = reader;
-	}
-
-	public static OntologyReader getGlobalInstance() {
-		return instance;
-	}
+public abstract class OntologyReader {
 	
 	public abstract OwlClass getOwlClass(String className);
 

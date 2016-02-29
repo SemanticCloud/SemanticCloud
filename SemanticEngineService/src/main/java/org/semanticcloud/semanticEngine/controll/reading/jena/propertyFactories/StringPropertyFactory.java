@@ -1,9 +1,9 @@
 package org.semanticcloud.semanticEngine.controll.reading.jena.propertyFactories;
 
 
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 import org.semanticcloud.semanticEngine.controll.reading.jena.OwlPropertyFactory;
-import org.semanticcloud.semanticEngine.entity.properties.StringProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.StringProperty;
 import org.apache.jena.ontology.OntProperty;
 
 public class StringPropertyFactory extends OwlPropertyFactory {

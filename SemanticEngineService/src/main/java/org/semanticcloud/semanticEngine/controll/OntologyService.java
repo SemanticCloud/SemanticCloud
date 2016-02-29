@@ -3,9 +3,9 @@ package org.semanticcloud.semanticEngine.controll;
 import java.util.List;
 
 import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
-import org.semanticcloud.semanticEngine.entity.OwlClass;
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.OwlIndividual;
+import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OwlIndividual;
 import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,11 @@ public class OntologyService {
 
     public OntoProperty getProperty(String propertyUri) throws ConfigurationException {
         return ontologyReader.getProperty(propertyUri);
+    }
+
+    public OntoProperty getProperty(String classUri, String propertyUri) {
+        OwlClass owlClass = ontologyReader.getOwlClass(classUri);
+        return owlClass.findProperty(propertyUri);
     }
 
     public void getOwlSubclasses(String classUri) {

@@ -1,8 +1,8 @@
 package org.semanticcloud.semanticEngine.controll.reading.jena.propertyFactories;
 
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 import org.semanticcloud.semanticEngine.controll.reading.jena.OwlPropertyFactory;
-import org.semanticcloud.semanticEngine.entity.properties.FloatProperty;
+import org.semanticcloud.semanticEngine.model.ontology.properties.FloatProperty;
 import org.apache.jena.ontology.OntProperty;
 
 public class FloatPropertyFactory extends OwlPropertyFactory {

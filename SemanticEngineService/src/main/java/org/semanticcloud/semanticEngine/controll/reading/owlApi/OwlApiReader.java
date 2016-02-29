@@ -8,10 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.semanticcloud.semanticEngine.entity.models.PropertyValueCondition;
-import org.semanticcloud.semanticEngine.entity.OwlClass;
-import org.semanticcloud.semanticEngine.entity.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.OwlIndividual;
+import org.semanticcloud.semanticEngine.model.conditions.PropertyCondition;
+import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+import org.semanticcloud.semanticEngine.model.ontology.OwlIndividual;
 import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
 
 import org.semanticcloud.semanticEngine.controll.reading.owlApi.propertyFactories.DateTimePropertyFactory;
@@ -48,10 +48,7 @@ public class OwlApiReader extends OntologyReader {
 	private final OWLDataFactory factory;
 	private String uri;
     private boolean ignorePropsWithNoDomain;
-	
-	public static void initialize2(String uri, String localOntologyFolder) {
-		setGlobalInstance(loadFromFile(uri, localOntologyFolder));
-	}
+
     public static void initialize(String uri, String localOntologyFolder) {
         initialize(uri, new OwlApiReaderConfig().useLocalFolder(localOntologyFolder));
     }
@@ -144,7 +141,7 @@ public class OwlApiReader extends OntologyReader {
 			for (Node<OWLNamedIndividual> instance : instances) {
 				OWLNamedIndividual individual = instance.getRepresentativeElement();
 				
-				OwlIndividual owlIndividual = new OwlIndividual(individual, new ArrayList<PropertyValueCondition>());
+				OwlIndividual owlIndividual = new OwlIndividual(individual, new ArrayList<PropertyCondition>());
 				if (!individuals.contains(owlIndividual))
 					individuals.add(owlIndividual);
 			}			
