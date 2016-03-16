@@ -1,3 +1,4 @@
+'use strict';
 angular.module('dashboardApp')
     .controller('TrackerController', function ($scope, AuthServerProvider, $cookies, $http, Tracker) {
         // This controller uses a Websocket connection to receive user activities in real-time.

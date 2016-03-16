@@ -49,7 +49,7 @@ swagger:
     licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html
 eureka:
     instance:
-        hostname: configserver
+        hostname: dashboard
         preferIpAddress: true
     client:
         serviceUrl:

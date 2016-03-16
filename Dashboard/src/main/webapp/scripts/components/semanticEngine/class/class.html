@@ -1,0 +1,19 @@
+<div class="box box-default" ng-controller="ClassController">
+    <div class="box-header with-border">
+        <h3 class="box-title">{{name}}</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div ng-repeat="propertyCondition in propertyConditions">
+        <div ng-include = "'scripts/components/semanticEngine/property/property.html'"></div>
+    </div>
+
+    <!-- /.box-body -->
+    <div style="display: block;" class="box-footer">
+        <button type="button" class="btn btn-block btn-success" ng-click="addPropertyCondition()">Primary</button>
+    </div>
+</div>

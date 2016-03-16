@@ -6,6 +6,10 @@ configserver:
   image: config-service
   links:
     - discovery
+semanticengine:
+  image: semantic-engine
+  links:
+    - discovery
 dashboarddb:
   image: postgres:9.4.5
   environment:
