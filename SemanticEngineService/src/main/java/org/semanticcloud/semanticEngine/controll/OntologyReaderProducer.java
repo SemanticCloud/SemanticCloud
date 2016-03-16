@@ -33,9 +33,11 @@ import org.semanticcloud.semanticEngine.model.conditions.DatatypePropertyConditi
 import org.semanticcloud.semanticEngine.model.conditions.IndividualCondition;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.net.InetAddress;
 import java.util.Map;
 
 @Component
@@ -45,8 +47,8 @@ public class OntologyReaderProducer {
 
     @Bean
     public OntologyReader produceReader() {
-        String uri = "file:/home/malagus/workspace/master-thesis/Ontologia/cloud.owl";
-        OntologyGenerator.initialize(uri,"file:/home/malagus/workspace/master-thesis/Ontologia/");
+        String uri = "file:/opt/SemanticCloud/cloud.owl";
+        OntologyGenerator.initialize(uri,"file:/opt/SemanticCloud/Ontologia/");
 
         return initialize(jenaConfig);
     }

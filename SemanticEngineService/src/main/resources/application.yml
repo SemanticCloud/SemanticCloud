@@ -4,13 +4,15 @@ spring:
     application:
         name: semantic-engine
 eureka:
+    instance:
+        hostname: semantic-engine
+        preferIpAddress: true
     client:
         serviceUrl:
-            defaultZone: http://localhost:9000/eureka/
+            defaultZone: http://discovery:9000/eureka/
 
 jena:
-    baseOntology: file:/home/malagus/workspace/master-thesis/Ontologia/cloud.owl
+    baseOntology: file:/opt/SemanticCloud/cloud.owl
     ignorePropsWithNoDomain: true
     localMappings:
-        "http://semantic-cloud.org/Cloud": file:/home/malagus/workspace/master-thesis/Ontologia/cloud.owl
-
+        "http://semantic-cloud.org/Cloud": file:/opt/SemanticCloud/cloud.owl
