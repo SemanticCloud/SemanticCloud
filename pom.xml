@@ -21,7 +21,6 @@
     <name>Semantic Cloud</name>
 
     <modules>
-        <!--<module>ManagementService</module>-->
         <module>SemanticEngineService</module>
         <module>Dashboard</module>
         <module>DiscoveryService</module>
@@ -80,6 +79,7 @@
         <usertype-core.version>4.0.0.GA</usertype-core.version>
         <jade.version>4.4.0</jade.version>
         <jena.version>3.0.0</jena.version>
+        <owlapi.version>4.2.3</owlapi.version>
         <!--<lombok.version>1.16.2</lombok.version>-->
         <!--<postgresql.version>9.1-901-1.jdbc4</postgresql.version>-->
         <!--<spring.boot.version>1.2.6.RELEASE</spring.boot.version>-->
@@ -135,6 +135,11 @@
                 <groupId>com.tilab.jade</groupId>
                 <artifactId>jade</artifactId>
                 <version>${jade.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.owlapi</groupId>
+                <artifactId>owlapi-distribution</artifactId>
+                <version>${owlapi.version}</version>
             </dependency>
 
             <!--&lt;!&ndash;Test dependencies&ndash;&gt;-->

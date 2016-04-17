@@ -18,6 +18,8 @@ dashboarddb:
     - POSTGRES_DB=dashboard
   links:
     - discovery
+  ports:
+    - "5432:5432"
 dashboard:
   image: dashboard
   links:

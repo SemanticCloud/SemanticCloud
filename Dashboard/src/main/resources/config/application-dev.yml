@@ -6,7 +6,7 @@ spring:
         active: dev
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
-        url: jdbc:postgresql://dashboarddb:5432/postgres
+        url: jdbc:postgresql://localhost:5432/postgres
 #        url: jdbc:postgresql://localhost:5432/postgres
         databaseName: dashboard
         serverName: dashboard
