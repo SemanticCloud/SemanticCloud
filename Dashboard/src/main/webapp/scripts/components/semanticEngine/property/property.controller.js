@@ -2,10 +2,12 @@
 
 angular.module('dashboardApp')
     .controller('PropertyController', function ($scope) {
+        $scope.property = null;
+        $scope.operator = null;
 
-        $scope.components = [];
-
-        $scope.addComponent = function(){
-            $scope.components.push({});
-        };
+        $scope.operators =[
+            { name:"equal", condition:"scripts/components/semanticEngine/condition/simpleValue.html"},
+            { name:"constrained", condition:"scripts/components/semanticEngine/condition/objectValue.html"},
+            { name:"equalTo", condition:"scripts/components/semanticEngine/condition/individualValue.html"},
+        ];
     });

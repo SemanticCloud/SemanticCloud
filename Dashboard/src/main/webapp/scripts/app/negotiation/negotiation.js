@@ -4,7 +4,7 @@ angular.module('dashboardApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('negotiation', {
-                parent: 'site',
+                parent: 'project.detail',
                 url: '/negotiation',
                 data: {
                     //authorities: ['ROLE_USER'],

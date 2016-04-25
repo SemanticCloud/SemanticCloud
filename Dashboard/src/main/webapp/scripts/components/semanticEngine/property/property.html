@@ -1,22 +1,22 @@
-<div style="display: block;" class="box-body">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Property</label>
-                <select aria-hidden="true" class="form-control select2 select2-hidden-accessible" style="width: 100%;">
-                    <option value=""></option>
-                    <option ng-repeat="property in properties" value="{{property}}">{{property}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Operator</label>
-                <select aria-hidden="true" class="form-control select2 select2-hidden-accessible" style="width: 100%;">
-                    <option value=""></option>
-                    <option ng-repeat="operator in operators" value="{{operator}}">{{operator}}</option>
-                </select>
-            </div>
-        </div>
+
+<div class="row" ng-controller="PropertyController">
+    <div class="col-md-6">
+            <label>Property</label>
+            <select ng-model="property" aria-hidden="true" class="form-control select2 select2-hidden-accessible" style="width: 100%;">
+                <option value=""></option>
+                <option ng-repeat="property in properties" value="{{property}}">{{property}}</option>
+            </select>
+    </div>
+    <div class="col-md-6" ng-show="property">
+            <label>Operator</label>
+            <select ng-model="operator"
+                    aria-hidden="true" class="form-control select2 select2-hidden-accessible" style="width: 100%;">
+                <option value=""></option>
+                <option ng-repeat="operator in operators" value="{{operator}}">{{operator.name}}</option>
+            </select>
+    </div>
+    <div  class="row" ng-if="operator">
+        <div ng-include="operator.condition"></div>
+
     </div>
 </div>

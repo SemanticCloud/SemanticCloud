@@ -1,33 +1,25 @@
-<nav class="" role="navigation">
+<nav class="" role="navigation" ng-if="isAuthenticated()">
     <div class="sidebar-collapse">
-        <ul side-navigation="" class="nav metismenu sidebar-menu" id="side-menu" ng-switch="isAuthenticated()">
+        <ul side-navigation="" class="nav metismenu sidebar-menu" id="side-menu">
             <li class="active" ui-sref-active="active">
-                <a ui-sref="home">
-                    <span class="glyphicon glyphicon-home"></span>
-                    <span translate="global.menu.home">Home</span>
+                <a ui-sref="project">
+                    <span class="fa fa-th-list"></span>
+                    <span translate="global.menu.projects">Projects</span>
                 </a>
             </li>
-            <li class="active" ui-sref-active="active">
+            <li class="header" ng-if="$state.includes('project.detail')">
+                <span translate="global.menu.project">Projects</span>
+            </li>
+            <!--<li class="header" ng-if="$state.includes('project.detail')">-->
+                <!--<span>{{project.name}}</span>-->
+            <!--</li>-->
+            <li class="active" ui-sref-active="active" ng-if="$state.includes('project.detail')">
                 <a ui-sref="negotiation">
                     <span class="glyphicon glyphicon-home"></span>
-                    <span translate="global.menu.negotiation">Negotiations</span>
+                    <span translate="global.menu.negotiations">Negotiations</span>
                 </a>
             </li>
-            <!--<li class="active" ui-sref-active="active">-->
-                <!--<a ui-sref="engine">-->
-                    <!--<span class="glyphicon glyphicon-home"></span>-->
-                    <!--<span translate="global.menu.home">Home</span>-->
-                <!--</a>-->
-            <!--</li>-->
-            <li ui-sref-active="active" ng-switch-when="true">
-                <a ui-sref="project"><span class="fa fa-files-o"></span>
-                    &#xA0;<span translate="global.menu.projects">Projects</span>
-                </a>
-            </li>
-            <li class="header">
-                Project
-            </li>
-            <li ui-sref-active="active" ng-switch-when="true" class="dropdown pointer" has-authority="ROLE_ADMIN">
+            <li ui-sref-active="active" class="dropdown pointer" has-authority="ROLE_ADMIN">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="">
                                 <span>
                                     <span class="glyphicon glyphicon-th-list"></span>

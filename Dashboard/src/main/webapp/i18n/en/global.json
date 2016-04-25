@@ -5,6 +5,8 @@
         "menu": {
             "home": "Home",
             "projects":"Projects",
+            "project":"Project",
+            "negotiations": "Negotiations",
             "entities": {
                 "main": "Entities",
                 "credentials": "Credentials",

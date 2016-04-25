@@ -61,6 +61,10 @@ gulp.task('copy', function () {
             .pipe(plumber({errorHandler: handleErrors}))
             .pipe(changed(config.dist + 'assets/fonts/'))
             .pipe(gulp.dest(config.dist + 'assets/fonts/')),
+        gulp.src(config.app + 'bower_components/font-awesome/fonts/*.*')
+            .pipe(plumber({errorHandler: handleErrors}))
+            .pipe(changed(config.dist + 'assets/fonts/'))
+            .pipe(gulp.dest(config.dist + 'assets/fonts/')),
         gulp.src(config.app + 'assets/**/*.{woff,svg,ttf,eot}')
             .pipe(plumber({errorHandler: handleErrors}))
             .pipe(changed(config.dist + 'assets/fonts/'))
