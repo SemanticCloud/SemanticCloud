@@ -1,6 +1,6 @@
 package org.semanticcloud.semanticEngine.controll.owlGeneration.restrictionFactories;
 
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
 import org.semanticcloud.semanticEngine.controll.owlGeneration.RestrictionFactory;
 import org.semanticcloud.semanticEngine.model.conditions.DatatypePropertyCondition;
 import org.joda.time.DateTime;

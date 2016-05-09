@@ -28,7 +28,9 @@ var gulp = require('gulp'),
     cache = require('gulp-cached'),
     handleErrors = require('./gulp/handleErrors'),
     util = require('./gulp/utils'),
-    includeSource = require('gulp-include-source');
+    //includeSource = require('gulp-include-source'),
+    inject = require('gulp-inject'),
+    series = require('stream-series');
 
 var config = {
     app: 'src/main/webapp/',
@@ -110,7 +112,8 @@ gulp.task('serve', function () {
             '/metrics',
             '/websocket/tracker',
             '/dump',
-            '/oauth/token'
+            '/oauth/token',
+            '/semantic-engine'
         ];
 
         var requireTrailingSlash = proxyRoutes.filter(function (r) {
@@ -148,7 +151,7 @@ gulp.task('serve', function () {
             open: true,
             port: config.port,
             server: {
-                baseDir: config.dist,
+                baseDir: config.app,
                 middleware: proxies
             }
         });
@@ -157,13 +160,24 @@ gulp.task('serve', function () {
     });
 });
 
+gulp.task('inject', function(){
+    var app = gulp.src([config.app + 'scripts/app/app.js',config.app + 'scripts/app/app.constants.js'], {read: false});
+    var all = gulp.src([config.app + 'scripts/app/*/**/*.js', config.app + 'scripts/components/**/*.js'], {read: false});
+    var stream = gulp.src(config.app + 'index.html')
+        .pipe(plumber({errorHandler: handleErrors}))
+        .pipe(inject(series(app,all),{relative: true}))
+        .pipe(gulp.dest(config.app));
+
+    return stream;
+});
+
 gulp.task('watch', function () {
     gulp.watch('bower.json', ['wiredep']);
     gulp.watch(['gulpfile.js', 'pom.xml'], ['ngconstant:dev']);
     gulp.watch(config.app + 'assets/styles/**/*.css', ['styles']);
     gulp.watch(config.app + 'assets/images/**', ['images']);
-    gulp.watch(config.app + 'scripts/**/*.*', ['js']);
-    //gulp.watch([config.dist + '*.html', config.dist + 'scripts/**', config.dist + 'i18n/**']).on('change', browserSync.reload);
+    //gulp.watch(config.app + 'scripts/**/*.*', ['js']);
+    gulp.watch([config.app + '*.html', config.app + 'scripts/**', config.app + 'i18n/**']).on('change', browserSync.reload);
 });
 
 gulp.task('wiredep', ['wiredep:test', 'wiredep:app']);
@@ -201,28 +215,28 @@ gulp.task('wiredep:test', function () {
         .pipe(gulp.dest(config.test));
 });
 
-gulp.task('js', function () {
-    return gulp.src([config.app + '**/*.html', '!' + config.app + '@(dist|bower_components)/**/*.html'])
-        .pipe(plumber({errorHandler: handleErrors}))
-        .pipe(includeSource())
-        .pipe(usemin({
-            js: [
-                sourcemaps.init,
-                ngAnnotate,
-                'concat',
-                uglify.bind(uglify, {mangle: false}),
-                rev,
-                sourcemaps.write.bind(sourcemaps.write, '.')
-            ]
-        }))
-        .pipe(gulp.dest(config.dist))
-        .pipe(browserSync.reload({stream: true}));
-});
+//gulp.task('js', function () {
+//    return gulp.src([config.app + '**/*.html', '!' + config.app + '@(dist|bower_components)/**/*.html'])
+//        .pipe(plumber({errorHandler: handleErrors}))
+//        .pipe(includeSource())
+//        .pipe(usemin({
+//            js: [
+//                sourcemaps.init,
+//                ngAnnotate,
+//                'concat',
+//                uglify.bind(uglify, {mangle: false}),
+//                rev,
+//                sourcemaps.write.bind(sourcemaps.write, '.')
+//            ]
+//        }))
+//        .pipe(gulp.dest(config.dist))
+//        .pipe(browserSync.reload({stream: true}));
+//});
 
-gulp.task('usemin', ['images', 'styles'], function () {
+gulp.task('usemin', ['inject','images', 'styles'], function () {
     return gulp.src([config.app + '**/*.html', '!' + config.app + '@(dist|bower_components)/**/*.html'])
         .pipe(plumber({errorHandler: handleErrors}))
-        .pipe(includeSource())
+        //.pipe(includeSource())
         .pipe(usemin({
             css: [
                 prefix,

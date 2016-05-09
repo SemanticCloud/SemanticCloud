@@ -7,7 +7,7 @@ import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLIndividual;
 
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
 import org.semanticcloud.semanticEngine.model.conditions.PropertyCondition;
 
 

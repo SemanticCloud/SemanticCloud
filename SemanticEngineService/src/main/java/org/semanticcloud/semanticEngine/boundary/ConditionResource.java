@@ -1,7 +1,7 @@
 package org.semanticcloud.semanticEngine.boundary;
 
 import org.semanticcloud.semanticEngine.controll.OntologyService;
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
 import org.semanticcloud.semanticEngine.controll.owlGeneration.OntologyGenerator;
 import org.semanticcloud.semanticEngine.model.conditions.ClassCondition;
 import org.semanticcloud.semanticEngine.model.conditions.ClassPropertyCondition;

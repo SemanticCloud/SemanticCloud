@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.semanticcloud.semanticEngine.model.conditions.ClassCondition;
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
 import org.semanticcloud.semanticEngine.model.conditions.PropertyCondition;
 
 import org.semanticweb.owlapi.model.IRI;

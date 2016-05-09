@@ -6,9 +6,8 @@ import org.semanticcloud.semanticEngine.controll.OntologyService;
 import org.semanticcloud.semanticEngine.controll.OperatorService;
 import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
 import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
-import org.semanticcloud.semanticEngine.model.conditions.ClassCondition;
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
-import org.semanticcloud.semanticEngine.entity.models.PropertyOperator;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.PropertyOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("class")
+@RequestMapping("class/{classUri}")
 public class ClassResource {
 
     @Autowired
@@ -24,13 +23,19 @@ public class ClassResource {
     @Autowired
     private OperatorService operatorService;
 
-    @RequestMapping(value = "{classUri}", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public OwlClass getClassInfo(@PathVariable String classUri) {
         OwlClass owlClass = ontologyService.getOwlClass(classUri);
         return owlClass;
     }
 
-    @RequestMapping(value = "{classUri}/subclasses", method = RequestMethod.GET)
+    @RequestMapping(value = "property",method = RequestMethod.GET)
+    public List<OntoProperty> getClassProperties(@PathVariable String classUri) {
+        OwlClass owlClass = ontologyService.getOwlClass(classUri);
+        return owlClass.getProperties();
+    }
+
+    @RequestMapping(value = "subclass", method = RequestMethod.GET)
     public void getSubclasses(@PathVariable String classUri) {
         ontologyService.getOwlSubclasses(classUri);
     }
@@ -45,20 +50,5 @@ public class ClassResource {
             e.printStackTrace();
         }
         return operatorService.getOperators(property);
-    }
-
-    @RequestMapping(value = "{classUri}/properties/{propertyUri}/restrictions", method = RequestMethod.GET)
-    public void getPropertyRestrictions(@PathVariable String classUri, @PathVariable String propertyUri) {
-
-    }
-
-
-    @RequestMapping(value = "conditions", method = RequestMethod.POST)
-    public void updateConditions(List<ClassCondition> classConditions) {
-
-    }
-    @RequestMapping(value = "condition", method = RequestMethod.POST)
-    public void updateCondition(ClassCondition classCondition) {
-
     }
 }

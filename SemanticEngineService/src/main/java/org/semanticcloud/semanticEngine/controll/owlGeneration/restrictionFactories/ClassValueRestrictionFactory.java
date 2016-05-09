@@ -3,7 +3,7 @@ package org.semanticcloud.semanticEngine.controll.owlGeneration.restrictionFacto
 import java.util.ArrayList;
 import java.util.List;
 
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
 import org.semanticcloud.semanticEngine.controll.owlGeneration.IndividualGenerator;
 import org.semanticcloud.semanticEngine.controll.owlGeneration.RestrictionFactory;
 import org.semanticcloud.semanticEngine.controll.owlGeneration.ClassRestrictionGenerator;

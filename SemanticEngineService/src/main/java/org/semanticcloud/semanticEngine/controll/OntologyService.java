@@ -6,7 +6,7 @@ import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
 import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
 import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 import org.semanticcloud.semanticEngine.model.ontology.OwlIndividual;
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

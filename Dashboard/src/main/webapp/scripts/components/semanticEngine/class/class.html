@@ -1,13 +1,13 @@
-<div ng-controller="ClassController">
+<div>
     <div class="box-header with-border">
-        <h3 class="box-title">Component</h3>
+        <h3 class="box-title">{{condition.classUri}}</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
     <form class="form-horizontal">
         <div class="box-body">
-            <div class="form-group" ng-repeat="propertyCondition in propertyConditions">
-                <div class="col-md-12" ng-include = "'scripts/components/semanticEngine/property/property.html'"></div>
+            <div class="form-group" ng-repeat="propertyCondition in condition.propertyConditions">
+                <div class="col-md-12" se-property property-condition="propertyCondition" properties="properties"></div>
             </div>
         </div>
         <!-- /.box-body -->

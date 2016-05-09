@@ -1,6 +1,6 @@
 package org.semanticcloud.semanticEngine.controll.reading;
 
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
 import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
 import org.semanticcloud.semanticEngine.model.ontology.OwlIndividual;

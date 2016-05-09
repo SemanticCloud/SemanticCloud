@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
-import org.semanticcloud.semanticEngine.entity.models.PropertyOperator;
+import org.semanticcloud.semanticEngine.model.PropertyOperator;
 import org.semanticcloud.semanticEngine.model.ontology.properties.DateTimeProperty;
 import org.semanticcloud.semanticEngine.model.ontology.properties.FloatProperty;
 import org.semanticcloud.semanticEngine.model.ontology.properties.IntegerProperty;

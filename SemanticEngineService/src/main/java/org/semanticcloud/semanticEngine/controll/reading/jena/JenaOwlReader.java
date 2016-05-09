@@ -1,7 +1,7 @@
 package org.semanticcloud.semanticEngine.controll.reading.jena;
 
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
-import org.semanticcloud.semanticEngine.entity.models.InvalidConfigurationException;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.InvalidConfigurationException;
 import org.semanticcloud.semanticEngine.model.conditions.PropertyCondition;
 import org.semanticcloud.semanticEngine.model.ontology.OwlClass;
 import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;

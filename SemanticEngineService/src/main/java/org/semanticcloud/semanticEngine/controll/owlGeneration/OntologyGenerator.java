@@ -1,8 +1,8 @@
 package org.semanticcloud.semanticEngine.controll.owlGeneration;
 
 import org.semanticcloud.semanticEngine.model.conditions.ClassCondition;
-import org.semanticcloud.semanticEngine.entity.models.ConfigurationException;
-import org.semanticcloud.semanticEngine.entity.models.OntologyUtils;
+import org.semanticcloud.semanticEngine.model.ConfigurationException;
+import org.semanticcloud.semanticEngine.model.OntologyUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.OWLXMLDocumentFormat;
 import org.semanticweb.owlapi.formats.RDFXMLDocumentFormat;

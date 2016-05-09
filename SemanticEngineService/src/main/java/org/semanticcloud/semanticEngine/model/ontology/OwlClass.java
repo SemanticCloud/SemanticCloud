@@ -3,6 +3,7 @@ package org.semanticcloud.semanticEngine.model.ontology;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.jena.ontology.OntClass;
 import org.semanticweb.owlapi.model.IRI;
 
@@ -10,6 +11,7 @@ import org.semanticweb.owlapi.model.IRI;
 public class OwlClass extends OwlElement {
 
     private OwlClass superClass;
+    @JsonIgnore
 	private List<OntoProperty> properties;
     private String label;
 

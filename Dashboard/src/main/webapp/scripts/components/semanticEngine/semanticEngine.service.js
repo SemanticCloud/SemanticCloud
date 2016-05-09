@@ -1,13 +1,20 @@
 'use strict';
 
 angular.module('dashboardApp')
-    .factory('SemanticEngineService', function ($http) {
-        var baseUrl = 'semantic-engine/classes/';
+    .factory('SemanticEngineService', function (Restangular) {
+        var base = Restangular.all('semantic-engine/');
         return {
             getClass: function (classUri) {
-                return $http.get(baseUrl + '/' + classUri).then(function (response) {
-                    return response.data;
-                });
+                return base.one('class', classUri).get();
+            },
+            getClassProperties: function (classUri) {
+                return base.one('class', classUri).all('property').getList();
+            },
+            getClassInRange: function (classUri, propertUri) {
+                return base.one('class', classUri).one('property', propertUri).all('classes').getList();
+            },
+            getIndividualsInRange: function (classUri, propertUri) {
+                return base.one('class', classUri).one('property', propertUri).all('individuals').getList();
             }
         };
     });

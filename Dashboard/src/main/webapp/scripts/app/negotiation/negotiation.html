@@ -1,5 +1,6 @@
-<div ng-repeat="component in components" class="box box-info">
-    <div ng-include = "'scripts/components/semanticEngine/class/class.html'"></div>
+<div ng-repeat="condition in conditions" class="box box-info">
+    <se-class condition="condition"></se-class>
 </div>
 
-<button type="button" class="btn btn-block btn-primary" ng-click="addComponent()">Add component</button>
+<button type="button" class="btn btn-block btn-primary" ng-click="addCondition()">Add condition</button>
+<button type="button" class="btn btn-block btn-success" ng-click="save()">Save</button>

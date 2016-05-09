@@ -1,4 +1,4 @@
-package org.semanticcloud.semanticEngine.entity.models;
+package org.semanticcloud.semanticEngine.model;
 
 public class InvalidConfigurationException extends RuntimeException {
 	public InvalidConfigurationException() {

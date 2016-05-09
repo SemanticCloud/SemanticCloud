@@ -1,4 +1,4 @@
-package org.semanticcloud.semanticEngine.entity.models;
+package org.semanticcloud.semanticEngine.model;
 
 public class IllegalURLException extends IllegalArgumentException {
 	private String illegalUrl;

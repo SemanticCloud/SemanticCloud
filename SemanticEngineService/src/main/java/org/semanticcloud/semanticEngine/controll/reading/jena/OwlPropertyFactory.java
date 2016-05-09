@@ -3,7 +3,7 @@ package org.semanticcloud.semanticEngine.controll.reading.jena;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.semanticcloud.semanticEngine.entity.models.InvalidConfigurationException;
+import org.semanticcloud.semanticEngine.model.InvalidConfigurationException;
 import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 import org.apache.jena.ontology.OntProperty;
 

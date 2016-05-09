@@ -1,23 +1,14 @@
 <?xml version="1.0"?>
-
-
-<!DOCTYPE rdf:RDF [
-    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
-    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
-    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
-    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-]>
-
-
 <rdf:RDF xmlns="http://semantic-cloud.org/Cloud#"
      xml:base="http://semantic-cloud.org/Cloud"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://semantic-cloud.org/Cloud">
+        <owl:versionIRI rdf:resource="http://semantic-cloud.org/Cloud/0.7.0"/>
         <rdfs:label xml:lang="en">Cloud Ontology</rdfs:label>
-        <owl:versionIRI rdf:resource="http://semantic-cloud.org/Cloud/0.6.0"/>
     </owl:Ontology>
     
 
@@ -36,9 +27,10 @@
     <!-- http://semantic-cloud.org/Cloud#hasAvailabilityZone -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasAvailabilityZone">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#AvailabilityZone"/>
+        <rdfs:subPropertyOf rdf:resource="http://semantic-cloud.org/Cloud#hasResource"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Component"/>
+        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#AvailabilityZone"/>
     </owl:ObjectProperty>
     
 
@@ -46,8 +38,18 @@
     <!-- http://semantic-cloud.org/Cloud#hasCPU -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasCPU">
-        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#CPU"/>
+        <rdfs:subPropertyOf rdf:resource="http://semantic-cloud.org/Cloud#hasResource"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Compute"/>
+        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#CPU"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://semantic-cloud.org/Cloud#hasDeploymentModel -->
+
+    <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasDeploymentModel">
+        <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Service"/>
+        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#DeploymentModel"/>
     </owl:ObjectProperty>
     
 
@@ -55,6 +57,7 @@
     <!-- http://semantic-cloud.org/Cloud#hasGPU -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasGPU">
+        <rdfs:subPropertyOf rdf:resource="http://semantic-cloud.org/Cloud#hasResource"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Compute"/>
         <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#GPU"/>
     </owl:ObjectProperty>
@@ -64,8 +67,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasIP -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasIP">
-        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#IP"/>
+        <rdfs:subPropertyOf rdf:resource="http://semantic-cloud.org/Cloud#hasResource"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#NetworkInterface"/>
+        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#IP"/>
     </owl:ObjectProperty>
     
 
@@ -73,6 +77,7 @@
     <!-- http://semantic-cloud.org/Cloud#hasInstalledSoftware -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasInstalledSoftware">
+        <rdfs:subPropertyOf rdf:resource="http://semantic-cloud.org/Cloud#hasResource"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Compute"/>
         <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#Software"/>
     </owl:ObjectProperty>
@@ -82,8 +87,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasMAC -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasMAC">
-        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#MAC"/>
+        <rdfs:subPropertyOf rdf:resource="http://semantic-cloud.org/Cloud#hasResource"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#NetworkInterface"/>
+        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#MAC"/>
     </owl:ObjectProperty>
     
 
@@ -91,6 +97,7 @@
     <!-- http://semantic-cloud.org/Cloud#hasMemory -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasMemory">
+        <rdfs:subPropertyOf rdf:resource="http://semantic-cloud.org/Cloud#hasResource"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Compute"/>
         <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#VirtualMemory"/>
     </owl:ObjectProperty>
@@ -109,9 +116,19 @@
     <!-- http://semantic-cloud.org/Cloud#hasRegion -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasRegion">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://semantic-cloud.org/Cloud#hasResource"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#AvailabilityZone"/>
         <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#Region"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://semantic-cloud.org/Cloud#hasResource -->
+
+    <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#hasResource">
+        <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Component"/>
+        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#Resource"/>
     </owl:ObjectProperty>
     
 
@@ -134,12 +151,22 @@
     
 
 
+    <!-- http://semantic-cloud.org/Cloud#offeredBy -->
+
+    <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#offeredBy">
+        <owl:inverseOf rdf:resource="http://semantic-cloud.org/Cloud#offersService"/>
+        <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Service"/>
+        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#Provider"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://semantic-cloud.org/Cloud#offersService -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#offersService">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Provider"/>
         <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#Service"/>
-        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
     </owl:ObjectProperty>
     
 
@@ -158,9 +185,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasArchtecture -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasArchtecture">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#CPU"/>
-        <rdfs:range rdf:resource="&rdfs;Literal"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     </owl:DatatypeProperty>
     
 
@@ -168,8 +195,7 @@
     <!-- http://semantic-cloud.org/Cloud#hasAvailableSize -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasAvailableSize">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:range rdf:resource="&xsd;int"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -178,6 +204,7 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
 
@@ -185,9 +212,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasClockSpeed -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasClockSpeed">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#CPU"/>
-        <rdfs:range rdf:resource="&xsd;float"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
     </owl:DatatypeProperty>
     
 
@@ -195,9 +222,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasCores -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasCores">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#CPU"/>
-        <rdfs:range rdf:resource="&xsd;int"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
 
@@ -205,8 +232,7 @@
     <!-- http://semantic-cloud.org/Cloud#hasDescription -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasDescription">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -215,6 +241,7 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
@@ -222,9 +249,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasHostname -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasHostname">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Compute"/>
-        <rdfs:range rdf:resource="&rdfs;Literal"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     </owl:DatatypeProperty>
     
 
@@ -232,8 +259,7 @@
     <!-- http://semantic-cloud.org/Cloud#hasID -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasID">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:range rdf:resource="&rdfs;Literal"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -243,6 +269,7 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     </owl:DatatypeProperty>
     
 
@@ -250,9 +277,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasIPAdress -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasIPAdress">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#IP"/>
-        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
@@ -260,10 +287,10 @@
     <!-- http://semantic-cloud.org/Cloud#hasIPRange -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasIPRange">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:comment xml:lang="en">IPv4 or IPv6 Address range, CIDR notation</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Network"/>
-        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">IPv4 or IPv6 Address range, CIDR notation</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -271,10 +298,10 @@
     <!-- http://semantic-cloud.org/Cloud#hasLabel -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasLabel">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:comment xml:lang="en">Tag based VLANs (e.g. external-dmz)</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Network"/>
-        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Tag based VLANs (e.g. external-dmz)</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -283,7 +310,7 @@
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasMACAddress">
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#MAC"/>
-        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
@@ -291,8 +318,7 @@
     <!-- http://semantic-cloud.org/Cloud#hasName -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasName">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -303,6 +329,7 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
@@ -311,7 +338,7 @@
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasPortNumber">
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Port"/>
-        <rdfs:range rdf:resource="&xsd;int"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
 
@@ -319,9 +346,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasState -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasState">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Component"/>
-        <rdfs:range rdf:resource="&rdfs;Literal"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     </owl:DatatypeProperty>
     
 
@@ -329,9 +356,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasURL -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasURL">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Service"/>
-        <rdfs:range rdf:resource="&xsd;anyURI"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
     </owl:DatatypeProperty>
     
 
@@ -339,9 +366,9 @@
     <!-- http://semantic-cloud.org/Cloud#hasVersion -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasVersion">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Software"/>
-        <rdfs:range rdf:resource="&rdfs;Literal"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     </owl:DatatypeProperty>
     
 
@@ -349,22 +376,22 @@
     <!-- http://semantic-cloud.org/Cloud#hasVlan -->
 
     <owl:DatatypeProperty rdf:about="http://semantic-cloud.org/Cloud#hasVlan">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdfs:comment xml:lang="en">802.1q VLAN Identifier</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Network"/>
         <rdfs:range>
             <rdfs:Datatype>
-                <owl:onDatatype rdf:resource="&xsd;int"/>
+                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
                 <owl:withRestrictions rdf:parseType="Collection">
                     <rdf:Description>
-                        <xsd:maxInclusive rdf:datatype="&xsd;int">4095</xsd:maxInclusive>
+                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</xsd:minInclusive>
                     </rdf:Description>
                     <rdf:Description>
-                        <xsd:minInclusive rdf:datatype="&xsd;int">0</xsd:minInclusive>
+                        <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4095</xsd:maxInclusive>
                     </rdf:Description>
                 </owl:withRestrictions>
             </rdfs:Datatype>
         </rdfs:range>
+        <rdfs:comment xml:lang="en">802.1q VLAN Identifier</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -433,18 +460,10 @@ party, or some combination of them, and it may exist on or off premises.</rdfs:c
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://semantic-cloud.org/Cloud#hasCPU"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
                 <owl:onClass rdf:resource="http://semantic-cloud.org/Cloud#CPU"/>
-                <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://semantic-cloud.org/Cloud#ComputeService -->
-
-    <owl:Class rdf:about="http://semantic-cloud.org/Cloud#ComputeService">
-        <rdfs:subClassOf rdf:resource="http://semantic-cloud.org/Cloud#Service"/>
     </owl:Class>
     
 
@@ -777,8 +796,8 @@ with, and uses service from Cloud Providers.</rdfs:comment>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://semantic-cloud.org/Cloud#hasInstalledSoftware"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
                 <owl:onClass rdf:resource="http://semantic-cloud.org/Cloud#OperatingSystem"/>
-                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -801,12 +820,12 @@ with, and uses service from Cloud Providers.</rdfs:comment>
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    <rdf:Description rdf:about="&owl;Thing">
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Thing">
         <rdfs:comment xml:lang="en">Reporesent connection between two elements of cloud</rdfs:comment>
     </rdf:Description>
 </rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net -->
+<!-- Generated by the OWL API (version 4.2.1.20160306-0033) https://github.com/owlcs/owlapi -->
 

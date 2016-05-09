@@ -19,7 +19,7 @@ public class PropertyResource {
     private OntologyService ontologyService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public OntoProperty getPropertyCondition(@PathVariable String classUri, @PathVariable String propertyUri) {
+    public OntoProperty getProperty(@PathVariable String classUri, @PathVariable String propertyUri) {
         return ontologyService.getProperty(classUri,propertyUri);
     }
 
