@@ -10,6 +10,13 @@ import jade.lang.acl.ACLMessage;
 import jade.proto.ContractNetInitiator;
 import org.semanticcloud.agents.base.AgentType;
 import org.semanticcloud.agents.base.BaseAgent;
+import org.semanticcloud.agents.base.messaging.OWLMessage;
+import org.semanticcloud.agents.broker.behaviours.NegotiationBehaviour;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 import java.util.Date;
 import java.util.Enumeration;
@@ -23,85 +30,20 @@ public class BrokerAgent extends BaseAgent {
     @Override
     protected void setup() {
         registerAgent(AgentType.BROKER);
-
-        List<AID> providers = findProviders();
-        if (providers.size() != 0) {
-
-            // Fill the CFP message
-            ACLMessage msg = new ACLMessage(ACLMessage.CFP);
-            for (AID aid : providers) {
-                msg.addReceiver(aid);
-            }
-            //todo owl message components description
-            msg.setProtocol(FIPANames.InteractionProtocol.FIPA_CONTRACT_NET);
-            // We want to receive a reply in 10 secs
-            msg.setReplyByDate(new Date(System.currentTimeMillis() + 10000));
-            msg.setContent("dummy-action");
-            msg.setConversationId(UUID.randomUUID().toString());
-
-            addBehaviour(new ContractNetInitiator(this, msg) {
-
-                protected void handlePropose(ACLMessage propose, Vector v) {
-                    System.out.println("Agent " + propose.getSender().getName() + " proposed " + propose.getContent());
-                }
-
-                protected void handleRefuse(ACLMessage refuse) {
-                    System.out.println("Agent " + refuse.getSender().getName() + " refused");
-                }
-
-                protected void handleFailure(ACLMessage failure) {
-                    if (failure.getSender().equals(myAgent.getAMS())) {
-                        // FAILURE notification from the JADE runtime: the receiver
-                        // does not exist
-                        System.out.println("Responder does not exist");
-                    } else {
-                        System.out.println("Agent " + failure.getSender().getName() + " failed");
-                    }
-                }
-
-                protected void handleAllResponses(Vector responses, Vector acceptances) {
-
-                    // Evaluate proposals.
-                    int bestProposal = -1;
-                    AID bestProposer = null;
-                    ACLMessage accept = null;
-                    Enumeration e = responses.elements();
-                    while (e.hasMoreElements()) {
-                        ACLMessage msg = (ACLMessage) e.nextElement();
-                        if (msg.getPerformative() == ACLMessage.PROPOSE) {
-                            ACLMessage reply = msg.createReply();
-                            reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
-                            acceptances.addElement(reply);
-                            int proposal = Integer.parseInt(msg.getContent());
-                            if (proposal > bestProposal) {
-                                bestProposal = proposal;
-                                bestProposer = msg.getSender();
-                                accept = reply;
-                            }
-                        }
-                    }
-                    // Accept the proposal of the best proposer
-                    if (accept != null) {
-                        System.out.println("Accepting proposal " + bestProposal + " from responder " + bestProposer.getName());
-                        accept.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-                    }
-                }
-
-                protected void handleInform(ACLMessage inform) {
-                    System.out.println("Agent " + inform.getSender().getName() + " successfully performed the requested action");
-                }
-            });
-        } else {
-            System.out.println("No responder specified.");
+        try {
+            OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+            System.out.println("Onto.");
+            OWLOntology ontology = manager.createOntology();
+            System.out.println("start.");
+            startNegotiations(ontology);
+        } catch (OWLOntologyStorageException e) {
+            e.printStackTrace();
+        } catch (OWLOntologyCreationException e) {
+            e.printStackTrace();
         }
     }
 
-    private void selectBestOffer() {
-
-    }
-
-
-    private List<AID> findProviders() {
+    public List<AID> findProviders() {
         List<AID> agents = new LinkedList<>();
 
         DFAgentDescription dfd = new DFAgentDescription();
@@ -118,5 +60,28 @@ public class BrokerAgent extends BaseAgent {
         }
 
         return agents;
+    }
+
+    public void startNegotiations(OWLOntology conditions) throws OWLOntologyStorageException {
+        List<AID> providers = findProviders();
+
+        if(providers.size() ==0){
+            //error no provider
+            System.out.println("No responder specified.");
+            return;
+        }
+        OWLMessage cfp = createCFP(conditions);
+        providers.forEach(aid -> cfp.addReceiver(aid));
+        NegotiationBehaviour negotiationBehaviour = new NegotiationBehaviour(this, cfp);
+        addBehaviour(negotiationBehaviour);
+    }
+
+    public OWLMessage createCFP(OWLOntology conditions) throws OWLOntologyStorageException {
+        OWLMessage message = new OWLMessage(ACLMessage.CFP);
+        message.setContentOntology(conditions);
+        message.setProtocol(FIPANames.InteractionProtocol.FIPA_CONTRACT_NET);
+        message.setReplyByDate(new Date(System.currentTimeMillis() + 10000));
+        message.setConversationId(UUID.randomUUID().toString());
+        return message;
     }
 }

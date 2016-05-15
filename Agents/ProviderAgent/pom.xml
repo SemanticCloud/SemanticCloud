@@ -18,11 +18,46 @@
             <artifactId>base-agent</artifactId>
             <version>${version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.tilab.jade</groupId>
-            <artifactId>jade</artifactId>
-        </dependency>
+
     </dependencies>
+    <profiles>
+        <profile>
+            <id>jade-main</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <mainClass>jade.Boot</mainClass>
+                            <arguments>
+                                <argument>-conf</argument>
+                                <argument>src/main/resources/jade-main-container.properties</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jade-agent</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <mainClass>jade.Boot</mainClass>
+                            <arguments>
+                                <argument>-conf</argument>
+                                <argument>src/main/resources/jade-agent-container.properties</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 
 </project>

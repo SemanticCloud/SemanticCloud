@@ -80,10 +80,14 @@
         <jade.version>4.4.0</jade.version>
         <jena.version>3.0.0</jena.version>
         <owlapi.version>4.2.3</owlapi.version>
-        <!--<lombok.version>1.16.2</lombok.version>-->
+        <lombok.version>1.16.8</lombok.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <logback.version>1.1.7</logback.version>
         <!--<postgresql.version>9.1-901-1.jdbc4</postgresql.version>-->
         <!--<spring.boot.version>1.2.6.RELEASE</spring.boot.version>-->
         <!--<spring.data.jpa.version>1.9.0.RELEASE</spring.data.jpa.version>-->
+        <!--Plugins-->
+        <exec-maven.version>1.4.0</exec-maven.version>
     </properties>
 
     <repositories>
@@ -95,37 +99,29 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--<dependency>-->
-                <!--<groupId>org.projectlombok</groupId>-->
-                <!--<artifactId>lombok</artifactId>-->
-                <!--<version>${lombok.version}</version>-->
-                <!--<scope>provided</scope>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>postgresql</groupId>-->
-                <!--<artifactId>postgresql</artifactId>-->
-                <!--<version>${postgresql.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-web</artifactId>-->
-                <!--<version>${spring.boot.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
-                <!--<version>${spring.boot.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-data-jpa</artifactId>-->
-                <!--<version>${spring.boot.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.data</groupId>-->
-                <!--<artifactId>spring-data-jpa</artifactId>-->
-                <!--<version>${spring.data.jpa.version}</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
@@ -172,6 +168,11 @@
                     <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
                     <version>${docker.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

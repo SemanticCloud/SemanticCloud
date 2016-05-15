@@ -11,6 +11,7 @@ import org.semanticcloud.agents.base.AgentType;
 import org.semanticcloud.agents.base.BaseAgent;
 
 public class ProviderAgent extends BaseAgent {
+    private String providerId;
     @Override
     protected void setup() {
         registerAgent(AgentType.PROVIDER);
