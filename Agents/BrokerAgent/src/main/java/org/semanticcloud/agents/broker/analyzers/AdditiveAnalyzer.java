@@ -5,6 +5,7 @@ import org.semanticcloud.agents.base.messaging.OWLMessage;
 import org.semanticcloud.agents.broker.NegotiationParameter;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class AdditiveAnalyzer extends Analyzer {
 
@@ -14,14 +15,15 @@ public class AdditiveAnalyzer extends Analyzer {
 
 
         // Evaluate proposals.
-        int bestProposal = -1;
+        double bestProposal = -1;
 
-        for (ACLMessage proposal: proposals) {
-            if (proposal.getPerformative() == ACLMessage.PROPOSE) {
-                int o = Integer.parseInt(proposal.getContent());
+        for (ACLMessage message: proposals) {
+            if (message.getPerformative() == ACLMessage.PROPOSE) {
+                OWLMessage proposal = OWLMessage.wrap(message);
+                double o = calculateValue(proposal);
                 if (o > bestProposal) {
                     bestProposal = o;
-                    best = proposal;
+                    best = message;
                 }
             }
         }
@@ -40,7 +42,8 @@ public class AdditiveAnalyzer extends Analyzer {
         return best;
     }
 
-    private double calculateValue() {
-        return 0;
+    private double calculateValue(OWLMessage proposal) {
+
+        return ThreadLocalRandom.current().nextDouble(0, 1);
     }
 }
