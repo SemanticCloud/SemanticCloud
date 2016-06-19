@@ -1,8 +1,9 @@
 'use strict';
 angular.module('dashboardApp')
-    .directive('seProperty', function ($log) {
+    .directive('seProperty', function (SemanticEngineService) {
         return {
             scope: {
+                classUri: '=',
                 propertyCondition: '=',
                 properties: '='
             },
@@ -14,8 +15,18 @@ angular.module('dashboardApp')
                     { name:"equalTo", url:"scripts/components/semanticEngine/condition/individualValue.html"},
                 ];
 
+
                 $scope.updateOperators = function(){
                     $scope.propertyCondition.propertyUri = $scope.property.uri;
+                    //chane localName to Uri
+                    SemanticEngineService.getIndividualsInRange($scope.classUri,$scope.property.localName).then(
+                        function(data){
+                            $scope.individuals = data;
+                        });
+                    SemanticEngineService.getClassInRange($scope.classUri,$scope.property.localName).then(
+                        function(data){
+                            $scope.classes = data;
+                        });
                     if($scope.property.datatype == null){
                         $scope.operators =[
                             { name:"describedBy", url:"scripts/components/semanticEngine/condition/objectValue.html"},

@@ -9,9 +9,20 @@ import jade.lang.acl.MessageTemplate;
 import jade.proto.ContractNetResponder;
 import org.semanticcloud.agents.base.AgentType;
 import org.semanticcloud.agents.base.BaseAgent;
+import org.semanticcloud.agents.base.messaging.OWLMessage;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import org.semanticweb.owlapi.util.AutoIRIMapper;
+
+import java.io.File;
 
 public class ProviderAgent extends BaseAgent {
     private String providerId;
+
     @Override
     protected void setup() {
         registerAgent(AgentType.PROVIDER);
@@ -23,20 +34,39 @@ public class ProviderAgent extends BaseAgent {
         addBehaviour(new ContractNetResponder(this, template) {
             @Override
             protected ACLMessage handleCfp(ACLMessage cfp) throws RefuseException, FailureException, NotUnderstoodException {
-                System.out.println("Agent " + getLocalName() + ": CFP received from " + cfp.getSender().getName() + ". Action is " + cfp.getContent());
-                int proposal = prepareProposal();
-                if (proposal > 2) {
+                try {
+                    System.out.println("Agent " + getLocalName() + ": CFP received from " + cfp.getSender().getName() + ". Action is " + cfp.getContent());
+                    int proposal = prepareProposal();
+                    //if (proposal > 2) {
                     // We provide a proposal
                     System.out.println("Agent " + getLocalName() + ": Proposing " + proposal);
                     ACLMessage propose = cfp.createReply();
                     propose.setPerformative(ACLMessage.PROPOSE);
                     propose.setContent(String.valueOf(proposal));
-                    return propose;
-                } else {
-                    // We refuse to provide a proposal
-                    System.out.println("Agent " + getLocalName() + ": Refuse");
-                    throw new RefuseException("evaluation-failed");
+                    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+                    AutoIRIMapper mapper = new AutoIRIMapper(new File("/opt/SemanticCloud"), true);
+                    manager.getIRIMappers().add(mapper);
+                    System.out.println("Onto.");
+                    OWLOntology ontology = null;
+
+                    ontology = manager.loadOntology(IRI.create("http://semantic-cloud.org/CloudOffer"));
+                    OWLMessage wrap = OWLMessage.wrap(propose);
+                    wrap.setContentOntology(ontology);
+
+
+                    return wrap;
+                } catch (OWLOntologyStorageException e) {
+                    e.printStackTrace();
+                    return null;
+                } catch (OWLOntologyCreationException e) {
+                    e.printStackTrace();
+                    return null;
                 }
+//                } else {
+//                    // We refuse to provide a proposal
+//                    System.out.println("Agent " + getLocalName() + ": Refuse");
+//                    throw new RefuseException("evaluation-failed");
+//                }
             }
 
             @Override

@@ -9,9 +9,6 @@ import org.semanticcloud.agents.broker.analyzers.Analyzer;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLProperty;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
@@ -49,13 +46,13 @@ public class NegotiationBehaviour extends ContractNetInitiator {
         Enumeration e = responses.elements();
         List<OWLProperty> properties = OWLParser.getPropertiesWithRestrictions(conditions);
         System.out.println(properties);
-        ACLMessage best = analyzer.evaluateProposal(responses, null);
+        ACLMessage best = analyzer.evaluateProposal(conditions, responses, null);
         while (e.hasMoreElements()) {
             ACLMessage msg = (ACLMessage) e.nextElement();
             if (msg.getPerformative() == ACLMessage.PROPOSE) {
                 ACLMessage reply = msg.createReply();
                 if (msg.equals(best)) {
-                    System.out.println("Accepting proposal " + best.getContent() + " from responder " + best.getSender().getName());
+                    //System.out.println("Accepting proposal " + best.getContent() + " from responder " + best.getSender().getName());
                     reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
                 } else {
                     reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
