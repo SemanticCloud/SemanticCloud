@@ -184,14 +184,14 @@ public class OwlApiReader extends OntologyReader {
 		// OWL doesn't specify that operands of a unionOf domain should be regarded as property domains, 
 		// so additionally we have to also parse the domain manually
         //corect?
-		Collection<OWLClassExpression> domains = EntitySearcher.getDomains((OWLDataProperty) owlProperty, ontology.getImportsClosure());
-
-		for (Iterator iterator = domains.iterator(); iterator.hasNext();) {
-			OWLClassExpression domainExpression = (OWLClassExpression) iterator.next();
-			
-			Set<OWLClassExpression> domainDisjuncts = domainExpression.asDisjunctSet();
-			topLevelDomains.addAll(domainDisjuncts);
-		}
+//		Collection<OWLClassExpression> domains = EntitySearcher.getDomains((OWLDataProperty) owlProperty, ontology.getImportsClosure());
+//
+//		for (Iterator iterator = domains.iterator(); iterator.hasNext();) {
+//			OWLClassExpression domainExpression = (OWLClassExpression) iterator.next();
+//
+//			Set<OWLClassExpression> domainDisjuncts = domainExpression.asDisjunctSet();
+//			topLevelDomains.addAll(domainDisjuncts);
+//		}
 		
 		
 		//

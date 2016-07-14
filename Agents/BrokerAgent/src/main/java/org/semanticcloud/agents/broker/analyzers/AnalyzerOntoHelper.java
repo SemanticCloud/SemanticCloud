@@ -1,7 +1,6 @@
 package org.semanticcloud.agents.broker.analyzers;
 
 import org.semanticcloud.agents.broker.Criterion;
-import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
@@ -10,12 +9,8 @@ import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.reasoner.ConsoleProgressMonitor;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
-import org.semanticweb.owlapi.reasoner.SimpleConfiguration;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,25 +18,13 @@ import java.util.Set;
 
 public class AnalyzerOntoHelper {
 
-    /**
-     * Extract value of a property from ontology containing offer individual
-     * @param ontology
-     * @param negParameter
-     * @return OWLLiteral, OWLNamedIndividual depending on property type
-     */
-    public static Object getIndividualPropertyValue(OWLOntology ontology, Criterion negParameter) {
-        OWLReasonerFactory reasonerFactory = new Reasoner.ReasonerFactory();
-        ConsoleProgressMonitor progressMonitor = new ConsoleProgressMonitor();
-        OWLReasonerConfiguration config = new SimpleConfiguration(progressMonitor);
-        OWLReasoner reasoner = reasonerFactory.createReasoner(ontology, config);
-        reasoner.precomputeInferences();
+    public static Object getIndividualPropertyValue(OWLOntology ontology, Criterion negParameter, OWLReasoner reasoner) {
         OWLDataFactory fac = ontology.getOWLOntologyManager().getOWLDataFactory();
 
         OWLClass contractClass = fac.getOWLClass(IRI.create(negParameter.getDescription()));
         NodeSet<OWLNamedIndividual> individualsNodeSet = reasoner.getInstances(contractClass, true);
         Set<OWLNamedIndividual> individuals = individualsNodeSet.getFlattened();
         System.out.println("For class " + negParameter.getDescription() + " there are " + individuals.size() + " individuals");
-        OWLObjectProperty proposedContract = fac.getOWLObjectProperty(IRI.create(negParameter.getPropertyName()));
 
         for(OWLNamedIndividual ind : individuals) {
 //            System.out.println("analyze individual: " + ind.getIRI());
@@ -148,26 +131,19 @@ public class AnalyzerOntoHelper {
         return false;
     }
 
-    /**
-     *
-     * @param parametersMap
-     * @param userConstraints
-     * @param offer
-     * @return flag indicating if values for all parameters were found
-     */
-    public static boolean extractParameterValues(HashMap<Criterion, Object> parametersMap, List<Criterion> userConstraints, OWLOntology offer) {
+    public static boolean extractParameterValues(HashMap<Criterion, Object> parametersMap, List<Criterion> userConstraints, OWLOntology offer, OWLReasoner reasoner) {
         boolean allFound = true;
         boolean allFoundNested = true;
         for (Criterion np : userConstraints) {
             System.out.println("extract value for parameter " + np.getPropertyName());
-            Object value = AnalyzerOntoHelper.getIndividualPropertyValue(offer, np);
+            Object value = AnalyzerOntoHelper.getIndividualPropertyValue(offer, np, reasoner);
             if (value != null) {
                 parametersMap.put(np, value);
             } else {
                 System.out.println("No value for parameter " + np.getPropertyName());
                 allFound = false;
             }
-            allFoundNested = AnalyzerOntoHelper.extractParameterValues(parametersMap, np.getNestedParams(), offer);
+            allFoundNested = AnalyzerOntoHelper.extractParameterValues(parametersMap, np.getNestedParams(), offer, reasoner);
         }
         return (allFound && allFoundNested);
     }

@@ -24,11 +24,11 @@ public class NegotiationBehaviour extends ContractNetInitiator {
     }
 
     protected void handlePropose(ACLMessage propose, Vector v) {
-        System.out.println("Agent " + propose.getSender().getName() + " proposed " + propose.getContent());
+        //System.out.println("Agent " + propose.getSender().getName() + " proposed " + propose.getContent());
     }
 
     protected void handleRefuse(ACLMessage refuse) {
-        System.out.println("Agent " + refuse.getSender().getName() + " refused");
+        //System.out.println("Agent " + refuse.getSender().getName() + " refused");
     }
 
     protected void handleFailure(ACLMessage failure) {

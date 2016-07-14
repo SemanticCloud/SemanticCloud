@@ -87,4 +87,12 @@ public class Criterion {
         nestedParams.add(nestedParam);
         nestedParam.setParent(this);
     }
+
+    public CriterionType getType() {
+        return type;
+    }
+
+    public void setType(CriterionType type) {
+        this.type = type;
+    }
 }
