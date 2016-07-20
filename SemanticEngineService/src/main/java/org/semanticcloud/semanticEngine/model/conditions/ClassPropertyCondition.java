@@ -1,22 +1,22 @@
 package org.semanticcloud.semanticEngine.model.conditions;
 
-public class ClassPropertyCondition extends PropertyCondition {
-	private ClassCondition classConstraintValue;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 
+public class ClassPropertyCondition<T extends OntoProperty> extends PropertyCondition<ClassCondition,T> {
 	public ClassPropertyCondition(){
 		
 	}
 	
 	public ClassPropertyCondition(String propertyUri, ClassCondition classConstraintValue) {
 		super(propertyUri);
-		this.classConstraintValue = classConstraintValue;
+		this.value = classConstraintValue;
 	}
 
 	public void setClassConstraintValue(ClassCondition classConstraintValue) {
-		this.classConstraintValue = classConstraintValue;
+		this.value = classConstraintValue;
 	}
 
 	public ClassCondition getClassConstraintValue() {
-		return classConstraintValue;
+		return value;
 	}
 }

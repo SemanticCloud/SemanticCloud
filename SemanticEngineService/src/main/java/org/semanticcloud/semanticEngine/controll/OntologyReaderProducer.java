@@ -3,6 +3,7 @@ package org.semanticcloud.semanticEngine.controll;
 import org.apache.jena.ontology.OntDocumentManager;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.semanticcloud.semanticEngine.controll.reading.OntologyReader;
 import org.semanticcloud.semanticEngine.controll.reading.jena.JenaOwlReader;
 import org.semanticcloud.semanticEngine.controll.reading.jena.JenaConfig;
@@ -73,7 +74,7 @@ public class OntologyReaderProducer {
 
     public JenaOwlReader loadFromFile(JenaConfig config) {
         //todo resoner
-        OntModel model = ModelFactory.createOntologyModel();
+        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
         //OntModel model = ModelFactory.createOntologyModel(String.valueOf(PelletReasonerFactory.THE_SPEC));
         if (config != null) {
             OntDocumentManager dm = model.getDocumentManager();

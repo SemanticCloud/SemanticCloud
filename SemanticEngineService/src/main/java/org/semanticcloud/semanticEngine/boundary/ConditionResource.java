@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("condition")
@@ -27,13 +28,14 @@ public class ConditionResource {
 
         }
         OntologyGenerator globalInstance = OntologyGenerator.getGlobalInstance();
-        String test = globalInstance.convertToOwlClass2("test", classConditions.get(0));
+        UUID id = UUID.randomUUID();
+        String test = globalInstance.convertToOwlClass2(id.toString(), classConditions.get(0));
         return test;
     }
 
     private void fillConditionProperty(PropertyCondition condition) {
         try {
-            condition.setProperty(ontologyService.getProperty(condition.getPropertyUri()));
+            condition.setProperty(ontologyService.getProperty(condition.getUri()));
         } catch (ConfigurationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

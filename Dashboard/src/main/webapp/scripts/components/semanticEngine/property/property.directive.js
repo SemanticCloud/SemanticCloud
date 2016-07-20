@@ -1,6 +1,6 @@
 'use strict';
 angular.module('dashboardApp')
-    .directive('seProperty', function (SemanticEngineService) {
+    .directive('seProperty', function (SemanticEngineService, $log) {
         return {
             scope: {
                 classUri: '=',
@@ -15,9 +15,15 @@ angular.module('dashboardApp')
                     { name:"equalTo", url:"scripts/components/semanticEngine/condition/individualValue.html"},
                 ];
 
+                $scope.initCondition = function(type, operator){
+                    $log.info(type);
+                    $scope.propertyCondition.type = type;
+                    $scope.propertyCondition.operator = operator;
+                };
+
 
                 $scope.updateOperators = function(){
-                    $scope.propertyCondition.propertyUri = $scope.property.uri;
+                    $scope.propertyCondition.uri = $scope.property.uri;
                     //chane localName to Uri
                     SemanticEngineService.getIndividualsInRange($scope.classUri,$scope.property.localName).then(
                         function(data){
@@ -36,7 +42,9 @@ angular.module('dashboardApp')
                     //todo numeric property
                     else {
                         $scope.operators =[
-                            { name:"equal", url:"scripts/components/semanticEngine/condition/simpleValue.html"}
+                            { name:"equal", url:"scripts/components/semanticEngine/condition/simpleValue.html"},
+                            { name:"greaterThan", url:"scripts/components/semanticEngine/condition/greaterThan.html"},
+                            { name:"lessThan", url:"scripts/components/semanticEngine/condition/lessThan.html"}
                         ];
                     }
 

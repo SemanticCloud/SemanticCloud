@@ -69,7 +69,7 @@ public class OwlIndividual extends OwlElement {
 		for (Iterator it = properties.iterator(); it.hasNext();) {
 			PropertyCondition prop = (PropertyCondition) it.next();
 			
-			if(prop.getPropertyUri().equals(uri)){
+			if(prop.getUri().equals(uri)){
 				return prop;
 			}
 		}

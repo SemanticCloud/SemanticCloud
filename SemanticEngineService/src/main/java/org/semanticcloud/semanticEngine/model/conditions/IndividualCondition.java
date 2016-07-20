@@ -1,21 +1,22 @@
 package org.semanticcloud.semanticEngine.model.conditions;
 
-public class IndividualCondition extends PropertyCondition {
-	private String individualValue;
+import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
+
+public class IndividualCondition<T extends OntoProperty> extends PropertyCondition<String, T> {
 
 	public IndividualCondition(){
 	}
 	
 	public IndividualCondition(String propertyUri, String individualValue) {
 		super(propertyUri);
-		this.individualValue = individualValue;
+		this.value = individualValue;
 	}
 
 	public void setIndividualValue(String individualValue) {
-		this.individualValue = individualValue;
+		this.value = individualValue;
 	}
 
 	public String getIndividualValue() {
-		return individualValue;
+		return value;
 	}
 }

@@ -1,6 +1,6 @@
-<div>
+<div ng-init="initCondition('individualValue','equalToIndividual')">
     <label>Individual</label>
-    <select ng-model="individualValue" aria-hidden="true" class="form-control select2 select2-hidden-accessible" style="width: 100%;"
+    <select ng-model="propertyCondition.value" aria-hidden="true" class="form-control select2 select2-hidden-accessible" style="width: 100%;"
             ng-options="individual as individual.localName for individual in individuals track by individual.uri">
     </select>
 </div>

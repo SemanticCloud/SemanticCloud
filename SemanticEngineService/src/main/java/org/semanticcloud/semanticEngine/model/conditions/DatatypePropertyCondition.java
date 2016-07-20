@@ -2,7 +2,7 @@ package org.semanticcloud.semanticEngine.model.conditions;
 
 import org.semanticcloud.semanticEngine.model.ontology.properties.OwlDatatypeProperty;
 
-public class DatatypePropertyCondition extends PropertyCondition<OwlDatatypeProperty> {
+public class DatatypePropertyCondition extends PropertyCondition<String,OwlDatatypeProperty> {
     private String value;
     private String operator;
 
@@ -33,12 +33,12 @@ public class DatatypePropertyCondition extends PropertyCondition<OwlDatatypeProp
     }
 
     @Override
-    public void setPropertyUri(String propertyUri) {
-        super.setPropertyUri(propertyUri);
+    public void setUri(String propertyUri) {
+        super.setUri(propertyUri);
     }
 
     @Override
-    public String getPropertyUri() {
-        return super.getPropertyUri();
+    public String getUri() {
+        return super.getUri();
     }
 }

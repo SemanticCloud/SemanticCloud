@@ -27,7 +27,7 @@ public class DatatypeRestrictionFactory extends RestrictionFactory<DatatypePrope
 
 	private DatatypeRestrictionFactory getOperatorRestrictionFactory(DatatypePropertyCondition condition) throws ConfigurationException {
 		if(condition.getProperty()== null){
-			throw new RuntimeException(String.format("The condition for uri: %s has not been initialized with a property object", condition.getPropertyUri()));
+			throw new RuntimeException(String.format("The condition for uri: %s has not been initialized with a property object", condition.getUri()));
 		}
 
 		Class<? extends OntoProperty> propertyClass = condition.getProperty().getClass();

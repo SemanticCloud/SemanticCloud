@@ -8,7 +8,7 @@ angular.module('dashboardApp')
             },
             templateUrl: 'scripts/components/semanticEngine/class/class.html',
             controller: function ($scope, SemanticEngineService) {
-                SemanticEngineService.getClassProperties($scope.condition.classUri).then(function(properties){
+                SemanticEngineService.getClassProperties($scope.condition.localName).then(function(properties){
                     $scope.properties = properties;
                 });
                 $scope.condition.propertyConditions = [];

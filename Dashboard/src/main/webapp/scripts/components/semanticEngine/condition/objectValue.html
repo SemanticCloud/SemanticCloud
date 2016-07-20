@@ -1,10 +1,10 @@
-<div>
+<div ng-init="initCondition('classConstraint','constrainedBy')">
     <label>Class</label>
-    <select ng-model="class" aria-hidden="true" class="form-control select2 select2-hidden-accessible"
+    <select ng-model="propertyCondition.value" aria-hidden="true" class="form-control select2 select2-hidden-accessible"
             style="width: 100%;"
-            ng-options="class as class.localName for class in classes track by class.uri">
+            ng-options="classConstraintValue as classConstraintValue.localName for classConstraintValue in classes track by classConstraintValue.uri">
     </select>
-    <div ng-if="class">
-        <se-class condition="class"></se-class>
+    <div ng-if="propertyCondition.value">
+        <se-class condition="propertyCondition.value"></se-class>
     </div>
 </div>

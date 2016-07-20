@@ -30,7 +30,7 @@ public class IndividualGenerator{
 	}
 
 	public List<OWLAxiom> createPropertyAxioms2(OWLIndividual individual, ClassCondition condition) throws ConfigurationException {
-		OWLClass conditionClass = factory.getOWLClass(IRI.create(condition.getClassUri()));
+		OWLClass conditionClass = factory.getOWLClass(IRI.create(condition.getUri()));
 		
 		OWLClassAssertionAxiom classAssertionAxiom = factory.getOWLClassAssertionAxiom(conditionClass, individual);
 				
@@ -53,7 +53,7 @@ public class IndividualGenerator{
             individualAxioms.add(individualAxiom);
         }
 
-        OWLClass conditionClass = factory.getOWLClass(IRI.create(condition.getClassUri()));
+        OWLClass conditionClass = factory.getOWLClass(IRI.create(condition.getUri()));
 
         OWLClassAssertionAxiom classAssertionAxiom = factory.getOWLClassAssertionAxiom(conditionClass, individual);
 

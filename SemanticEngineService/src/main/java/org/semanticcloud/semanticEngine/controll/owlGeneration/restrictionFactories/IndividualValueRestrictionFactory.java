@@ -27,7 +27,7 @@ public class IndividualValueRestrictionFactory extends RestrictionFactory<Indivi
 	
 	@Override
 	public OWLClassExpression createRestriction(IndividualCondition condition) {
-		OWLObjectProperty conditionProperty = factory.getOWLObjectProperty(IRI.create(condition.getPropertyUri()));
+		OWLObjectProperty conditionProperty = factory.getOWLObjectProperty(IRI.create(condition.getUri()));
 		OWLNamedIndividual value = factory.getOWLNamedIndividual(IRI.create(condition.getIndividualValue()));
 		OWLObjectHasValue restriction = factory.getOWLObjectHasValue(conditionProperty, value);
 		return restriction;
@@ -35,7 +35,7 @@ public class IndividualValueRestrictionFactory extends RestrictionFactory<Indivi
 
 	@Override
 	public List<OWLAxiom> createIndividualValue(IndividualCondition condition, OWLIndividual individual) throws ConfigurationException {
-		OWLObjectProperty conditionProperty = factory.getOWLObjectProperty(IRI.create(condition.getPropertyUri()));
+		OWLObjectProperty conditionProperty = factory.getOWLObjectProperty(IRI.create(condition.getUri()));
 		OWLIndividual valueIndividual = factory.getOWLNamedIndividual(IRI.create(condition.getIndividualValue()));
 
 		OWLObjectPropertyAssertionAxiom assertion = factory.getOWLObjectPropertyAssertionAxiom(conditionProperty, individual, valueIndividual);

@@ -26,7 +26,7 @@ public class LessThanRestrictionFactory extends DatatypeRestrictionFactory {
 	
 	@Override
 	public OWLClassExpression createRestriction(DatatypePropertyCondition condition) {
-		OWLDataProperty conditionProperty = factory.getOWLDataProperty(IRI.create(condition.getPropertyUri()));
+		OWLDataProperty conditionProperty = factory.getOWLDataProperty(IRI.create(condition.getUri()));
 		OWLDatatype xsdType = factory.getOWLDatatype(IRI.create(dataTypeUri));
 		OWLLiteral value = factory.getOWLLiteral(condition.getValue(), xsdType);
 		OWLDatatypeRestriction dataRange = factory.getOWLDatatypeRestriction(xsdType, OWLFacet.MAX_EXCLUSIVE, value);

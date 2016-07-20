@@ -29,7 +29,7 @@ public class EqualToRestrictionFactory extends DatatypeRestrictionFactory {
 	
 	@Override
 	public OWLClassExpression createRestriction(DatatypePropertyCondition condition) {
-		OWLDataProperty conditionProperty = factory.getOWLDataProperty(IRI.create(condition.getPropertyUri()));
+		OWLDataProperty conditionProperty = factory.getOWLDataProperty(IRI.create(condition.getUri()));
 		OWLLiteral value = getValueLiteral(condition);
 		OWLDataHasValue restriction = factory.getOWLDataHasValue(conditionProperty, value);
 		return restriction;
@@ -44,7 +44,7 @@ public class EqualToRestrictionFactory extends DatatypeRestrictionFactory {
 	
 	@Override
 	public List<OWLAxiom> createIndividualValue(DatatypePropertyCondition condition, OWLIndividual individual) throws ConfigurationException {
-		OWLDataProperty conditionProperty = factory.getOWLDataProperty(IRI.create(condition.getPropertyUri()));
+		OWLDataProperty conditionProperty = factory.getOWLDataProperty(IRI.create(condition.getUri()));
 		OWLLiteral value = getValueLiteral(condition);
 		OWLDataPropertyAssertionAxiom assertion = factory.getOWLDataPropertyAssertionAxiom(conditionProperty, individual, value);
 

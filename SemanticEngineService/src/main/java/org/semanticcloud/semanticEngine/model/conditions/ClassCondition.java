@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClassCondition {
-	private String classUri;
+	private String uri;
 	private List<PropertyCondition> propertyConditions = new ArrayList<>();
 		
-	public String getClassUri() {
-		return classUri;
+	public String getUri() {
+		return uri;
 	}
 
-	public void setClassUri(String classUri) {
-		this.classUri = classUri;
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 
 	public List<PropertyCondition> getPropertyConditions() {

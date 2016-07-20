@@ -15,6 +15,9 @@ angular.module('dashboardApp')
             },
             getIndividualsInRange: function (classUri, propertUri) {
                 return base.one('class', classUri).one('property', propertUri).all('individuals').getList();
+            },
+            create: function (conditions) {
+                return base.all('condition').post(conditions);
             }
         };
     });

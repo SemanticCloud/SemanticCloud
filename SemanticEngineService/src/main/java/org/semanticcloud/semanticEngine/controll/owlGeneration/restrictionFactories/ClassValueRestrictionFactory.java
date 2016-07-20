@@ -34,7 +34,7 @@ public class ClassValueRestrictionFactory extends RestrictionFactory<ClassProper
 	
 	@Override
 	public OWLClassExpression createRestriction(ClassPropertyCondition condition) throws ConfigurationException {
-		OWLObjectProperty conditionProperty = factory.getOWLObjectProperty(IRI.create(condition.getPropertyUri()));
+		OWLObjectProperty conditionProperty = factory.getOWLObjectProperty(IRI.create(condition.getUri()));
 
 		OWLClassExpression nestedCondition = classRestrictionGenerator.convertToOntClass(null, condition.getClassConstraintValue());
 		OWLObjectSomeValuesFrom propertyRestriction = factory.getOWLObjectSomeValuesFrom(conditionProperty, nestedCondition);
@@ -43,7 +43,7 @@ public class ClassValueRestrictionFactory extends RestrictionFactory<ClassProper
 
 	@Override
 	public List<OWLAxiom> createIndividualValue(ClassPropertyCondition condition, OWLIndividual individual) throws ConfigurationException {
-		OWLObjectProperty conditionProperty = factory.getOWLObjectProperty(IRI.create(condition.getPropertyUri()));
+		OWLObjectProperty conditionProperty = factory.getOWLObjectProperty(IRI.create(condition.getUri()));
 		OWLIndividual nestedIndividual = factory.getOWLAnonymousIndividual();
 
 		List<OWLAxiom> nestedAxioms = individualGenerator.createPropertyAxioms(nestedIndividual, condition.getClassConstraintValue());

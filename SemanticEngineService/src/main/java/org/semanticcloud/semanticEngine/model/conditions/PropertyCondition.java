@@ -12,9 +12,11 @@ import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;
 		@JsonSubTypes.Type(value = IndividualCondition.class , name = "individualValue"),
 		@JsonSubTypes.Type(value = DatatypePropertyCondition.class , name = "datatypeValue"),
 })
-public class PropertyCondition<T extends OntoProperty>{
-	private String propertyUri;
+public class PropertyCondition<V,T extends OntoProperty>{
+	private String uri;
 	private String type;
+	protected V value;
+
 	//needed ?
 	private T property;
 
@@ -22,16 +24,16 @@ public class PropertyCondition<T extends OntoProperty>{
 		
 	}
 	
-	public PropertyCondition(String propertyUri) {
-		this.propertyUri = propertyUri;
+	public PropertyCondition(String uri) {
+		this.uri = uri;
 	}
 
-	public void setPropertyUri(String propertyUri) {
-		this.propertyUri = propertyUri;
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 
-	public String getPropertyUri() {
-		return propertyUri;
+	public String getUri() {
+		return uri;
 	}
 
 	public void setProperty(T property) {
@@ -49,5 +51,13 @@ public class PropertyCondition<T extends OntoProperty>{
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public V getValue() {
+		return value;
+	}
+
+	public void setValue(V value) {
+		this.value = value;
 	}
 }

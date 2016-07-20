@@ -161,6 +161,15 @@
     
 
 
+    <!-- http://semantic-cloud.org/Cloud#offersComponent -->
+
+    <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#offersComponent">
+        <rdfs:domain rdf:resource="http://semantic-cloud.org/Cloud#Service"/>
+        <rdfs:range rdf:resource="http://semantic-cloud.org/Cloud#Component"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://semantic-cloud.org/Cloud#offersService -->
 
     <owl:ObjectProperty rdf:about="http://semantic-cloud.org/Cloud#offersService">

@@ -11,6 +11,7 @@ import org.semanticweb.owlapi.search.EntitySearcher;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public abstract class SimpleDatatypePropertyFactory extends OwlPropertyFactory {
 
@@ -28,7 +29,7 @@ public abstract class SimpleDatatypePropertyFactory extends OwlPropertyFactory {
 		OWLDataProperty dataProperty = property.asOWLDataProperty();
 
 		
-		Collection<OWLDataRange> ranges = EntitySearcher.getRanges(dataProperty, onto.getImports());
+		Collection<OWLDataRange> ranges = EntitySearcher.getRanges(dataProperty, onto.getImports().stream()).collect(Collectors.toList());
 		if(ranges.size() > 1){
 			return false;
 		}		
