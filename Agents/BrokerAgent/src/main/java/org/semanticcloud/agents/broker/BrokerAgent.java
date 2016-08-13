@@ -45,7 +45,7 @@ public class BrokerAgent extends BaseAgent {
             manager.getIRIMappers().add(mapper);
             System.out.println("Onto.");
             OWLOntology ontology = manager.createOntology();
-            ontology = manager.loadOntology(IRI.create("http://semantic-cloud.org/Cloud"));
+            ontology = manager.loadOntology(IRI.create("http://semantic-cloud.org/CloudR"));
             //to remove
 //            OWLDataFactory owlDataFactory = manager.getOWLDataFactory();
 //            Set<OWLAxiom> set = new HashSet<>();

@@ -16,6 +16,7 @@
         <module>BrokerAgent</module>
         <module>ProviderAgent</module>
         <module>BaseAgent</module>
+        <module>JcloudsProviderAgent</module>
     </modules>
 
 </project>
