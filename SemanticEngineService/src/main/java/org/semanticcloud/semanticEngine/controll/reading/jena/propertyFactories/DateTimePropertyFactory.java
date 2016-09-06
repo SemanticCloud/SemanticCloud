@@ -22,7 +22,7 @@ public class DateTimePropertyFactory extends OwlPropertyFactory {
 
     @Override
     public OntoProperty createProperty(OntProperty ontProperty) {
-        return new DateTimeProperty(ontProperty.getNameSpace(), ontProperty.getLocalName());
+        return new DateTimeProperty(ontProperty.getNameSpace(), ontProperty.getLocalName(),ontProperty.isFunctionalProperty());
     }
 
 }

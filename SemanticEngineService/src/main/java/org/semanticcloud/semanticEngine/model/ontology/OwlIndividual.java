@@ -15,6 +15,7 @@ public class OwlIndividual extends OwlElement {
 	private List<PropertyCondition> properties;
 	
 	public OwlIndividual(Individual individual, List<PropertyCondition> properties) {
+		super(null,individual.getLocalName());
 		if(properties == null){
 			throw new NullArgumentException("properties");
 		}
@@ -24,6 +25,7 @@ public class OwlIndividual extends OwlElement {
 	}
 	
 	public OwlIndividual(OWLNamedIndividual individual, List<PropertyCondition> properties) {
+		super(null,individual.getIRI().getFragment());
 		if(properties == null){
 			throw new NullArgumentException("properties");
 		}

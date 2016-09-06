@@ -16,8 +16,7 @@ public class OwlClass extends OwlElement {
     private String label;
 
 	public OwlClass(String namespace, String name, List<OntoProperty> properties) {
-		this.namespace = namespace;
-		this.localName = name;
+        super(namespace, name);
 		this.properties = properties;
 	}
 

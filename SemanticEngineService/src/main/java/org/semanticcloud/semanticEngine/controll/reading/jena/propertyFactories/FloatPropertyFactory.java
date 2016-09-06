@@ -23,7 +23,7 @@ public class FloatPropertyFactory extends OwlPropertyFactory {
 
     @Override
     public OntoProperty createProperty(OntProperty ontProperty) {
-        return new FloatProperty(ontProperty.getNameSpace(), ontProperty.getLocalName(), ontProperty.getRange().getURI());
+        return new FloatProperty(ontProperty.getNameSpace(), ontProperty.getLocalName(), ontProperty.getRange().getURI(),ontProperty.isFunctionalProperty());
     }
 
 }

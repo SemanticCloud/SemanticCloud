@@ -1,13 +1,16 @@
 package org.semanticcloud.semanticEngine.model.ontology;
 
 
-import org.semanticcloud.semanticEngine.model.ontology.OwlElement;
+import lombok.Getter;
 
+@Getter
 public abstract class OntoProperty extends OwlElement {
 
-    private String datatype;
+    //private String datatype;
 
-    public String getDatatype() {
-        return datatype;
+    private boolean functional;
+
+    public OntoProperty(String namespace, String localName, boolean functional) {
+        super(namespace, localName);
     }
 }
