@@ -1,0 +1,22 @@
+server:
+    port: 8090
+spring:
+    application:
+        name: agent-gateway
+eureka:
+    instance:
+        hostname: agent-gateway
+        preferIpAddress: true
+    client:
+        serviceUrl:
+            defaultZone: http://discovery:9000/eureka/
+
+gateway:
+    platformId: sc
+    mainPort: 10099
+    mainHost: localhost
+    containerName: con1
+    localhost: localhost
+    localPort: 10100
+    services: jade.core.event.NotificationService
+

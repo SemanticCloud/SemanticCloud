@@ -28,6 +28,7 @@
         <module>ConfigService</module>
         <module>Agents</module>
         <module>Agency</module>
+        <module>AgentGateway</module>
     </modules>
 
     <properties>
