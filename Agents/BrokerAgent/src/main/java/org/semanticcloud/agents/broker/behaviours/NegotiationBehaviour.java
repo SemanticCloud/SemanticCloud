@@ -3,6 +3,7 @@ package org.semanticcloud.agents.broker.behaviours;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.proto.ContractNetInitiator;
+import org.semanticcloud.agents.broker.BrokerAgent;
 import org.semanticcloud.agents.broker.OWLParser;
 import org.semanticcloud.agents.broker.analyzers.AdditiveAnalyzer;
 import org.semanticcloud.agents.broker.analyzers.Analyzer;
@@ -17,18 +18,27 @@ public class NegotiationBehaviour extends ContractNetInitiator {
     private Analyzer analyzer;
     private OWLOntology conditions;
 
-    public NegotiationBehaviour(Agent agent, ACLMessage cfp, OWLOntology conditions) {
+    public NegotiationBehaviour(BrokerAgent agent, ACLMessage cfp, OWLOntology conditions) {
         super(agent, cfp);
         analyzer = new AdditiveAnalyzer();
         this.conditions = conditions;
     }
 
+    @Override
+    public BrokerAgent getAgent() {
+        return (BrokerAgent) myAgent;
+    }
+
     protected void handlePropose(ACLMessage propose, Vector v) {
-        //System.out.println("Agent " + propose.getSender().getName() + " proposed " + propose.getContent());
+        ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+        message.setContent("Agent " + propose.getSender().getName() + " proposed " + propose.getContent());
+        getAgent().sendMessageToClient(propose.getConversationId(),message);
     }
 
     protected void handleRefuse(ACLMessage refuse) {
-        //System.out.println("Agent " + refuse.getSender().getName() + " refused");
+        ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+        message.setContent("Agent " + refuse.getSender().getName() + " refused " + refuse.getContent());
+        getAgent().sendMessageToClient(refuse.getConversationId(),message);
     }
 
     protected void handleFailure(ACLMessage failure) {
@@ -51,8 +61,11 @@ public class NegotiationBehaviour extends ContractNetInitiator {
             ACLMessage msg = (ACLMessage) e.nextElement();
             if (msg.getPerformative() == ACLMessage.PROPOSE) {
                 ACLMessage reply = msg.createReply();
-                if (msg.equals(best)) {
-                    //System.out.println("Accepting proposal " + best.getContent() + " from responder " + best.getSender().getName());
+                if (msg.getSender().equals(best.getSender())) {
+                    ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+                    message.setContent("Agent " + best.getSender().getName() + " best offer: " + best.getContent());
+                    getAgent().sendMessageToClient(best.getConversationId(),message);
+                    System.out.println("Accepting proposal " + best.getContent() + " from responder " + best.getSender().getName());
                     reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
                 } else {
                     reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
