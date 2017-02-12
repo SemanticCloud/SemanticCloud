@@ -6,7 +6,7 @@
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
-        <version>1.2.6.RELEASE</version>
+        <version>1.4.0.RELEASE</version>
         <relativePath />
     </parent>
     <!--<parent>-->
@@ -156,8 +156,8 @@
 
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-parent</artifactId>
-                <version>Angel.SR3</version>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Camden.SR4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
