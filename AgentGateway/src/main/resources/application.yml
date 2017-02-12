@@ -3,6 +3,11 @@ server:
 spring:
     application:
         name: agent-gateway
+    cloud:
+        consul:
+            host: consul
+            discovery:
+                prefer-ip-address: true
 eureka:
     instance:
         hostname: agent-gateway
@@ -12,10 +17,10 @@ eureka:
             defaultZone: http://discovery:9000/eureka/
 
 gateway:
-    platformId: sc
+    platformId: SemanticCloud
     mainPort: 10099
-    mainHost: localhost
-    containerName: con1
+    mainHost: jadeplatform
+    containerName: gateway
     localhost: localhost
     localPort: 10100
     services: jade.core.event.NotificationService

@@ -29,8 +29,8 @@ public class OntologyService {
         return owlClass.findProperty(propertyUri);
     }
 
-    public void getOwlSubclasses(String classUri) {
-        ontologyReader.getOwlSubclasses(classUri);
+    public List<OwlClass> getOwlSubclasses(String classUri) {
+        return ontologyReader.getOwlSubclasses(classUri);
     }
 
     public List<OwlIndividual> getIndividualsInRange(String classUri, String propertyUri) {

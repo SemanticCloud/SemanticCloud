@@ -1,7 +1,15 @@
+consul:
+  image: consul
+  ports:
+    - "8500:8500"
+webconsole:
+  image: web-console
+  links:
+    - consul
 discovery:
   image: discovery-service
   ports:
-    - "9000:9000"
+    - "9000"
 configserver:
   image: config-service
   links:
@@ -10,6 +18,7 @@ semanticengine:
   image: semantic-engine
   links:
     - discovery
+    - consul
 dashboarddb:
   image: postgres:9.4.5
   environment:
@@ -31,3 +40,20 @@ gateway:
     - "8080:8080"
   links:
     - discovery
+    - consul
+#Agents
+agentgateway:
+  image: agent-gateway
+  links:
+    - consul
+    - jadeplatform
+#Main
+jadeplatform:
+  #image: jade-platform
+  build : ./JadePlatform
+  ports:
+      - "10099:10099"
+  links:
+    - consul
+#Broker
+#Providers

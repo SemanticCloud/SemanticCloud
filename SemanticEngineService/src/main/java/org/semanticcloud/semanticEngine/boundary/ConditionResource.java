@@ -7,6 +7,7 @@ import org.semanticcloud.semanticEngine.model.conditions.ClassCondition;
 import org.semanticcloud.semanticEngine.model.conditions.ClassPropertyCondition;
 import org.semanticcloud.semanticEngine.model.conditions.PropertyCondition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,16 +21,17 @@ import java.util.UUID;
 public class ConditionResource {
     @Autowired
     private OntologyService ontologyService;
+    private static final String PREFIX = "http://semantic-cloud.org/Cloud/condition#";
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String updateConditions(@RequestBody List<ClassCondition> classConditions) {
-        for (ClassCondition classCondition : classConditions) {
+    @RequestMapping(method = RequestMethod.POST, produces = "application/rdf+xml")
+    public String updateConditions(@RequestBody ClassCondition classCondition) {
+        //for (ClassCondition classCondition : classConditions) {
             fill(classCondition);
 
-        }
+        //}
         OntologyGenerator globalInstance = OntologyGenerator.getGlobalInstance();
         UUID id = UUID.randomUUID();
-        String test = globalInstance.convertToOwlClass2(id.toString(), classConditions.get(0));
+        String test = globalInstance.convertToOwlClass(PREFIX + id, classCondition);
         return test;
     }
 

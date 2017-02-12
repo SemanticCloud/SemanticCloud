@@ -36,8 +36,8 @@ public class ClassResource {
     }
 
     @RequestMapping(value = "subclass", method = RequestMethod.GET)
-    public void getSubclasses(@PathVariable String classUri) {
-        ontologyService.getOwlSubclasses(classUri);
+    public List<OwlClass> getSubclasses(@PathVariable String classUri) {
+        return ontologyService.getOwlSubclasses(classUri);
     }
 
     @RequestMapping(value = "{classUri}/properties/{propertyUri}/operators", method = RequestMethod.GET)

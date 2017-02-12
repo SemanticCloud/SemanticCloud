@@ -69,22 +69,14 @@ public class OntologyGenerator {
 		individualGenerator = new IndividualGenerator(factory);
 	}
 
-    public String convertToOwlClass(String classUri, ClassCondition condition) {
-        OWLOntology destinationOntology = convertToOwlClassOntology(classUri, condition);
-
-        try {
-            return serializeToString(destinationOntology);
-        } catch (OWLOntologyStorageException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-	public String convertToOwlClass2(String classUri, ClassCondition condition) {
+	public String convertToOwlClass(String classUri, ClassCondition condition) {
 		OWLOntology destinationOntology;
 		try {
-			destinationOntology = manager.createOntology();
+            IRI iri = IRI.create(classUri);
+
+            String ontologyIRI = OntologyUtils.getNamespace(iri);
+
+            destinationOntology = manager.createOntology(IRI.create(ontologyIRI));
 
 			OWLClassExpression resultExpression = getClassRestrictionGenerator().convertToOntClass(classUri, condition);
 			

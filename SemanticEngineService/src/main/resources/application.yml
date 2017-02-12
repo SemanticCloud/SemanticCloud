@@ -3,6 +3,11 @@ server:
 spring:
     application:
         name: semantic-engine
+    cloud:
+        consul:
+            host: consul
+            discovery:
+                prefer-ip-address: true
 eureka:
     instance:
         hostname: semantic-engine

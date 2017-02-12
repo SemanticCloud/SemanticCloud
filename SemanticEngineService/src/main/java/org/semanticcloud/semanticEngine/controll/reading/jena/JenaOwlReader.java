@@ -37,13 +37,18 @@ public class JenaOwlReader extends OntologyReader{
 		this.ignorePropsWithNoDomain = ignorePropsWithNoDomain;
 	}
 
+	private String fixNamespace(String uri){
+		if (!(uri.contains("#"))) {
+			uri = String.format("%s#%s", this.uri, uri);
+		}
+		return uri;
+	}
+
 	/* (non-Javadoc)
 	 * @see models.ontologyReading.jena.OntologyReader#getOwlClass(java.lang.String)
 	 */
 	public OwlClass getOwlClass(String className) {
-		if (!(className.contains("#"))) {
-			className = String.format("%s#%s", uri, className);
-		}
+		className = fixNamespace(className);
 		OntClass ontClass = model.getOntClass(className);
 		if (ontClass == null)
 			return null;
@@ -61,9 +66,7 @@ public class JenaOwlReader extends OntologyReader{
 	 * @see models.ontologyReading.jena.OntologyReader#getProperty(java.lang.String)
 	 */
     public OntoProperty getProperty(String propertyUri) throws ConfigurationException {
-        if (!(propertyUri.contains("#"))) {
-            propertyUri = String.format("%s#%s", uri, propertyUri);
-        }
+		propertyUri = fixNamespace(propertyUri);
         OntProperty ontProperty = model.getOntProperty(propertyUri);
         if(ontProperty == null){
             throw new ConfigurationException(String.format("Property %s not found in ontology", propertyUri));
@@ -156,8 +159,20 @@ public class JenaOwlReader extends OntologyReader{
     }
 
     @Override
-    public List<OwlClass> getOwlSubclasses(String classUri) {
-        return null;
+    public List<OwlClass> getOwlSubclasses(String className) {
+		className = fixNamespace(className);
+		OntClass ontClass = model.getOntClass(className);
+		if (ontClass == null) {
+			return null;
+		}
+		List<OwlClass> classes = new ArrayList<>();
+		for (ExtendedIterator<? extends OntResource> s = ontClass.listSubClasses(true); s.hasNext();) {
+			OntClass subclass = s.next().asClass();
+			if (!subclass.getURI().equals("http://www.w3.org/2002/07/owl#Nothing")){
+				classes.add(new OwlClass(subclass));
+			}
+		}
+        return classes;
     }
 
     private List<OntClass> getAllClassesFromRange(OntoProperty property) {

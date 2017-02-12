@@ -4,6 +4,11 @@ debug:
 spring:
     application:
         name: gateway
+    cloud:
+        consul:
+            host: consul
+            discovery:
+                prefer-ip-address: true
 security:
     user:
         password: none
@@ -25,4 +30,4 @@ eureka:
             defaultZone: http://discovery:9000/eureka/
 zuul:
     routes:
-        dashboard: /**
+        webconsole: /**
