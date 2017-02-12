@@ -33,13 +33,6 @@ public class StartBehaviour extends CyclicBehaviour {
                 System.out.println("Onto.");
                 OWLOntology ontology;
                 ontology = manager.loadOntology(IRI.create("http://semantic-cloud.org/CloudR"));
-                //to remove
-//            OWLDataFactory owlDataFactory = manager.getOWLDataFactory();
-//            Set<OWLAxiom> set = new HashSet<>();
-//            OWLImportsDeclaration owlImportsDeclaration = owlDataFactory.getOWLImportsDeclaration(IRI.create("http://semantic-cloud.org/Cloud"));
-//            manager.applyChange(new AddImport(ontology, owlImportsDeclaration));
-                //manager.add()
-                //
                 System.out.println("start.");
                 getAgent().startNegotiations(msg, ontology);
             } catch (OWLOntologyStorageException e) {

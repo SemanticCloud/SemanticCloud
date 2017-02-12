@@ -18,9 +18,15 @@ public class NegotiationBehaviour extends ContractNetResponder {
     @Override
     protected ACLMessage handleCfp(ACLMessage cfp) throws RefuseException, FailureException, NotUnderstoodException {
         ACLMessage propose = cfp.createReply();
-        propose.setPerformative(ACLMessage.PROPOSE);
+
         String ontology = getAgent().prepareProposal(cfp.getContent());
-        propose.setContent(ontology);
+        if(ontology != null){
+            propose.setContent(ontology);
+            propose.setPerformative(ACLMessage.PROPOSE);
+        }
+        else {
+            propose.setPerformative(ACLMessage.REFUSE);
+        }
         //OWLMessage wrap = OWLMessage.wrap(propose);
         //wrap.setContentOntology(ontology);
 

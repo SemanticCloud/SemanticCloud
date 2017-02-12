@@ -1,12 +1,8 @@
 package org.semanticcloud.agents.provider;
 
-import jade.domain.FIPAAgentManagement.FailureException;
-import jade.domain.FIPAAgentManagement.NotUnderstoodException;
-import jade.domain.FIPAAgentManagement.RefuseException;
 import jade.domain.FIPANames;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import jade.proto.ContractNetResponder;
 import org.semanticcloud.agents.base.AgentType;
 import org.semanticcloud.agents.base.BaseAgent;
 import org.semanticcloud.agents.provider.behaviours.ActionBehaviour;
