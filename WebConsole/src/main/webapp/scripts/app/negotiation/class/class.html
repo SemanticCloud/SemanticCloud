@@ -1,0 +1,20 @@
+<div>
+    <div class="box-header with-border">
+        <h3 class="box-title">{{condition.uri}}</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+        <div class="box-body">
+            <div class="form-group" ng-repeat="propertyCondition in condition.propertyConditions">
+                <div class="col-md-12" se-property class-uri="condition.localName" property-condition="propertyCondition" properties="properties"></div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-default">Cancel</button>
+            <button type="button" ng-if="properties && properties.length > 0" class="btn btn-success pull-right" ng-click="addPropertyCondition()">Add property</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>

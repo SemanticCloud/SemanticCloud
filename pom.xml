@@ -29,6 +29,7 @@
         <module>Agents</module>
         <module>Agency</module>
         <module>AgentGateway</module>
+        <module>WebConsole</module>
     </modules>
 
     <properties>

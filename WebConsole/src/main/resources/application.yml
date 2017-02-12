@@ -1,0 +1,30 @@
+server:
+    port: 8080
+debug:
+spring:
+    application:
+        name: webconsole
+    cloud:
+        consul:
+            host: consul
+            discovery:
+                prefer-ip-address: true
+security:
+    user:
+        password: none
+endpoints:
+    restart:
+        enabled: true
+    shutdown:
+        enabled: true
+    health:
+        sensitive: false
+eureka:
+    instance:
+        hostname: configserver
+        preferIpAddress: true
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://discovery:9000/eureka/
