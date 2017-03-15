@@ -5,7 +5,8 @@ spring:
         name: agent-gateway
     cloud:
         consul:
-            host: consul
+#            host: consul
+            host: localhost
             discovery:
                 prefer-ip-address: true
 eureka:
