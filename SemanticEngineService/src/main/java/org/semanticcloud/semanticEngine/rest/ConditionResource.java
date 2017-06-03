@@ -32,6 +32,8 @@ public class ConditionResource {
         OntologyGenerator globalInstance = OntologyGenerator.getGlobalInstance();
         UUID id = UUID.randomUUID();
         String test = globalInstance.convertToOwlClass(PREFIX + id, classCondition);
+        String test2 = globalInstance.convertToOwlClassJena(PREFIX + id, classCondition);
+
         return test;
     }
 
