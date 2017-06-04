@@ -1,8 +1,10 @@
 package org.semanticcloud;
 
 
+import org.apache.jena.ontology.OntModel;
+
 public interface Provider {
-    void prepareProposal();
+    OntModel prepareProposal(OntModel cfp);
 
     void acceptProposal();
 

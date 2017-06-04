@@ -47,7 +47,7 @@ public class JcloudsAgent extends ProviderAgent {
     private OntModel offer;
     private final static String NS = "http://semantic-cloud.org/Cloud#";
 
-    private final static String OFFER_CLASS = "http://semantic-cloud.org/CloudR#test";
+    private final static String OFFER_CLASS = "http://semantic-cloud.org/Cloud#Condition";
 
     private ComputeServiceContext context;
     private ComputeService client;
@@ -76,14 +76,26 @@ public class JcloudsAgent extends ProviderAgent {
             // When reading the file it reads in \n in as
             credential = json.get("private_key").toString().replace("\"", "").replace("\\n", "\n");
         }
+
         ns2 = "http://semantic-cloud.org/" + providerId + "#";
+        if (providerId.equals("openstack-nova")){
+            context = ContextBuilder.newBuilder(providerId)
+                    .endpoint("http://8.43.86.2:5000/v2.0/")
+                    .credentials(identity, credential)
+                    .modules(ImmutableSet.<Module>of(new Log4JLoggingModule(),
+                            new SshjSshClientModule()))
+                    .buildView(ComputeServiceContext.class);
+
+        }
+        else {
 
 
-        context = ContextBuilder.newBuilder(providerId)
-                .credentials(identity, credential)
-                .modules(ImmutableSet.<Module>of(new Log4JLoggingModule(),
-                        new SshjSshClientModule()))
-                .buildView(ComputeServiceContext.class);
+            context = ContextBuilder.newBuilder(providerId)
+                    .credentials(identity, credential)
+                    .modules(ImmutableSet.<Module>of(new Log4JLoggingModule(),
+                            new SshjSshClientModule()))
+                    .buildView(ComputeServiceContext.class);
+        }
         System.out.println(providerId + " " + identity + " " + credential);
 
         client = context.getComputeService();
@@ -131,8 +143,10 @@ public class JcloudsAgent extends ProviderAgent {
     private Individual addVolume(Volume volume) {
         Individual volumeInterface = offer.getOntClass(NS + "VolumeInterface").createIndividual();
         Property hasDeviceId = offer.getProperty(NS + "hasDeviceId");
-        Literal deviceID = offer.createTypedLiteral(volume.getDevice());
-        volumeInterface.addProperty(hasDeviceId, deviceID);
+        if(volume.getDevice() != null) {
+            Literal deviceID = offer.createTypedLiteral(volume.getDevice());
+            volumeInterface.addProperty(hasDeviceId, deviceID);
+        }
 
         Property hasVolume = offer.getProperty(NS + "hasVolume");
         Individual individual = offer.getOntClass(NS + "Volume").createIndividual();
@@ -164,11 +178,15 @@ public class JcloudsAgent extends ProviderAgent {
         offer = createModel();
         offer.enterCriticalSection(Lock.WRITE) ;  // or Lock.WRITE
         try {
+            OntClass serviceClass = offer.getOntClass(NS + "Service");
+            Individual service = serviceClass.createIndividual(ns2 + "serviceID");
+            Property hasResource = offer.getProperty(NS + "hasResource");
             OntClass computeClass = offer.getOntClass(NS + "Compute");
             Property hasCPU = offer.getProperty(NS + "hasCPU");
             Property hasMemory = offer.getProperty(NS + "hasMemory");
             Property hasVolumeInterface = offer.getProperty(NS + "hasVolumeInterface");
             hardwares = client.listHardwareProfiles();
+            System.out.println(hardwares);
             hardwares.forEach(o -> {
                 Individual individual = computeClass.createIndividual(ns2 + o.getId());
                 o.getProcessors().forEach(cpu -> {
@@ -178,6 +196,7 @@ public class JcloudsAgent extends ProviderAgent {
                 o.getVolumes().forEach(d -> {
                     individual.addProperty(hasVolumeInterface, addVolume(d));
                 });
+                service.addProperty(hasResource,individual);
 
             });
         }finally {
@@ -262,31 +281,56 @@ public class JcloudsAgent extends ProviderAgent {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("/tmp/test.jsonld");
+            //fileOutputStream.write("<?xml version=\"1.0\"?>\n".getBytes(StandardCharsets.UTF_8));
+            model.write(fileOutputStream, "JSON-LD");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         OntModel proposal = createModel();
 
         OntClass ontClass = model.getOntClass(OFFER_CLASS);
-        List<? extends OntResource> resources = ontClass.listInstances().toList();
-        if(resources.size() == 0){
+
+        //List<? extends OntResource> resources = ontClass.listInstances().toList();
+        List<? extends OntResource> resources2 = ontClass.listSubClasses(true).toList();
+        if(resources2.size() == 0){
             return null;
         }
-        System.out.println(resources.size());
-        resources.forEach(o -> {
-            o.getLocalName();
-            List<RDFNode> node = new ArrayList<RDFNode>();
-            System.out.println("Resource:" + o.getLocalName());
-            Resource resource = offer.getBaseModel().getResource(o.getURI());
-            traverse(proposal, resource, new ArrayList<>(), 0);
+
+        resources2.forEach(r ->{
+            OntClass ontClass2 = r.asClass();
+            List<? extends OntResource> resources = ontClass2.listInstances().toList();
+            System.out.println(r.getURI());
+            System.out.println(resources.size());
 
 
+            resources.forEach(o -> {
+                o.getLocalName();
+                List<RDFNode> node = new ArrayList<RDFNode>();
+                System.out.println("Resource:" + o.getLocalName());
+                Resource resource = offer.getBaseModel().getResource(o.getURI());
+                traverse(proposal, resource, new ArrayList<>(), 0);
+
+
+            });
+            System.out.println("---info eqivalent");
+            ontClass2.listEquivalentClasses().toList().forEach(o -> {
+                System.out.println(o);
+            });
+            System.out.println("---info subclasses");
+            ontClass2.listSubClasses().toList().forEach(o -> {
+                System.out.println(o);
+            });
+            System.out.println("---info super");
+            ontClass2.listSuperClasses().toList().forEach(o -> {
+                System.out.println(o);
+            });
         });
-        System.out.println("---info---");
-        ontClass.listEquivalentClasses().toList().forEach(o -> {
-            System.out.println(o);
-        });
-        ontClass.listSubClasses().toList().forEach(o -> {
-            System.out.println(o);
-        });
+
 
         StringWriter out = new StringWriter();
         proposal.write(out, "RDF/XML");
@@ -295,6 +339,18 @@ public class JcloudsAgent extends ProviderAgent {
             FileOutputStream fileOutputStream = new FileOutputStream("/tmp/prop"+providerId+".owl");
             fileOutputStream.write("<?xml version=\"1.0\"?>\n".getBytes(StandardCharsets.UTF_8));
             proposal.write(fileOutputStream, "RDF/XML");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("/tmp/prop"+providerId+".jsonld");
+            //fileOutputStream.write("<?xml version=\"1.0\"?>\n".getBytes(StandardCharsets.UTF_8));
+
+            proposal.write(fileOutputStream, "JSON-LD");
+            //proposal.write(fileOutputStream, );
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

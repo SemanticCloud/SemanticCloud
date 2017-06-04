@@ -10,6 +10,32 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>joyent</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.semanticcloud</groupId>
+            <artifactId>core</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.joyent.triton</groupId>
+            <artifactId>java-triton-client</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

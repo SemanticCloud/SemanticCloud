@@ -29,6 +29,11 @@
             <groupId>net.sourceforge.owlapi</groupId>
             <artifactId>org.semanticweb.hermit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.semanticcloud</groupId>
+            <artifactId>core</artifactId>
+            <version>${version}</version>
+        </dependency>
     </dependencies>
 
 
