@@ -27,9 +27,10 @@
         <module>GatewayService</module>
         <module>ConfigService</module>
         <module>Agents</module>
-        <module>Agency</module>
+        <!--<module>Agency</module>-->
         <module>AgentGateway</module>
         <module>WebConsole</module>
+        <module>core</module>
     </modules>
 
     <properties>
