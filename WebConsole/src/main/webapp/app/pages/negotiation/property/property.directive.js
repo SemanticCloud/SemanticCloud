@@ -1,5 +1,5 @@
 'use strict';
-angular.module('WebConsole')
+angular.module('app.pages.negotiation')
     .directive('seProperty', function (SemanticEngineService, $log) {
         return {
             scope: {
@@ -7,7 +7,7 @@ angular.module('WebConsole')
                 propertyCondition: '=',
                 properties: '='
             },
-            templateUrl: 'scripts/app/negotiation/property/property.html',
+            templateUrl: 'app/pages/negotiation/property/property.html',
             controller: function ($scope) {
                 $scope.operators =[
                     { name:"equal", url:"scripts/app/negotiation/condition/simpleValue.html"},
