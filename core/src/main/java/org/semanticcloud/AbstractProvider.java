@@ -1,6 +1,6 @@
 package org.semanticcloud;
 
-import org.apache.jena.ontology.OntDocumentManager;
+
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -21,8 +21,6 @@ public abstract class AbstractProvider implements Provider  {
         model.setDynamicImports(true);
         FileManager fileManager = FileManager.get();
         fileManager.addLocatorFile("/opt/SemanticCloud/");
-        //OntDocumentManager dm = model.getDocumentManager();
-        //dm.addAltEntry("http://semantic-cloud.org/Cloud", "file:/opt/SemanticCloud/cloud.owl");
 
         Ontology ontology = model.createOntology(namespace.replace("#", ""));
         ontology.addImport(model.createResource("http://semantic-cloud.org/Cloud"));

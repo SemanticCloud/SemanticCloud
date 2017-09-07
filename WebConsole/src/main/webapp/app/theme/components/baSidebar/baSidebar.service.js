@@ -20,20 +20,34 @@
         var isMenuCollapsed = shouldMenuBeCollapsed();
 
         this.getMenuItems = function() {
+          var filterChilderen = function(states,item,level){
+            var children = states.filter(function(child) {
+              return child.level == level && child.name.indexOf(item.name) === 0;
+            });
+            item.subMenu = children.length ? children : null;
+            if(item.subMenu !== null){
+              item.subMenu.forEach(function(item) {
+                filterChilderen(states,item,level+1);
+              });
+            }
+  
+          };
           var states = defineMenuItemStates();
           var menuItems = states.filter(function(item) {
             return item.level == 0;
           });
 
           menuItems.forEach(function(item) {
-            var children = states.filter(function(child) {
-              return child.level == 1 && child.name.indexOf(item.name) === 0;
-            });
-            item.subMenu = children.length ? children : null;
+            filterChilderen(states,item,1);
+            // var children = states.filter(function(child) {
+            //   return child.level == 1 && child.name.indexOf(item.name) === 0;
+            // });
+            // item.subMenu = children.length ? children : null;
           });
 
           return menuItems.concat(staticMenuItems);
         };
+        
 
         this.shouldMenuBeCollapsed = shouldMenuBeCollapsed;
         this.canSidebarBeHidden = canSidebarBeHidden;
@@ -65,7 +79,7 @@
 
         function defineMenuItemStates() {
           return $state.get()
-              .filter(function(s) {
+              .filter(function(s) {         
                 return s.sidebarMeta;
               })
               .map(function(s) {

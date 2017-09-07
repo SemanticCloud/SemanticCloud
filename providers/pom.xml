@@ -16,6 +16,7 @@
         <module>aws</module>
         <module>google-cloud-platform</module>
         <module>openstack</module>
+        <module>jclouds</module>
     </modules>
 
 

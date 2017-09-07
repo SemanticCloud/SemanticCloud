@@ -18,7 +18,8 @@
     'BlurAdmin.pages.profile',
     'app.pages.provisioning',
     'app.pages.management',
-    'app.pages.negotiation'
+    'app.pages.negotiation',
+    'app.pages.resource'
   ])
       .config(routeConfig);
 

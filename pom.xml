@@ -31,6 +31,7 @@
         <module>AgentGateway</module>
         <module>WebConsole</module>
         <module>core</module>
+        <module>providers</module>
     </modules>
 
     <properties>
