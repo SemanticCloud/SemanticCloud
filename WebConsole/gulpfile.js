@@ -323,7 +323,8 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
 }).map(function(file) {
   require('./gulp/' + file);
 });
-
+gulp.task('test', function () {
+});
 
 /**
  *  Default task clean temporaries directories and launch the

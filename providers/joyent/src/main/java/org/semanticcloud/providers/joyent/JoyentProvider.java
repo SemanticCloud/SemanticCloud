@@ -13,6 +13,7 @@ import org.apache.jena.util.FileManager;
 import org.mindswap.pellet.jena.PelletInfGraph;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.semanticcloud.AbstractProvider;
+import org.semanticcloud.Cloud;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -90,13 +91,13 @@ public class JoyentProvider extends AbstractProvider {
 //        }
     }
     private Individual addCPU(OntModel baseModel, Package p) {
-        Individual individual = baseModel.getOntClass(NS + "CPU").createIndividual();
+        Individual individual = baseModel.getOntClass(Cloud.NS + "CPU").createIndividual();
 
 //        Property hasClockSpeed = baseModel.getProperty(NS + "hasClockSpeed");
 //        Literal speed = baseModel.createTypedLiteral(new Float(cpu.getSpeed()));
 //        individual.addProperty(hasClockSpeed, speed);
 
-        Property hasCores = baseModel.getProperty(NS + "hasCores");
+        Property hasCores = baseModel.getProperty(Cloud.NS + "hasCores");
         Literal cores = baseModel.createTypedLiteral(p.getVcpus());
         individual.addProperty(hasCores, cores);
         return individual;
@@ -104,8 +105,8 @@ public class JoyentProvider extends AbstractProvider {
     }
 
     private Individual addVirtualMemory(OntModel baseModel, Package p) {
-        Individual individual = baseModel.getOntClass(NS + "VirtualMemory").createIndividual();
-        Property hasAvailableSize = baseModel.getProperty(NS + "hasAvailableSize");
+        Individual individual = baseModel.getOntClass(Cloud.NS + "VirtualMemory").createIndividual();
+        Property hasAvailableSize = baseModel.getProperty(Cloud.NS + "hasAvailableSize");
         Literal ram = baseModel.createTypedLiteral(p.getMemory());
         individual.addProperty(hasAvailableSize, ram);
         return individual;
@@ -113,16 +114,16 @@ public class JoyentProvider extends AbstractProvider {
     }
 
     private Individual addVolume(OntModel baseModel, Package p) {
-        Individual volumeInterface = baseModel.getOntClass(NS + "VolumeInterface").createIndividual();
+        Individual volumeInterface = baseModel.getOntClass(Cloud.NS + "VolumeInterface").createIndividual();
 //        Property hasDeviceId = baseModel.getProperty(NS + "hasDeviceId");
 //        if(volume.getDevice() != null) {
 //            Literal deviceID = offer.createTypedLiteral(volume.getDevice());
 //            volumeInterface.addProperty(hasDeviceId, deviceID);
 //        }
 
-        Property hasVolume = baseModel.getProperty(NS + "hasVolume");
-        Individual individual = baseModel.getOntClass(NS + "Volume").createIndividual();
-        Property hasAvailableSize = baseModel.getProperty(NS + "hasAvailableSize");
+        Property hasVolume = baseModel.getProperty(Cloud.NS + "hasVolume");
+        Individual individual = baseModel.getOntClass(Cloud.NS + "Volume").createIndividual();
+        Property hasAvailableSize = baseModel.getProperty(Cloud.NS + "hasAvailableSize");
         Literal space = baseModel.createTypedLiteral(p.getDisk());
         individual.addProperty(hasAvailableSize, space);
         volumeInterface.addProperty(hasVolume, individual);
@@ -134,13 +135,13 @@ public class JoyentProvider extends AbstractProvider {
     public OntModel prepareProposal(OntModel cfp) {
         final String OFFER_CLASS = "http://semantic-cloud.org/CloudR#test";
         OntModel baseModel = createBaseModel();
-        OntClass serviceClass = baseModel.getOntClass(NS + "Service");
+        OntClass serviceClass = baseModel.getOntClass(Cloud.NS + "Service");
         Individual service = serviceClass.createIndividual(namespace + "TritonCompute");
-        Property hasResource = baseModel.getProperty(NS + "hasResource");
-        OntClass computeClass = baseModel.getOntClass(NS + "Container");
-        Property hasCPU = baseModel.getProperty(NS + "hasCPU");
-        Property hasMemory = baseModel.getProperty(NS + "hasMemory");
-        Property hasVolumeInterface = baseModel.getProperty(NS + "hasVolumeInterface");
+        Property hasResource = baseModel.getProperty(Cloud.NS + "hasResource");
+        OntClass computeClass = baseModel.getOntClass(Cloud.NS + "Container");
+        Property hasCPU = baseModel.getProperty(Cloud.NS + "hasCPU");
+        Property hasMemory = baseModel.getProperty(Cloud.NS + "hasMemory");
+        Property hasVolumeInterface = baseModel.getProperty(Cloud.NS + "hasVolumeInterface");
         try {
             Collection<Package> list = cloudApi.packages().list();
             list.forEach( p ->{

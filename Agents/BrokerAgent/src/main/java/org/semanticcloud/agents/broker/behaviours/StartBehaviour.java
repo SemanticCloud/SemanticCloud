@@ -3,6 +3,7 @@ package org.semanticcloud.agents.broker.behaviours;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
+import org.apache.commons.io.IOUtils;
 import org.semanticcloud.agents.broker.BrokerAgent;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
@@ -31,8 +32,10 @@ public class StartBehaviour extends CyclicBehaviour {
                 AutoIRIMapper mapper = new AutoIRIMapper(new File("/opt/SemanticCloud"), true);
                 manager.getIRIMappers().add(mapper);
                 System.out.println("Onto.");
-                OWLOntology ontology;
-                ontology = manager.loadOntology(IRI.create("http://semantic-cloud.org/CloudR"));
+                OWLOntology ontology = manager.loadOntologyFromOntologyDocument(IOUtils.toInputStream(msg.getContent()));
+
+
+                //ontology = manager.loadOntology(IRI.create("https://semanticcloud.github.io/Ontology/cloud.owlR"));
                 System.out.println("start.");
                 getAgent().startNegotiations(msg, ontology);
             } catch (OWLOntologyStorageException e) {

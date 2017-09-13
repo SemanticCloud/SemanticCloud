@@ -13,3 +13,4 @@ buildNumber.properties
 *.iml
 APDescription.txt
 MTPs-Main-Container.txt
+Agents/JcloudsProviderAgent/src/main/resources/jade-agent-container.properties

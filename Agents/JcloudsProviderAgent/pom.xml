@@ -56,6 +56,11 @@
             <artifactId>gson</artifactId>
             <version>2.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.semanticcloud</groupId>
+            <artifactId>jclouds</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

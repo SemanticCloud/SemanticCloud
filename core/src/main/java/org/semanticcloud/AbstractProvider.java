@@ -9,7 +9,7 @@ import org.mindswap.pellet.jena.PelletReasonerFactory;
 
 
 public abstract class AbstractProvider implements Provider  {
-    protected final static String NS = "http://semantic-cloud.org/Cloud#";
+    protected final static String OFFER_CLASS = Cloud.NS +"Condition";
     protected final String namespace;
 
     protected AbstractProvider(String namespace) {
@@ -19,12 +19,10 @@ public abstract class AbstractProvider implements Provider  {
     protected OntModel createBaseModel(){
         OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
         model.setDynamicImports(true);
-        FileManager fileManager = FileManager.get();
-        fileManager.addLocatorFile("/opt/SemanticCloud/");
 
         Ontology ontology = model.createOntology(namespace.replace("#", ""));
-        ontology.addImport(model.createResource("http://semantic-cloud.org/Cloud"));
-        model.setNsPrefix("cloud", "http://semantic-cloud.org/Cloud#");
+        ontology.addImport(model.createResource(Cloud.NS.replace("#", "")));
+        model.setNsPrefix("cloud", Cloud.NS);
         return model;
     }
 }
