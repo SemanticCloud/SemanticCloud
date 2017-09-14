@@ -1,4 +1,4 @@
-package org.semanticcloud.semanticEngine.boundary;
+package org.semanticcloud.semanticEngine.rest;
 
 public class IndividualsResource {
 }

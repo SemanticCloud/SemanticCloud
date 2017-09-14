@@ -12,5 +12,6 @@ public abstract class OntoProperty extends OwlElement {
 
     public OntoProperty(String namespace, String localName, boolean functional) {
         super(namespace, localName);
+        this.functional = functional;
     }
 }

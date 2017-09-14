@@ -1,4 +1,4 @@
-package org.semanticcloud.semanticEngine.boundary;
+package org.semanticcloud.semanticEngine.rest;
 
 import org.semanticcloud.semanticEngine.controll.OntologyService;
 import org.semanticcloud.semanticEngine.model.ontology.OntoProperty;

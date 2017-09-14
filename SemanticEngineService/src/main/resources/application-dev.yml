@@ -5,7 +5,7 @@ spring:
         name: semantic-engine
     cloud:
         consul:
-            host: consul
+            host: localhost
             discovery:
                 prefer-ip-address: true
 eureka:
@@ -17,7 +17,7 @@ eureka:
             defaultZone: http://discovery:9000/eureka/
 
 jena:
-    baseOntology: file:/opt/SemanticCloud/cloud.owl
+    baseOntology: https://semanticcloud.github.io/Ontology/cloud.owl
     ignorePropsWithNoDomain: true
     localMappings:
         "http://semantic-cloud.org/Cloud": file:/opt/SemanticCloud/cloud.owl

@@ -4,7 +4,6 @@ package org.semanticcloud;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.util.FileManager;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 
 

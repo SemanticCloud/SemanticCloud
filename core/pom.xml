@@ -31,6 +31,24 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-maven-tools</artifactId>
                 <version>${jena.version}</version>
@@ -46,6 +64,7 @@
                         <source>
                             <!-- Test2.java (only) will contain OntModel declarations -->
                             <input>https://semanticcloud.github.io/Ontology/cloud.owl</input>
+                            <!--<input>src/main/resources/cloud.owl</input>-->
                             <ontology>true</ontology>
                             <lang-owl>true</lang-owl>
 
