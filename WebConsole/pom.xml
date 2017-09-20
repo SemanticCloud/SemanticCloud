@@ -41,6 +41,13 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warSourceDirectory>src/main/webapp/release</warSourceDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.github.trecloux</groupId>
                 <artifactId>yeoman-maven-plugin</artifactId>
                 <version>0.4</version>
@@ -66,7 +73,7 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>src/main/webapp/dist</directory>
+                            <directory>src/main/webapp/release</directory>
                         </fileset>
                         <fileset>
                             <directory>.tmp</directory>
