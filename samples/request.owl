@@ -8,7 +8,6 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <Ontology rdf:about="https://semanticcloud.github.io/Ontology/cloud.owlR">
         <imports rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl"/>
-        <imports rdf:resource="http://trystack.com/"/>
     </Ontology>
     
 

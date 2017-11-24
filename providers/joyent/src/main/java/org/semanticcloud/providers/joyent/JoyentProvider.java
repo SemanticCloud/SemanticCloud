@@ -1,32 +1,37 @@
 package org.semanticcloud.providers.joyent;
 
 import com.joyent.triton.CloudApi;
-import com.joyent.triton.config.*;
+import com.joyent.triton.config.ChainedConfigContext;
+import com.joyent.triton.config.ConfigContext;
+import com.joyent.triton.config.DefaultsConfigContext;
+import com.joyent.triton.config.MapConfigContext;
+import com.joyent.triton.config.SystemSettingsConfigContext;
 import com.joyent.triton.domain.Instance;
-import com.joyent.triton.domain.Package;
-import org.apache.commons.io.IOUtils;
-import org.apache.jena.ontology.*;
+import org.semanticcloud.providers.joyent.triton.domain.Package;
+import org.apache.jena.ontology.Individual;
+import org.apache.jena.ontology.OntClass;
+import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.util.FileManager;
-import org.mindswap.pellet.jena.PelletInfGraph;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.semanticcloud.AbstractProvider;
 import org.semanticcloud.Cloud;
+import org.semanticcloud.providers.joyent.triton.TritonService;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by malagus on 6/1/17.
  */
 public class JoyentProvider extends AbstractProvider {
     private CloudApi cloudApi;
+    private TritonService tritonService;
 
     public JoyentProvider() {
         super("https://www.joyent.com/#");
@@ -46,16 +51,27 @@ public class JoyentProvider extends AbstractProvider {
                 new SystemSettingsConfigContext(),
                 mapConfigContext
         );
+        try {
+            tritonService = new TritonService("https://eu-ams-1.api.joyent.com","malagus","/home/l.smolaga/.ssh/test2_id_rsa");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         cloudApi = new CloudApi(context);
     }
 
     public static void main(String[] args) throws IOException {
-        /* This configures the Triton SDK using defaults, environment variables
-         * and Java system properties. */
+//        InstanceAPI target = Feign.builder()
+//                .contract(new JAXRSContract())
+//                .decoder(new JacksonDecoder())
+//                .requestInterceptor(new MyRequestInterceptor("malagus","/home/l.smolaga/.ssh/test2_id_rsa"))
+//                .target(InstanceAPI.class, "https://eu-ams-1.api.joyent.com");
+//        List<org.semanticcloud.providers.joyent.triton.domain.Instance> list = target.list("malagus");
+//        System.out.println(list);
+        //System.out.println(target.get("malagus","60a3b1fa-0674-11e2-abf5-cb82934a8e24"));
 
 
         //System.out.println(out);
-     //   try {
+      //  try {
 //            FileManager fileManager = FileManager.get();
 //            fileManager.addLocatorFile("/opt/SemanticCloud/");
 //            FileInputStream fileInputStream = new FileInputStream("/opt/SemanticCloud/req.owl");
@@ -104,18 +120,6 @@ public class JoyentProvider extends AbstractProvider {
 
 
 
-//        CloudApi cloudApi = new CloudApi(context);
-//
-//        // Each section of the API has its own class
-//        Instances instanceApi = cloudApi.instances();
-//
-//        Iterator<Package> instancesIterator = cloudApi.packages().list().iterator();
-//        cloudApi.images().listLatestVersions();
-//
-//        while (instancesIterator.hasNext()) {
-//            Package instance = instancesIterator.next();
-//            System.out.println(instance);
-//        }
     }
 
     private void listResources() {
@@ -174,15 +178,15 @@ public class JoyentProvider extends AbstractProvider {
         final String OFFER_CLASS = "http://semantic-cloud.org/CloudR#test";
         OntModel baseModel = createBaseModel();
         Individual service = baseModel.createIndividual(namespace + "TritonCompute",Cloud.Service);
-        try {
-            Collection<Package> list = cloudApi.packages().list();
-            list.forEach( p ->{
-                System.out.println(p);
-                Individual individual = baseModel.createIndividual(namespace + p.getName(), Cloud.Contanier);
+        List<Package> packages = tritonService.listPakages();
+        //Collection<Package> list = cloudApi.packages().list();
+        packages.forEach( p ->{
+            System.out.println(p);
+            Individual individual = baseModel.createIndividual(namespace + p.getName(), Cloud.Contanier);
 
-                individual.addProperty(Cloud.hasCPU, addCPU(baseModel,p));
-                individual.addProperty(Cloud.hasMemory, addVirtualMemory(baseModel,p));
-                individual.addProperty(Cloud.hasVolumeInterface, addVolume(baseModel,p));
+            individual.addProperty(Cloud.hasCPU, addCPU(baseModel,p));
+            individual.addProperty(Cloud.hasMemory, addVirtualMemory(baseModel,p));
+            individual.addProperty(Cloud.hasVolumeInterface, addVolume(baseModel,p));
 
 //                OntClass aClass = baseModel.createClass(namespace + p.getName());
 //                aClass.addSuperClass(computeClass);
@@ -205,13 +209,9 @@ public class JoyentProvider extends AbstractProvider {
 //                aClass.addSuperClass(hasValueRestriction1);
 
 
-                service.addProperty(Cloud.hasResource,individual);
+            service.addProperty(Cloud.hasResource,individual);
 
-            });
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        });
 
         OntModel m = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC, ModelFactory.createUnion(cfp, baseModel));
         OntClass ontClass = m.getOntClass(OFFER_CLASS);
@@ -270,4 +270,5 @@ public class JoyentProvider extends AbstractProvider {
     public void performAction() {
 
     }
+
 }
