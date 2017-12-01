@@ -7,6 +7,11 @@ import com.joyent.triton.config.DefaultsConfigContext;
 import com.joyent.triton.config.MapConfigContext;
 import com.joyent.triton.config.SystemSettingsConfigContext;
 import com.joyent.triton.domain.Instance;
+import org.apache.jena.ontology.OntDocumentManager;
+import org.apache.jena.ontology.OntResource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.util.FileManager;
 import org.semanticcloud.providers.joyent.triton.domain.Package;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
@@ -18,6 +23,7 @@ import org.semanticcloud.AbstractProvider;
 import org.semanticcloud.Cloud;
 import org.semanticcloud.providers.joyent.triton.TritonService;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,6 +31,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by malagus on 6/1/17.
@@ -72,15 +79,15 @@ public class JoyentProvider extends AbstractProvider {
 
         //System.out.println(out);
       //  try {
-//            FileManager fileManager = FileManager.get();
-//            fileManager.addLocatorFile("/opt/SemanticCloud/");
-//            FileInputStream fileInputStream = new FileInputStream("/opt/SemanticCloud/req.owl");
-//
-//            OntModel cfp = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
-//            cfp.setDynamicImports(true);
-//            OntDocumentManager dm = cfp.getDocumentManager();
-//            dm.addAltEntry("http://semantic-cloud.org/Cloud", "file:/opt/SemanticCloud/cloud.owl");
-//            cfp.read(fileInputStream, "RDF/XML");
+            FileManager fileManager = FileManager.get();
+            fileManager.addLocatorFile("/opt/SemanticCloud/");
+            FileInputStream fileInputStream = new FileInputStream("/home/l.smolaga/workspace/SemanticCloud/samples/request.owl");
+
+            OntModel cfp = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+            cfp.setDynamicImports(true);
+            OntDocumentManager dm = cfp.getDocumentManager();
+            //dm.addAltEntry("http://semantic-cloud.org/Cloud", "file:/opt/SemanticCloud/cloud.owl");
+            cfp.read(fileInputStream, "RDF/XML");
 
 
 
@@ -90,7 +97,7 @@ public class JoyentProvider extends AbstractProvider {
             OntModel baseModel = provider.createBaseModel();
             baseModel.createClass(OFFER_CLASS);
 
-            OntModel offer = provider.prepareProposal(baseModel);
+            OntModel offer = provider.prepareProposal(cfp);
 //            Individual individual = offer.createIndividual("http://aws.com/#test",offer.getOntClass("http://aws.com/#class/c4.8xlarge"));
 //            individual.listProperties().forEachRemaining( s->{
 //                System.out.println(s);
@@ -137,37 +144,58 @@ public class JoyentProvider extends AbstractProvider {
     }
 
     private Individual addCPU(OntModel baseModel, Package p) {
-        Individual individual = baseModel.createIndividual(Cloud.CPU);
+        Individual individual = baseModel.createIndividual(namespace+ UUID.randomUUID(),Cloud.CPU);
 
 //        Property hasClockSpeed = baseModel.getProperty(NS + "hasClockSpeed");
 //        Literal speed = baseModel.createTypedLiteral(new Float(cpu.getSpeed()));
 //        individual.addProperty(hasClockSpeed, speed);
 
         Literal cores = baseModel.createTypedLiteral(p.getVcpus());
+        baseModel.createDatatypeProperty(Cloud.hasCores.getURI());
         individual.addProperty(Cloud.hasCores, cores);
+        return individual;
+
+    }
+    private OntClass addCPURestriction(OntModel baseModel, Package p) {
+        OntClass individual = baseModel.createClass(namespace+ UUID.randomUUID());
+        individual.addSuperClass(Cloud.CPU);
+
+//        Property hasClockSpeed = baseModel.getProperty(NS + "hasClockSpeed");
+//        Literal speed = baseModel.createTypedLiteral(new Float(cpu.getSpeed()));
+//        individual.addProperty(hasClockSpeed, speed);
+
+        Literal cores = baseModel.createTypedLiteral(p.getVcpus());
+        baseModel.createDatatypeProperty(Cloud.hasCores.getURI());
+        //individual.addProperty(Cloud.hasCores, cores);
+        individual.addSuperClass(baseModel.createHasValueRestriction(null, Cloud.hasCores, cores));
         return individual;
 
     }
 
     private Individual addVirtualMemory(OntModel baseModel, Package p) {
-        Individual individual = baseModel.createIndividual(Cloud.Memory);
+        Individual individual = baseModel.createIndividual(namespace+ UUID.randomUUID(),Cloud.Memory);
         Literal ram = baseModel.createTypedLiteral(p.getMemory());
+        baseModel.createDatatypeProperty(Cloud.hasAvailableSize.getURI());
         individual.addProperty(Cloud.hasAvailableSize, ram);
         return individual;
 
     }
 
     private Individual addVolume(OntModel baseModel, Package p) {
-        Individual volumeInterface = baseModel.createIndividual(Cloud.VolumeInterface);
+        Individual volumeInterface = baseModel.createIndividual(namespace+ UUID.randomUUID(),Cloud.VolumeInterface);
 //        Property hasDeviceId = baseModel.getProperty(NS + "hasDeviceId");
 //        if(volume.getDevice() != null) {
 //            Literal deviceID = offer.createTypedLiteral(volume.getDevice());
 //            volumeInterface.addProperty(hasDeviceId, deviceID);
 //        }
 
-        Individual individual = baseModel.createIndividual(Cloud.Volume);
+        Individual individual = baseModel.createIndividual(namespace+ UUID.randomUUID(),Cloud.Volume);
         Literal space = baseModel.createTypedLiteral(p.getDisk());
+        baseModel.createDatatypeProperty(Cloud.hasAvailableSize.getURI());
+
         individual.addProperty(Cloud.hasAvailableSize, space);
+        baseModel.createObjectProperty(Cloud.hasVolume.getURI());
+
         volumeInterface.addProperty(Cloud.hasVolume, individual);
         return volumeInterface;
 
@@ -175,17 +203,27 @@ public class JoyentProvider extends AbstractProvider {
 
     @Override
     public OntModel prepareProposal(OntModel cfp) {
-        final String OFFER_CLASS = "http://semantic-cloud.org/CloudR#test";
+        final String OFFER_CLASS = "https://semanticcloud.github.io/Ontology/cloud.owl#Condition";
         OntModel baseModel = createBaseModel();
         Individual service = baseModel.createIndividual(namespace + "TritonCompute",Cloud.Service);
         List<Package> packages = tritonService.listPakages();
         //Collection<Package> list = cloudApi.packages().list();
         packages.forEach( p ->{
-            System.out.println(p);
-            Individual individual = baseModel.createIndividual(namespace + p.getName(), Cloud.Contanier);
+            //System.out.println(p);
 
+            OntClass ontClass = baseModel.createClass(namespace + p.getName() + "Package");
+            ontClass.addSuperClass(Cloud.Contanier);
+
+            Individual individual = baseModel.createIndividual(namespace + p.getName(), ontClass);
+
+            baseModel.createObjectProperty(Cloud.hasCPU.getURI());
             individual.addProperty(Cloud.hasCPU, addCPU(baseModel,p));
+            ontClass.addSuperClass(baseModel.createAllValuesFromRestriction(null, Cloud.hasCPU, addCPURestriction(baseModel,p)));
+
+            baseModel.createObjectProperty(Cloud.hasMemory.getURI());
             individual.addProperty(Cloud.hasMemory, addVirtualMemory(baseModel,p));
+
+            baseModel.createObjectProperty(Cloud.hasVolumeInterface.getURI());
             individual.addProperty(Cloud.hasVolumeInterface, addVolume(baseModel,p));
 
 //                OntClass aClass = baseModel.createClass(namespace + p.getName());
@@ -215,25 +253,47 @@ public class JoyentProvider extends AbstractProvider {
 
         OntModel m = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC, ModelFactory.createUnion(cfp, baseModel));
         OntClass ontClass = m.getOntClass(OFFER_CLASS);
-//        if(ontClass != null) {
-//            System.out.println("---info eqivalent");
-//            System.out.println(ontClass.getEquivalentClass());
-//            ontClass.listEquivalentClasses().toList().forEach(o -> {
-//                System.out.println(o);
-//            });
-//            System.out.println("---info instances");
-//            ontClass.listInstances().toList().forEach(o -> {
-//                System.out.println(o);
-//            });
-//            System.out.println("---info subclasses");
-//            ontClass.listSubClasses().toList().forEach(o -> {
-//                System.out.println(o);
-//            });
-//            System.out.println("---info super");
-//            ontClass.listSuperClasses().toList().forEach(o -> {
-//                System.out.println(o);
-//            });
-//        }
+        if(ontClass != null) {
+            System.out.println("---info eqivalent");
+            //System.out.println(ontClass.getEquivalentClass());
+            ontClass.listEquivalentClasses().toList().forEach(o -> {
+                System.out.println(o);
+            });
+            System.out.println("---info instances");
+            ontClass.listInstances().toList().forEach(o -> {
+                System.out.println(o);
+                    //OntResource equipeInstance = o;
+                    //System.out.println( "Equipe instance: " + equipeInstance.getProperty( Cloud.hasCPU ).getString() );
+
+                    // find out the resources that link to the instance
+                    //for (StmtIterator stmts = m.listStatements( null, null, o ); stmts.hasNext(); ) {
+                        Individual ind = o.as( Individual.class );
+
+
+                        // show the properties of this individual
+                        System.out.println( "  " + ind.getURI() );
+                        for (StmtIterator j = ind.listProperties(); j.hasNext(); ) {
+                            Statement s = j.next();
+                            System.out.print( "    " + s.getPredicate().getLocalName() + " -> " );
+
+                            if (s.getObject().isLiteral()) {
+                                System.out.println( s.getLiteral().getLexicalForm() );
+                            }
+                            else {
+                                System.out.println( s.getObject() );
+                            }
+                        }
+                    //}
+            });
+            System.out.println("---info subclasses");
+            ontClass.listSubClasses().toList().forEach(o -> {
+                System.out.println(o);
+            });
+            System.out.println("---info super");
+            ontClass.listSuperClasses().toList().forEach(o -> {
+                System.out.println(o);
+            });
+        }
 
 //        System.out.println(baseModel.validate().isValid());
 //        ((PelletInfGraph) baseModel.getGraph()).classify();
