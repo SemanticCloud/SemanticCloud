@@ -1,35 +1,25 @@
 package org.semanticcloud.providers.joyent;
 
-import com.joyent.triton.CloudApi;
-import com.joyent.triton.config.ChainedConfigContext;
-import com.joyent.triton.config.ConfigContext;
-import com.joyent.triton.config.DefaultsConfigContext;
-import com.joyent.triton.config.MapConfigContext;
-import com.joyent.triton.config.SystemSettingsConfigContext;
-import com.joyent.triton.domain.Instance;
-import org.apache.jena.ontology.OntDocumentManager;
-import org.apache.jena.ontology.OntResource;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
-import org.apache.jena.util.FileManager;
-import org.semanticcloud.providers.joyent.triton.domain.Package;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
+import org.apache.jena.ontology.OntDocumentManager;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.util.FileManager;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.semanticcloud.AbstractProvider;
 import org.semanticcloud.Cloud;
 import org.semanticcloud.providers.joyent.triton.TritonService;
+import org.semanticcloud.providers.joyent.triton.domain.Package;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,33 +27,15 @@ import java.util.UUID;
  * Created by malagus on 6/1/17.
  */
 public class JoyentProvider extends AbstractProvider {
-    private CloudApi cloudApi;
     private TritonService tritonService;
 
     public JoyentProvider() {
         super("https://www.joyent.com/#");
-        HashMap<String, String> objectObjectHashMap = new HashMap<>();
-
-
-        // objectObjectHashMap.put(MapConfigContext.KEY_ID_KEY,"$HOME/.ssh/test_id_rsa");
-        objectObjectHashMap.put(MapConfigContext.KEY_ID_KEY, "93:3f:61:e4:b6:f0:71:4c:e1:8d:e8:4b:d1:26:c2:67");
-        objectObjectHashMap.put(MapConfigContext.KEY_PATH_KEY, "/home/l.smolaga/.ssh/test2_id_rsa");
-        objectObjectHashMap.put(MapConfigContext.USER_KEY, "malagus");
-        objectObjectHashMap.put(MapConfigContext.URL_KEY, "https://eu-ams-1.api.joyent.com");
-        MapConfigContext mapConfigContext = new MapConfigContext(objectObjectHashMap);
-
-        ConfigContext context = new ChainedConfigContext(
-                new DefaultsConfigContext(),
-                //new EnvVarConfigContext(),
-                new SystemSettingsConfigContext(),
-                mapConfigContext
-        );
         try {
             tritonService = new TritonService("https://eu-ams-1.api.joyent.com","malagus","/home/l.smolaga/.ssh/test2_id_rsa");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        cloudApi = new CloudApi(context);
     }
 
     public static void main(String[] args) throws IOException {
@@ -132,14 +104,16 @@ public class JoyentProvider extends AbstractProvider {
     private void listResources() {
         OntModel baseModel = createBaseModel();
         Individual service = baseModel.createIndividual(namespace + "TritonCompute",Cloud.Service);
-        try {
-            Iterator<Instance> list = cloudApi.instances().list();
-            list.forEachRemaining(i ->{
-                System.out.println(i);
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+//        try {
+//
+//            Iterator<Instance> list = cloudApi.instances().list();
+//            list.forEachRemaining(i ->{
+//                System.out.println(i);
+//            });
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -208,17 +182,24 @@ public class JoyentProvider extends AbstractProvider {
         Individual service = baseModel.createIndividual(namespace + "TritonCompute",Cloud.Service);
         List<Package> packages = tritonService.listPakages();
         //Collection<Package> list = cloudApi.packages().list();
+        OntClass packageClass = baseModel.createClass(namespace + "Package");
+        packageClass.addSuperClass(Cloud.Contanier);
+        packageClass.addSuperClass(
+                baseModel
+                        .createCardinalityRestriction(null, Cloud.hasCPU,1)
+        );
         packages.forEach( p ->{
             //System.out.println(p);
 
-            OntClass ontClass = baseModel.createClass(namespace + p.getName() + "Package");
-            ontClass.addSuperClass(Cloud.Contanier);
+            OntClass packageLocalClass = baseModel.createClass(namespace + p.getName() + "Package");
+            packageLocalClass.addSuperClass(packageClass);
 
-            Individual individual = baseModel.createIndividual(namespace + p.getName(), ontClass);
+            Individual individual = baseModel.createIndividual(namespace + p.getName(), packageLocalClass);
 
             baseModel.createObjectProperty(Cloud.hasCPU.getURI());
             individual.addProperty(Cloud.hasCPU, addCPU(baseModel,p));
-            ontClass.addSuperClass(baseModel.createAllValuesFromRestriction(null, Cloud.hasCPU, addCPURestriction(baseModel,p)));
+
+            //packageClass.addSuperClass(baseModel.createAllValuesFromRestriction(null, Cloud.hasCPU, addCPURestriction(baseModel,p)));
 
             baseModel.createObjectProperty(Cloud.hasMemory.getURI());
             individual.addProperty(Cloud.hasMemory, addVirtualMemory(baseModel,p));
@@ -248,6 +229,7 @@ public class JoyentProvider extends AbstractProvider {
 
 
             service.addProperty(Cloud.hasResource,individual);
+            baseModel.createObjectProperty(Cloud.hasResource.getURI());
 
         });
 

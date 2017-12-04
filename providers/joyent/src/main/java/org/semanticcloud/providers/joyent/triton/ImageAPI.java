@@ -1,6 +1,5 @@
 package org.semanticcloud.providers.joyent.triton;
 
-import com.joyent.triton.domain.Package;
 import feign.Param;
 import feign.RequestLine;
 

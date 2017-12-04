@@ -16,11 +16,11 @@
             <artifactId>core</artifactId>
             <version>${version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.joyent.triton</groupId>
-            <artifactId>java-triton-client</artifactId>
-            <version>LATEST</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.joyent.triton</groupId>-->
+            <!--<artifactId>java-triton-client</artifactId>-->
+            <!--<version>LATEST</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
