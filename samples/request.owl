@@ -9,7 +9,6 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="https://semanticcloud.github.io/Ontology/cloud.owlR">
         <owl:imports rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl"/>
-        <owl:imports rdf:resource="https://www.joyent.com/"/>
     </owl:Ontology>
     
 
@@ -102,6 +101,33 @@
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owlR#cpudemo -->
+
+    <owl:NamedIndividual rdf:about="https://semanticcloud.github.io/Ontology/cloud.owlR#cpudemo">
+        <rdf:type rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owlR#demo -->
+
+    <owl:NamedIndividual rdf:about="https://semanticcloud.github.io/Ontology/cloud.owlR#demo">
+        <rdf:type rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Condition"/>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 

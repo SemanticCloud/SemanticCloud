@@ -4,11 +4,17 @@ import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntDocumentManager;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.rdf.model.InfModel;
 import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.util.FileManager;
+import org.apache.jena.vocabulary.XSD;
+import org.mindswap.pellet.jena.PelletInfGraph;
+import org.mindswap.pellet.jena.PelletReasoner;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.semanticcloud.AbstractProvider;
 import org.semanticcloud.Cloud;
@@ -179,7 +185,7 @@ public class JoyentProvider extends AbstractProvider {
     public OntModel prepareProposal(OntModel cfp) {
         final String OFFER_CLASS = "https://semanticcloud.github.io/Ontology/cloud.owl#Condition";
         OntModel baseModel = createBaseModel();
-        Individual service = baseModel.createIndividual(namespace + "TritonCompute",Cloud.Service);
+        Individual service = baseModel.createIndividual(namespace + "Triton",Cloud.Service);
         List<Package> packages = tritonService.listPakages();
         //Collection<Package> list = cloudApi.packages().list();
         OntClass packageClass = baseModel.createClass(namespace + "Package");
@@ -188,6 +194,10 @@ public class JoyentProvider extends AbstractProvider {
                 baseModel
                         .createCardinalityRestriction(null, Cloud.hasCPU,1)
         );
+
+//        packageClass.addSuperClass(
+//                baseModel.createAllValuesFromRestriction(null, Cloud.hasName, XSD.xstring)
+//        );
         packages.forEach( p ->{
             //System.out.println(p);
 
@@ -197,9 +207,15 @@ public class JoyentProvider extends AbstractProvider {
             Individual individual = baseModel.createIndividual(namespace + p.getName(), packageLocalClass);
 
             baseModel.createObjectProperty(Cloud.hasCPU.getURI());
+//            packageClass.addSuperClass(
+//                    baseModel
+//                            .createCardinalityRestriction(null, Cloud.hasCPU,1)
+//            );
             individual.addProperty(Cloud.hasCPU, addCPU(baseModel,p));
 
-            //packageClass.addSuperClass(baseModel.createAllValuesFromRestriction(null, Cloud.hasCPU, addCPURestriction(baseModel,p)));
+            packageLocalClass.addSuperClass(
+                    baseModel.createAllValuesFromRestriction(null, Cloud.hasCPU, addCPURestriction(baseModel,p))
+            );
 
             baseModel.createObjectProperty(Cloud.hasMemory.getURI());
             individual.addProperty(Cloud.hasMemory, addVirtualMemory(baseModel,p));
@@ -236,6 +252,10 @@ public class JoyentProvider extends AbstractProvider {
         OntModel m = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC, ModelFactory.createUnion(cfp, baseModel));
         OntClass ontClass = m.getOntClass(OFFER_CLASS);
         if(ontClass != null) {
+            System.out.println("---info disjoint");
+            ontClass.listDisjointWith().toList().forEach(o -> {
+                System.out.println(o);
+            });
             System.out.println("---info eqivalent");
             //System.out.println(ontClass.getEquivalentClass());
             ontClass.listEquivalentClasses().toList().forEach(o -> {
@@ -243,8 +263,12 @@ public class JoyentProvider extends AbstractProvider {
             });
             System.out.println("---info instances");
             ontClass.listInstances().toList().forEach(o -> {
-                System.out.println(o);
-                    //OntResource equipeInstance = o;
+                //System.out.println(o);
+                //PelletReasoner reasoner =(PelletReasoner) ((InfModel) m).getReasoner();
+
+                PelletInfGraph graph = (PelletInfGraph) m.getGraph();
+
+                //OntResource equipeInstance = o;
                     //System.out.println( "Equipe instance: " + equipeInstance.getProperty( Cloud.hasCPU ).getString() );
 
                     // find out the resources that link to the instance
@@ -252,11 +276,15 @@ public class JoyentProvider extends AbstractProvider {
                         Individual ind = o.as( Individual.class );
 
 
-                        // show the properties of this individual
+
+                         //show the properties of this individual
                         System.out.println( "  " + ind.getURI() );
                         for (StmtIterator j = ind.listProperties(); j.hasNext(); ) {
                             Statement s = j.next();
+                            if( !s.getPredicate().getLocalName().equals("type")) continue;
+                            if( !s.getObject().toString().equals("https://semanticcloud.github.io/Ontology/cloud.owl#Condition")) continue;
                             System.out.print( "    " + s.getPredicate().getLocalName() + " -> " );
+
 
                             if (s.getObject().isLiteral()) {
                                 System.out.println( s.getLiteral().getLexicalForm() );
@@ -264,9 +292,15 @@ public class JoyentProvider extends AbstractProvider {
                             else {
                                 System.out.println( s.getObject() );
                             }
+                            //System.out.println(graph.explain(s));
+//                            System.out.println("---");
+//                            Model explain = graph.explain(s);
+//                            //System.out.println(m.getDerivation(s));
+//                            explain.write(System.out);
+//                            System.out.println("---");
                         }
-                    //}
-            });
+                    }
+            );
             System.out.println("---info subclasses");
             ontClass.listSubClasses().toList().forEach(o -> {
                 System.out.println(o);
