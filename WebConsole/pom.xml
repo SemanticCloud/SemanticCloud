@@ -44,7 +44,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <warSourceDirectory>src/main/webapp/release</warSourceDirectory>
+                    <warSourceDirectory>target/webapp/release</warSourceDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -73,14 +73,14 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>src/main/webapp/release</directory>
+                            <directory>target/webapp/release</directory>
                         </fileset>
                         <fileset>
                             <directory>.tmp</directory>
                         </fileset>
-                        <fileset>
-                            <directory>node_modules</directory>
-                        </fileset>
+                        <!--<fileset>-->
+                            <!--<directory>node_modules</directory>-->
+                        <!--</fileset>-->
                     </filesets>
                 </configuration>
             </plugin>

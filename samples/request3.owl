@@ -9,11 +9,12 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="https://semanticcloud.github.io/Ontology/cloud.owlR">
         <owl:imports rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl"/>
+        <owl:imports rdf:resource="https://semanticcloud.github.io/Ontology/joyent.owl"/>
     </owl:Ontology>
-    
 
 
-    <!-- 
+
+    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Object Properties
@@ -21,16 +22,16 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
+
 
 
     <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasCPU -->
 
     <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasCPU"/>
-    
 
 
-    <!-- 
+
+    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Data properties
@@ -38,22 +39,22 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
+
 
 
     <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasClockSpeed -->
 
     <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasClockSpeed"/>
-    
+
 
 
     <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasCores -->
 
     <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasCores"/>
-    
 
 
-    <!-- 
+
+    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Classes
@@ -61,31 +62,31 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
+
 
 
     <!-- https://semanticcloud.github.io/Ontology/cloud.owl#CPU -->
 
     <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
-    
+
 
 
     <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Compute -->
 
     <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
-    
+
 
 
     <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Condition -->
 
-    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Condition2">
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Condition">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasCPU"/>
-                        <owl:someValuesFrom>
+                        <owl:allValuesFrom>
                             <owl:Class>
                                 <owl:intersectionOf rdf:parseType="Collection">
                                     <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
@@ -95,67 +96,14 @@
                                     </owl:Restriction>
                                 </owl:intersectionOf>
                             </owl:Class>
-                        </owl:someValuesFrom>
+                        </owl:allValuesFrom>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Condition999">
-            <owl:equivalentClass>
-                <owl:Class>
-                    <owl:intersectionOf rdf:parseType="Collection">
-                        <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
 
-                    </owl:intersectionOf>
-                </owl:Class>
-            </owl:equivalentClass>
-        </owl:Class>
-    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Condition3">
-                <owl:equivalentClass>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
 
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:equivalentClass>
-            </owl:Class>
-<owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Condition">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasCPU"/>
-                        <owl:someValuesFrom>
-                            <owl:Class>
-                                <owl:intersectionOf rdf:parseType="Collection">
-                                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasCores"/>
-                                        <owl:someValuesFrom>
-                                            <rdfs:Datatype>
-                                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-                                                <owl:withRestrictions rdf:parseType="Collection">
-                                                    <rdf:Description>
-                                                        <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</xsd:minExclusive>
-                                                    </rdf:Description>
-                                                    <rdf:Description>
-                                                        <xsd:maxExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</xsd:maxExclusive>
-                                                    </rdf:Description>
-                                                </owl:withRestrictions>
-                                            </rdfs:Datatype>
-                                        </owl:someValuesFrom>
-                                    </owl:Restriction>
-                                </owl:intersectionOf>
-                            </owl:Class>
-                        </owl:someValuesFrom>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-    </owl:Class>
 
     <!--
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +116,19 @@
 
 
 
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owlR#cpudemo -->
 
+    <owl:NamedIndividual rdf:about="https://semanticcloud.github.io/Ontology/cloud.owlR#cpudemo">
+        <rdf:type rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owlR#demo -->
+
+    <owl:NamedIndividual rdf:about="https://semanticcloud.github.io/Ontology/cloud.owlR#demo">
+        <rdf:type rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Condition"/>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 

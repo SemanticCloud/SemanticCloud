@@ -1,0 +1,888 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://semanticcloud.github.io/Ontology/cloud.owl#"
+     xml:base="https://semanticcloud.github.io/Ontology/cloud.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl">
+        <rdfs:label xml:lang="en">Cloud Ontology</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasAvailabilityZone -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasAvailabilityZone">
+        <rdfs:subPropertyOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#AvailabilityZone"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasCPU -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasCPU">
+        <rdfs:subPropertyOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasDeploymentModel -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasDeploymentModel">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Service"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#DeploymentModel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasGPU -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasGPU">
+        <rdfs:subPropertyOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#GPU"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasIP -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasIP">
+        <rdfs:subPropertyOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkInterface"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#IP"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasInstalledSoftware -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasInstalledSoftware">
+        <rdfs:subPropertyOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Software"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasMAC -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasMAC">
+        <rdfs:subPropertyOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkInterface"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#MAC"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasMemory -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasMemory">
+        <rdfs:subPropertyOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Memory"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasNetworkInterface -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasNetworkInterface">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkInterface"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasRegion -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasRegion">
+        <rdfs:subPropertyOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#AvailabilityZone"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Region"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasResource -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasResource">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Service"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasServiceModel -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasServiceModel">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Service"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ServiceModel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasVolume -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasVolume">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#VolumeInterface"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Volume"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasVolumeInterface -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasVolumeInterface">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#VolumeInterface"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#offeredBy -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#offeredBy">
+        <owl:inverseOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#offersService"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Service"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Provider"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#offersComponent -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#offersComponent">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Service"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#offersService -->
+
+    <owl:ObjectProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#offersService">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Provider"/>
+        <rdfs:range rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Service"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasArchtecture -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasArchtecture">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasAvailableSize -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasAvailableSize">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Memory"/>
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#StorageResource"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasClockSpeed -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasClockSpeed">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#GPU"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasCores -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasCores">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#GPU"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasDescription -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasDescription">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasDeviceId -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasDeviceId">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#VolumeInterface"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasHostname -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasHostname">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasID -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasID">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Provider"/>
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Service"/>
+                    <rdf:Description rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#User"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasIPAdress -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasIPAdress">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#IP"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasIPRange -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasIPRange">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Network"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">IPv4 or IPv6 Address range, CIDR notation</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasLabel -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasLabel">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Network"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Tag based VLANs (e.g. external-dmz)</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasMACAddress -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasMACAddress">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#MAC"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasMountPoint -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasMountPoint">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#VolumeInterface"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasName -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasPortNumber -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasPortNumber">
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Port"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasState -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasState">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasURL -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasURL">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Service"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasVersion -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasVersion">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Software"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#hasVlan -->
+
+    <owl:DatatypeProperty rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#hasVlan">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Network"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</xsd:minInclusive>
+                    </rdf:Description>
+                    <rdf:Description>
+                        <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4095</xsd:maxInclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:comment xml:lang="en">802.1q VLAN Identifier</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Actor -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Actor"/>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#AvailabilityZone -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#AvailabilityZone">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#LocationResource"/>
+        <rdfs:comment xml:lang="en">Availability Zones is isolated location in Region</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#BlockStorage -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#BlockStorage">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#StorageResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Broker -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Broker">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Actor"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#CPU -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#CPU">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ComputingResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#CommunityCloud -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#CommunityCloud">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#DeploymentModel"/>
+        <rdfs:comment xml:lang="en">The cloud infrastructure is provisioned for exclusive use by a specific
+community of consumers from organizations that have shared concerns (e.g., mission,
+security requirements, policy, and compliance considerations). It may be owned,
+managed, and operated by one or more of the organizations in the community, a third
+party, or some combination of them, and it may exist on or off premises.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Compute -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Compute">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ComputingResource"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasCPU"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#CPU"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#ComputingResource -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#ComputingResource">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Resource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Contanier -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Contanier">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:comment xml:lang="en">PaaS contanier</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Database -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Database">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#StorageResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#DeploymentModel -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#DeploymentModel"/>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#DomainName -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#DomainName">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkingResource"/>
+        <rdfs:comment xml:lang="en">A domain name is an identification string that defines a realm of administrative autonomy, authority or control within the Internet.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#FileStorage -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#FileStorage">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#StorageResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Framework -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Framework">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Software"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#GPU -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#GPU">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ComputingResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#HybridCloud -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#HybridCloud">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#DeploymentModel"/>
+        <rdfs:comment xml:lang="en">The cloud infrastructure is a composition of two or more distinct cloud
+infrastructures (private, community, or public) that remain unique entities, but are bound
+together by standardized or proprietary technology that enables data and application
+portability (e.g., cloud bursting for load balancing between clouds).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#IP -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#IP">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkingResource"/>
+        <rdfs:comment xml:lang="en">An Internet Protocol address (IP address) is a numerical label assigned to each device (e.g., computer, printer) participating in a computer network that uses the Internet Protocol for communication.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#IPv4 -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#IPv4">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#IP"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#IPv6 -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#IPv6">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#IP"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#IaaS -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#IaaS">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ServiceModel"/>
+        <rdfs:comment xml:lang="en">The capability provided to the consumer is to provision
+processing, storage, networks, and other fundamental computing resources where the
+consumer is able to deploy and run arbitrary software, which can include operating
+systems and applications. The consumer does not manage or control the underlying cloud
+infrastructure but has control over operating systems, storage, and deployed applications;
+and possibly limited control of select networking components (e.g., host firewalls).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#LocationResource -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#LocationResource">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Resource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#MAC -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#MAC">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkingResource"/>
+        <rdfs:comment xml:lang="en">Media Access Control address</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Memory -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Memory">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ComputingResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Middleware -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Middleware">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Software"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Network -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Network">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkingResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#NetworkInterface -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkInterface">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ResourceLink"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#NetworkingResource -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkingResource">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Resource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#ObjectStorage -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#ObjectStorage">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#StorageResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#OperatingSystem -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#OperatingSystem">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Software"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#PaaS -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#PaaS">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ServiceModel"/>
+        <rdfs:comment xml:lang="en">The capability provided to the consumer is to deploy onto the cloud
+infrastructure consumer-created or acquired applications created using programming languages, libraries, services, and tools supported by the provider. The consumer does
+not manage or control the underlying cloud infrastructure including network, servers,
+operating systems, or storage, but has control over the deployed applications and possibly
+configuration settings for the application-hosting environment.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Port -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Port">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#NetworkingResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#PrivateCloud -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#PrivateCloud">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#DeploymentModel"/>
+        <rdfs:comment xml:lang="en">The cloud infrastructure is provisioned for exclusive use by a single organization
+comprising multiple consumers (e.g., business units). It may be owned, managed, and
+operated by the organization, a third party, or some combination of them, and it may exist
+on or off premises.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Provider -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Provider">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Actor"/>
+        <rdfs:comment xml:lang="en">Company or organization that offers some resource in cloud to other businesses, organizations and individuals</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#PublicCloud -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#PublicCloud">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#DeploymentModel"/>
+        <rdfs:comment xml:lang="en">The cloud infrastructure is provisioned for open use by the general public. It may be
+owned, managed, and operated by a business, academic, or government organization, or
+some combination of them. It exists on the premises of the cloud provider.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Region -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Region">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#LocationResource"/>
+        <rdfs:comment xml:lang="en">Region is a separate geographic area</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Resource -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Resource">
+        <rdfs:comment xml:lang="en">Resource is any physical or virtual element of limited availability in cloud</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#ResourceLink -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#ResourceLink"/>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Runtime -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Runtime">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Software"/>
+        <rdfs:comment xml:lang="en">Software designed to implement functions built into a programming language</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#SaaS -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#SaaS">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ServiceModel"/>
+        <rdfs:comment xml:lang="en">The capability provided to the consumer is to use the provider’s
+applications running on a cloud infrastructure . The applications are accessible from
+various client devices through either a thin client interface, such as a web browser (e.g.,
+web-based email), or a program interface. The consumer does not manage or control the
+underlying cloud infrastructure including network, servers, operating systems, storage, or
+even individual application capabilities, with the possible exception of limited user-
+specific application configuration settings.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Service -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Service">
+        <rdfs:comment xml:lang="en">Cloud services means services made available to users on demand via the Internet from a cloud computing provider&apos;s servers as opposed to being provided from a company&apos;s own on-premises servers. Cloud services are designed to provide easy, scalable access to applications, resources and services, and are fully managed by a cloud services provider.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#ServiceModel -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#ServiceModel"/>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Software -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Software">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ComputingResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#StorageResource -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#StorageResource">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Resource"/>
+        <rdfs:comment xml:lang="en">Resource provide access to persistent storage</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#User -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#User">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Actor"/>
+        <rdfs:comment xml:lang="en">Person or organization that maintains a business relationship
+with, and uses service from Cloud Providers.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#VirtualMachine -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#VirtualMachine">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#Compute"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#hasInstalledSoftware"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#OperatingSystem"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#Volume -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#Volume">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#StorageResource"/>
+    </owl:Class>
+    
+
+
+    <!-- https://semanticcloud.github.io/Ontology/cloud.owl#VolumeInterface -->
+
+    <owl:Class rdf:about="https://semanticcloud.github.io/Ontology/cloud.owl#VolumeInterface">
+        <rdfs:subClassOf rdf:resource="https://semanticcloud.github.io/Ontology/cloud.owl#ResourceLink"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Thing">
+        <rdfs:comment xml:lang="en">Reporesent connection between two elements of cloud</rdfs:comment>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

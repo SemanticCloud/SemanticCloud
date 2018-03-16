@@ -16,7 +16,7 @@ public class Instance {
     private long memory;
     private long disk;
     private String state;
-    private UUID image;
+    private String image;
     private Set<InetAddress> ips;
     private Map<String, String> metadata;
     private Map<String, String> tags;

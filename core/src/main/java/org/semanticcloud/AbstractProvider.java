@@ -1,10 +1,10 @@
 package org.semanticcloud;
 
 
+import openllet.jena.PelletReasonerFactory;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.mindswap.pellet.jena.PelletReasonerFactory;
 
 
 public abstract class AbstractProvider implements Provider  {

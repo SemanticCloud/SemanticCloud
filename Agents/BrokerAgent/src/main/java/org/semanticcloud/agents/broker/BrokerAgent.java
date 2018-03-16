@@ -34,7 +34,7 @@ public class BrokerAgent extends BaseAgent {
 
         DFAgentDescription dfd = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
-        sd.setType("provider");
+        sd.setType(AgentType.PROVIDER.toString());
         dfd.addServices(sd);
         try {
             DFAgentDescription[] result = DFService.search(this, dfd);

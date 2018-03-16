@@ -26,10 +26,10 @@
             <artifactId>logback-classic</artifactId>
             <version>1.1.7</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-core</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.jena</groupId>-->
+            <!--<artifactId>jena-core</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.netflix.feign</groupId>
             <artifactId>feign-core</artifactId>

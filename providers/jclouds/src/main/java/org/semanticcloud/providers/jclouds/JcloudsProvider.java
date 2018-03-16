@@ -1,7 +1,8 @@
 package org.semanticcloud.providers.jclouds;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.inject.Module;
+import openllet.jena.PelletReasonerFactory;
+import org.apache.jena.ontology.AllValuesFromRestriction;
+import org.apache.jena.ontology.HasValueRestriction;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
@@ -14,7 +15,6 @@ import org.jclouds.compute.domain.ComputeMetadata;
 import org.jclouds.compute.domain.Hardware;
 import org.jclouds.compute.domain.Processor;
 import org.jclouds.compute.domain.Volume;
-import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.semanticcloud.AbstractProvider;
 import org.semanticcloud.Cloud;
 
@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Generic provider based on Apache jclouds
@@ -37,15 +38,35 @@ public class JcloudsProvider extends AbstractProvider {
     private ComputeService client;
 
     public static void main(String[] args) {
+//        JcloudsProvider provider = new JcloudsProvider(
+//                "http://trystack.com/#",
+//                "openstack-nova",
+//                "facebook1832369920122187:facebook1832369920122187",
+//                "gueZneMQzJ8Yr2tg",
+//                "http://8.43.86.2:5000/v2.0/"
+//         );
         JcloudsProvider provider = new JcloudsProvider(
-                "http://trystack.com/#",
-                "openstack-nova",
-                "facebook1832369920122187:facebook1832369920122187",
-                "gueZneMQzJ8Yr2tg",
-                "http://8.43.86.2:5000/v2.0/"
-         );
+                "http://aws.com/#",
+                "aws-ec2",
+                "AKIAIEPE7XR7IXKUVK5Q",
+                "672hi93g3z5+wjoFdYcKwVLvo8GhbJ29Vg3Ze1aO"
+                //"http://8.43.86.2:5000/v2.0/"
+        );
         provider.listResources();
-        OntModel offer = provider.prepareProposal(null);
+        OntModel baseModel = provider.createBaseModel();
+        baseModel.createClass(OFFER_CLASS);
+
+        OntModel offer = provider.prepareProposal(baseModel);
+        Individual individual = offer.createIndividual("http://aws.com/#test",offer.getOntClass("http://aws.com/#class/c4.8xlarge"));
+        individual.listProperties().forEachRemaining( s->{
+            System.out.println(s);
+
+        });
+        individual = offer.createIndividual("http://aws.com/#test2",offer.getOntClass("http://aws.com/#class/c4.8xlarge"));
+        individual.listProperties().forEachRemaining( s->{
+            System.out.println(s);
+
+        });
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("/tmp/prop"+provider.providerId+".owl");
@@ -74,7 +95,7 @@ public class JcloudsProvider extends AbstractProvider {
     private Individual createVirtualMemory(OntModel offer ,int memory) {
         Individual individual = offer.createIndividual(Cloud.Memory);
         Literal ram = offer.createTypedLiteral((new Float(memory)).intValue());
-        individual.addProperty(Cloud.hasAvailableSize, ram);
+        individual.addProperty(Cloud.hasMemorySize, ram);
         return individual;
 
     }
@@ -88,7 +109,7 @@ public class JcloudsProvider extends AbstractProvider {
 
         Individual individual = offer.createIndividual(Cloud.Volume);
         Literal space = offer.createTypedLiteral((volume.getSize()).intValue() * 1024);
-        individual.addProperty(Cloud.hasAvailableSize, space);
+        individual.addProperty(Cloud.hasStorageSize, space);
         volumeInterface.addProperty(Cloud.hasVolume, individual);
         return volumeInterface;
 
@@ -138,12 +159,21 @@ public class JcloudsProvider extends AbstractProvider {
     public OntModel prepareProposal(OntModel cfp) {
         OntModel offer = createBaseModel();
         OntModel proposal = createBaseModel();
+        OntClass service = offer.createClass(namespace + providerId + "ComputeService");
+        service.addSuperClass(Cloud.Service);
+        List<OntClass> resourcesList = new ArrayList<>();
         Set<? extends Hardware> hardwares = client.listHardwareProfiles();
         hardwares.forEach(o -> {
+            if(o.isDeprecated()) return;
             createCompute(offer,o);
+            resourcesList.add(createComputeClass(offer,o));
         });
+        offer.createAllValuesFromRestriction(null, Cloud.hasResource, offer.createUnionClass(namespace + providerId + "Compute", offer.createList(resourcesList.iterator())))
+        .addSubClass(service);
+
 
         OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC, ModelFactory.createUnion(cfp, offer));
+
         System.out.println(OFFER_CLASS);
 
 
@@ -191,6 +221,41 @@ public class JcloudsProvider extends AbstractProvider {
 
 
         return offer;
+    }
+
+    private OntClass createComputeClass(OntModel offer, Hardware o) {
+        OntClass aClass = offer.createClass(namespace + "class/" + o.getId());
+        aClass.addSuperClass(Cloud.Compute);
+
+        Individual individual = offer.createIndividual(namespace + o.getId(),Cloud.Compute);
+        o.getProcessors().forEach(cpu -> {
+            AllValuesFromRestriction hasValueRestriction = offer.createAllValuesFromRestriction(null, Cloud.hasCPU, createCPUClass(offer, cpu));
+           hasValueRestriction.addSubClass(aClass);
+            //individual.addProperty(Cloud.hasCPU, createCPU(offer,cpu));
+        });
+//        individual.addProperty(Cloud.hasMemory, createVirtualMemory(offer,o.getRam()));
+//        o.getVolumes().forEach(d -> {
+//            individual.addProperty(Cloud.hasVolumeInterface, createVolume(offer,d));
+//        });
+        //return individual;
+        return aClass;
+    }
+    private OntClass createCPUClass(OntModel offer , Processor cpu) {
+
+
+
+        Literal speed = offer.createTypedLiteral(new Float(cpu.getSpeed()));
+
+        Literal cores = offer.createTypedLiteral((new Float(cpu.getCores())).intValue());
+
+        OntClass aClass = offer.createClass(namespace + UUID.randomUUID());
+        aClass.addSuperClass(Cloud.CPU);
+        HasValueRestriction hasValueRestriction = offer.createHasValueRestriction(null, Cloud.hasClockSpeed, speed);
+        hasValueRestriction.addSubClass(aClass);
+        hasValueRestriction = offer.createHasValueRestriction(null, Cloud.hasCores, cores);
+        hasValueRestriction.addSubClass(aClass);
+        return aClass;
+
     }
 
     private void cloneIndividual(OntModel proposal, Resource resource) {

@@ -12,13 +12,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
 
-  <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+  <!-- build:css({src/main/webapp/.tmp/serve,src/main/webapp}) styles/vendor.css -->
   <!-- bower:css -->
   <!-- run `gulp inject` to automatically populate bower styles dependencies -->
   <!-- endbower -->
   <!-- endbuild -->
 
-  <!-- build:css({.tmp/serve,src}) styles/app.css -->
+  <!-- build:css({src/main/webapp/.tmp/serve,src/main/webapp}) styles/app.css -->
   <!-- inject:css -->
   <!-- css files will be automatically insert here -->
   <!-- endinject -->
@@ -58,14 +58,15 @@
   <div></div>
 </div>
 
-<!-- build:js(src) scripts/vendor.js -->
+<!-- build:js(src/main/webapp) scripts/vendor.js -->
 <!-- bower:js -->
 <!-- run `gulp inject` to automatically populate bower script dependencies -->
 <!-- endbower -->
 <!-- endbuild -->
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-<!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+<!--({.tmp/serve,.tmp/partials,src}) -->
+<!-- build:js({src/main/webapp/.tmp/serve,src/main/webapp/.tmp/partials,src/main/webapp}) scripts/app.js -->
 <!-- inject:js -->
 <!-- js files will be automatically insert here -->
 <!-- endinject -->
