@@ -2,6 +2,7 @@ package org.semanticcloud.jena;
 
 import org.apache.jena.ontology.AllValuesFromRestriction;
 import org.apache.jena.ontology.IntersectionClass;
+import org.apache.jena.ontology.MinInclusiveFacetRestriction;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntProperty;
 import org.apache.jena.ontology.Restriction;
@@ -173,7 +174,9 @@ public class ConditionParser {
             System.out.println(resource.getProperty(XSD.minExclusive));
         }
         else if(resource.hasProperty(XSD.minInclusive)){
+            MinInclusiveFacetRestriction as = resource.as(MinInclusiveFacetRestriction.class);
             System.out.println(resource.getProperty(XSD.minInclusive));
+            System.out.println(as.getMinInclusive());
         }
         // support other facets restrictions ?
 

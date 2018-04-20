@@ -3,8 +3,11 @@ package org.semanticcloud;
 
 import openllet.jena.PelletReasonerFactory;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.ModelFactory;
+
+import static openllet.jena.PelletReasonerFactory.THE_SPEC;
 
 
 public abstract class AbstractProvider implements Provider  {
@@ -16,7 +19,9 @@ public abstract class AbstractProvider implements Provider  {
     }
 
     protected OntModel createBaseModel(){
-        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+        OntModelSpec ontModelSpec = new OntModelSpec(OntModelSpec.OWL2_MEM);
+        ontModelSpec.setReasonerFactory(PelletReasonerFactory.theInstance());
+        OntModel model = ModelFactory.createOntologyModel(ontModelSpec);
         model.setDynamicImports(true);
 
         Ontology ontology = model.createOntology(namespace.replace("#", ""));

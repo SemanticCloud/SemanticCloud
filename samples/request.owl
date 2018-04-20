@@ -139,10 +139,10 @@
                                                 <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
                                                 <owl:withRestrictions rdf:parseType="Collection">
                                                     <rdf:Description>
-                                                        <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</xsd:minExclusive>
+                                                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</xsd:minInclusive>
                                                     </rdf:Description>
                                                     <rdf:Description>
-                                                        <xsd:maxExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</xsd:maxExclusive>
+                                                        <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</xsd:maxInclusive>
                                                     </rdf:Description>
                                                 </owl:withRestrictions>
                                             </rdfs:Datatype>

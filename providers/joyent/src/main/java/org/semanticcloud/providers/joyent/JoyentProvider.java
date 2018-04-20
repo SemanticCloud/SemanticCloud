@@ -5,6 +5,7 @@ import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntDocumentManager;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.util.FileManager;
@@ -54,8 +55,9 @@ public class JoyentProvider extends AbstractProvider {
             FileManager fileManager = FileManager.get();
             fileManager.addLocatorFile("/opt/SemanticCloud/");
             FileInputStream fileInputStream = new FileInputStream("/home/l.smolaga/workspace/SemanticCloud/samples/request.owl");
-
-            OntModel cfp = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+        OntModelSpec ontModelSpec = new OntModelSpec(OntModelSpec.OWL2_MEM);
+        ontModelSpec.setReasonerFactory(PelletReasonerFactory.theInstance());
+            OntModel cfp = ModelFactory.createOntologyModel(ontModelSpec);
             cfp.setDynamicImports(true);
             OntDocumentManager dm = cfp.getDocumentManager();
             //dm.addAltEntry("http://semantic-cloud.org/Cloud", "file:/opt/SemanticCloud/cloud.owl");
@@ -269,7 +271,9 @@ public class JoyentProvider extends AbstractProvider {
 
         });
 
-        OntModel m = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC, ModelFactory.createUnion(cfp, baseModel));
+        OntModelSpec ontModelSpec = new OntModelSpec(OntModelSpec.OWL2_MEM);
+        ontModelSpec.setReasonerFactory(PelletReasonerFactory.theInstance());
+        OntModel m = ModelFactory.createOntologyModel(ontModelSpec, ModelFactory.createUnion(cfp, baseModel));
         OntClass ontClass = m.getOntClass(OFFER_CLASS);
 
 //        cfp.listRestrictions().forEachRemaining(
