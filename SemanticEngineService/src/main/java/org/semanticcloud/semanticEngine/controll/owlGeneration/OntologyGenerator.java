@@ -85,15 +85,12 @@ public class OntologyGenerator {
 			return serializeToString(destinationOntology);
 			
 		} catch (OWLOntologyCreationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		} catch (OWLOntologyStorageException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		} catch (ConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}			
@@ -105,7 +102,6 @@ public class OntologyGenerator {
         try {
             return serializeToString(destinationOntology);
         } catch (OWLOntologyStorageException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
@@ -123,15 +119,12 @@ public class OntologyGenerator {
 			return serializeToString(destinationOntology);
 			
 		} catch (OWLOntologyCreationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		} catch (OWLOntologyStorageException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		} catch (ConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}		
@@ -190,11 +183,9 @@ public class OntologyGenerator {
             return destinationOntology;
 
         } catch (OWLOntologyCreationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         } catch (ConfigurationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
@@ -217,11 +208,9 @@ public class OntologyGenerator {
             return destinationOntology;
 
         } catch (OWLOntologyCreationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         } catch (ConfigurationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
